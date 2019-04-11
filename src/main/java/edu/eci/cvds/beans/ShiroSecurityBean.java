@@ -12,14 +12,18 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="shiroBean")
 @RequestScoped
-public class ShiroSecurityBean extends BasePageBean {
+public class ShiroSecurityBean implements Serializable {
 	
 	private String userName;
 	private String userPassword;
+	private boolean rememberMe;
 	
 	public ShiroSecurityBean() {}
 
@@ -38,18 +42,30 @@ public class ShiroSecurityBean extends BasePageBean {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+
+	public boolean getRememberMe(){
+		return rememberMe;
+	}
+
+	public void setRememberMe(boolean rme){
+		rememberMe = rme;
+	}
 	
 	public void loginUser() {
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
-			UsernamePasswordToken token = new UsernamePasswordToken(userName, new Sha256Hash(userPassword).toHex());
+			UsernamePasswordToken token = new UsernamePasswordToken(userName, new Sha256Hash(userPassword).toHex(), rememberMe);
 
             
             currentUser.login(token);
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
 		}catch(UnknownAccountException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en autenticacion", "Usuario no registrado"));
 		}catch (IncorrectCredentialsException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en autenticacion", "Contraseña incorrecta"));
+		}catch (IOException e){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en servidor", "Error"));
 		}
 	}
 	
