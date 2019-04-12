@@ -6,6 +6,7 @@
 package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import javax.persistence.PersistenceException;
 
 /**
  *
@@ -13,6 +14,6 @@ import edu.eci.cvds.samples.entities.Elemento;
  */
 public interface ElementoDAO {
     
-    public void registerElemento(Elemento element);
+    public void registerElemento(Elemento element) throws PersistenceException;
     
 }

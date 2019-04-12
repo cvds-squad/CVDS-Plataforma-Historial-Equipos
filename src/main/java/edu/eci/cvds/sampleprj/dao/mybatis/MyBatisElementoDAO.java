@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
 import edu.eci.cvds.samples.entities.Elemento;
+import javax.persistence.PersistenceException;
 
 /**
  *
@@ -20,8 +21,14 @@ public class MyBatisElementoDAO  implements ElementoDAO{
     private ElementoMapper elementoMapper;
 
     @Override
-    public void registerElemento(Elemento element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registerElemento(Elemento element) throws PersistenceException {
+       try{
+           elementoMapper.registerElemento(element);
+       }
+       catch(org.apache.ibatis.exceptions.PersistenceException e){
+           System.out.println("ERROR EN EL MAPEER=========00000000000");
+             throw new PersistenceException("Elemento ya existe",e);   
+       }
     }
     
 }

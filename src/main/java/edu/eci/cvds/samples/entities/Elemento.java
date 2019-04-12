@@ -22,6 +22,14 @@ public class Elemento implements Serializable {
     
     }
 
+    public Elemento(int ids, TipoElemento tipElement, String marca, String descripcion, boolean disponible) {
+        this.idElemento = ids;
+        this.tipelement= tipElement;
+        this.marca = marca;
+        this.descripcion = descripcion;
+        this.disponible = disponible;
+    }
+
     public int getIdElemento() {
         return idElemento;
     }
