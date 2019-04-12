@@ -5,10 +5,15 @@
 </h:head>
 <h:body>
 	<div align="center">
-		<p:graphicImage url="imglab.png" />
 		<br/>
 		<br/>
-		<h:outputText value="Sign in"/>
+		<br/>
+		<br/>
+		<br/>
+		<img src="imglab.png" width="200" height="200"/>
+		<br/>
+		<br/>
+		<h:outputText value="Sign in" />
 		<br/>
 		<br/>
 	    <h:form prependId="false">
@@ -23,10 +28,11 @@
 			<h:panelGrid columns="2">
 	            <h:outputText value="Remember me:"/>
 	            <p:selectBooleanCheckbox id="rememberMe" value="#{shiroBean.rememberMe}"/>
-				<br/>
-	            <h:outputText/>
-	            <p:commandButton value="Login" action="#{shiroBean.loginUser}" />
 	        </h:panelGrid>
+			<br/>
+	        <h:outputText/>
+	        <p:commandButton value="Login" action="#{shiroBean.loginUser}" />
+	        
         <p:messages id="messages" autoUpdate="true" closable="true" />
     	</h:form>
     </div>
