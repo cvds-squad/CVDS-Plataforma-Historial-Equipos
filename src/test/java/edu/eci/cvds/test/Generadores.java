@@ -6,6 +6,7 @@
 package edu.eci.cvds.test;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import org.quicktheories.core.Gen;
 import org.quicktheories.generators.Generate;
@@ -45,8 +46,58 @@ public class Generadores {
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
             return new Elemento(ids,tipElement,marca,descripcion,disponible);            
-        };
-        
-        
+        };   
+    }
+    
+    public static Gen<Elemento> genElementosMouse(){
+        return source->{
+            int ids = ids().generate(source);
+            TipoElemento mouse = TipoElemento.MOUSE;
+            String marca = genMarcas().generate(source);
+            String descripcion = genDescripcion().generate(source);
+            boolean disponible = genDisponible().generate(source);
+            return new Elemento(ids,mouse,marca,descripcion,disponible);            
+        };   
+    }
+    public static Gen<Elemento> genElementosTorre(){
+        return source->{
+            int ids = ids().generate(source);
+            TipoElemento torre = TipoElemento.TORRE;
+            String marca = genMarcas().generate(source);
+            String descripcion = genDescripcion().generate(source);
+            boolean disponible = genDisponible().generate(source);
+            return new Elemento(ids,torre,marca,descripcion,disponible);            
+        };   
+    }
+    public static Gen<Elemento> genElementosPantalla(){
+        return source->{
+            int ids = ids().generate(source);
+            TipoElemento pantalla = TipoElemento.PANTALLA;
+            String marca = genMarcas().generate(source);
+            String descripcion = genDescripcion().generate(source);
+            boolean disponible = genDisponible().generate(source);
+            return new Elemento(ids,pantalla,marca,descripcion,disponible);            
+        };   
+    }
+    public static Gen<Elemento> genElementosTeclado(){
+        return source->{
+            int ids = ids().generate(source);
+            TipoElemento teclado = TipoElemento.TECLADO;
+            String marca = genMarcas().generate(source);
+            String descripcion = genDescripcion().generate(source);
+            boolean disponible = genDisponible().generate(source);
+            return new Elemento(ids,teclado,marca,descripcion,disponible);            
+        };   
+    }
+    
+    public static Gen<Equipo> genEquipos(){
+        return source->{
+            int eId = ids().generate(source);
+            Elemento torre = genElementosTorre().generate(source);
+            Elemento mouse = genElementosMouse().generate(source);
+            Elemento pantalla = genElementosPantalla().generate(source);
+            Elemento teclado = genElementosTeclado().generate(source);
+            return new Equipo(eId,torre, pantalla, mouse, teclado);            
+        };   
     }
 }
