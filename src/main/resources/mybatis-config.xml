@@ -25,6 +25,7 @@
     <!-- mappers -->
     <mappers>
         <mapper resource="mappers/ElementoMapper.xml"/>
+        <mapper resource="mappers/EquipoMapper.xml"/>
     </mappers>
 
 

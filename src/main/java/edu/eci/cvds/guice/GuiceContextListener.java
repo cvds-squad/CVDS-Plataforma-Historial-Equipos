@@ -8,7 +8,9 @@ package edu.eci.cvds.guice;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
+import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisElementoDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisEquipoDAO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -34,7 +36,8 @@ public class GuiceContextListener implements ServletContextListener {
                 setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
 
-                bind(ElementoDAO.class).to(MyBatisElementoDAO.class);    
+                bind(ElementoDAO.class).to(MyBatisElementoDAO.class); 
+                bind(EquipoDAO.class).to(MyBatisEquipoDAO.class); 
             }
         });
 
