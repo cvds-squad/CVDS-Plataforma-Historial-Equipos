@@ -1,9 +1,53 @@
 package edu.eci.cvds.samples.services.impl;
 
+import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.HistoryService;
+import edu.eci.cvds.samples.services.HistoryServiceException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HistoryServiceStub implements HistoryService {
-
-    //stub
-
+    
+    private final Map<Integer,Elemento> elementosRegistrados;
+    private final Map<Integer,Elemento> nuevosElemenRegis;
+    
+    public HistoryServiceStub(){
+        elementosRegistrados = new HashMap<>();
+        nuevosElemenRegis = new HashMap<>();
+        poblar();
+    }
+    @Override
+    public void registrarElemento(Elemento elem) throws HistoryServiceException {
+        if(!elementosRegistrados.containsKey(elem.getIdElemento())){
+            elementosRegistrados.put(elem.getIdElemento(), elem);
+        }
+        else{
+            throw new HistoryServiceException("El elemento con codigo " + elem.getIdElemento() + " ya está registrado");
+        }
+    }
+    
+    //Poblar
+    private void poblar(){
+        TipoElemento TE1 = TipoElemento.MOUSE;
+        TipoElemento TE2 = TipoElemento.PANTALLA;
+        TipoElemento TE3 = TipoElemento.TORRE;
+        TipoElemento TE4 = TipoElemento.TECLADO;
+        
+        Elemento Elemento1 = new Elemento(1, TE4, "hp", "Teclado clásico HP con cable "
+                + "(con disposición para inglés de internacional): un teclado de estilo clásico que sobresale en lo que se refiere a sencillez y comodidad",true);
+        
+        Elemento Elemento2 = new Elemento(2, TE1, "hp", "onstruido según directrices y normas estrictas,  "
+                + "(el ratón HP combina sin esfuerzo un diseño moderno y elegante con funciones avanzadas que mejoran la vida.",true);
+        
+        Elemento Elemento3 = new Elemento(3, TE2, "asus", "IPS, 27 pulgadas, resolución WQHD 2560 x 1440  "
+                + "y 178 grados de ángulo de visión.",false);
+        
+        Elemento Elemento4 = new Elemento(4, TE3, "asus", "Servidor tipo torre de nive corporativo con funciones para mayor confiabilidad,  "
+                + "como memoria código de corrección de errores y controlador de almacenamiento integrado.",true);
+        
+        elementosRegistrados.put(2, Elemento3);
+        nuevosElemenRegis.put(1, Elemento1);
+        nuevosElemenRegis.put(2, Elemento2);
+        nuevosElemenRegis.put(4, Elemento4);
+    }   
 }
