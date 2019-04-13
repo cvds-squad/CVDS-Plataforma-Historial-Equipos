@@ -1,0 +1,69 @@
+*{
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color:#fff;
+}
+
+.contenedor-menu{
+    width: 20%;
+    min-width: 300px;
+    margin: 50px;
+    display: inline-block;
+    line-height: 18px;
+}
+
+.contenedor-menu .menu{
+    width: 100%;
+}
+
+.contenedor-menu ul{
+    list-style: none;
+}
+
+.contenedor-menu .menu li a{
+    color: black;
+    display: block;
+    padding: 15px 20px;
+    background: #a8a3a4;
+}
+
+.contenedor-menu .menu li a:hover{
+    background: #555555;
+}
+
+.contenedor-menu .menu .icono{
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.contenedor-menu .menu .icono.izquierda{
+    float: left;
+    margin-right: 10px;
+}
+
+.contenedor-menu .menu .icono.derecha{
+    float: right;
+    margin-left: 10px;
+}
+
+.contenedor-menu .menu ul {
+    display : none;
+}
+
+.contenedor-menu .menu ul li a{
+    background: lightgreen;
+    color: black;
+}
+
+.contenedor-menu .menu ul li a:hover{
+    background: #35a825;
+}
+
+.contenedor-menu .menu .activado > a{
+    background: #555555;
+    color: black;
+}
+
