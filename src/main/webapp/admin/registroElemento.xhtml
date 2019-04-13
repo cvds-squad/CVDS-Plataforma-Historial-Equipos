@@ -1,9 +1,85 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+     >
 <h:head>
-   test
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/menu.css"/>
+
+    <title>Registro de Elemento</title>
 </h:head>
 <h:body>
+
+    <!--Header-->
+    <div class="header">
+        <a href="#default" class="logo"><img src="/images/labLogo.png"/>Historial de Equipos</a>
+        <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>Inicio</a><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+    </div>
+
+    <h1>Registro de Elemento</h1>
+
+
+    <h:form>
+        <h:panelGrid columns="2" style="margin-bottom: 10px" cellpadding="5">
+            <h:outputLabel value="Tipo: "/>
+            <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
+                <f:selectItems value="#{elementoBean.tipos()}"/>
+            </p:selectOneMenu>
+            <h:outputLabel  value="Marca: "/>
+            <p:inputText id="marca" value="#{elementoBean.marca}"/>
+
+            <p:outputLabel value="Descripcion: "/>
+            <p:inputTextarea rows="5"/>
+
+        </h:panelGrid>
+        <p:commandButton value="Submit"  icon="fa fa-check" />
+    </h:form>
+
+
+    <!--Footer -->
+    <footer class="ct-footer">
+        <div class="container">
+            <div class="ct-footer-meta text-center-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2">
+                        <img alt="logo" src="/images/labLogo.png"/>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <address>
+                            <span>Escuela Colombiana de Ingeniería Julio Garavito<br/></span>Laboratorio de Informática<br/>
+                            AK.45 No.205-59 (Autopista Norte)-Bogotá<br/>
+                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+                        </address>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <ul class="ct-socials list-unstyled list-inline">
+                            <li>
+                                <a href="https://www.facebook.com/EscuelaIng/?ref=br_rs" target="_blank"><img alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Escuelaing" target="_blank"><img alt="twitter" src="https://www.solodev.com/assets/footer/twitter-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/user/escuelacolingenieria/featured" target="_blank"><img alt="youtube" src="https://www.solodev.com/assets/footer/youtube-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/escuelaing/?hl=es-la" target="_blank"><img alt="instagram" src="https://www.solodev.com/assets/footer/instagram-white.png"/></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
 </h:body>
 </html>

@@ -22,6 +22,13 @@ public class Elemento implements Serializable {
     
     }
 
+    public Elemento(TipoElemento tipElement, String marca, String descripcion){
+        this.tipelement = tipElement;
+        this.marca = marca;
+        this.descripcion = descripcion;
+        this.disponible = true; //Al crear un elemento siempre esta disponible
+    }
+
     public Elemento(int ids, TipoElemento tipElement, String marca, String descripcion, boolean disponible) {
         this.idElemento = ids;
         this.tipelement= tipElement;
