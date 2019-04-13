@@ -54,12 +54,12 @@ a {
 }
 
 .contenedor-menu .menu ul li a{
-    background: lightgreen;
+    background: #a3a6a6;
     color: black;
 }
 
 .contenedor-menu .menu ul li a:hover{
-    background: #35a825;
+    background: #828585;
 }
 
 .contenedor-menu .menu .activado > a{
