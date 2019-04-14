@@ -5,8 +5,20 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper">
     <insert parameterType="map" id="registerElemento" > 
-        INSERT INTO Elementos (idElemento, tipelement, marca, descripcion, disponible)
-            VALUES (#{elem.idElemento},#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible})
+        INSERT INTO Elementos (tipelement, marca, descripcion, disponible)
+            VALUES (#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible})
     </insert>
-             
+
+    <select id="consultElemento" resultMap="ElementoResult">
+        SELECT idElemento,tipelement,marca,Descripcion FROM Elementos
+          WHERE idElemento=#{eid}
+    </select>
+
+   <resultMap id="ElementoResult" type="Elemento">
+       <id property="idElemento" column="idElemento"/>
+       <result property="tipelement" column="tipelement"/>
+       <result property="marca" column="marca"/>
+       <result property="descripcion" column="Descripcion"/>
+   </resultMap>
+
 </mapper>

@@ -15,5 +15,6 @@ import javax.persistence.PersistenceException;
 public interface ElementoDAO {
     
     public void registerElemento(Elemento element) throws PersistenceException;
-    
+
+    public Elemento consultarElemento(int id) throws PersistenceException;
 }

@@ -77,6 +77,6 @@ public class Elemento implements Serializable {
         this.disponible = disponible;
     }
     
-    
+
     
 }

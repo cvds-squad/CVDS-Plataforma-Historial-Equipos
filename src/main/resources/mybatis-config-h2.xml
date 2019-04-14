@@ -10,13 +10,13 @@
         <typeAlias type="edu.eci.cvds.samples.entities.TipoElemento" alias="TipoElemento"/>
     </typeAliases>
 
-    <environments default="development">
-        <environment id="development">
+    <environments default="test">
+        <environment id="test">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="org.h2.Driver" />
                 <property name="url" value="jdbc:h2:file:./target/db/testdb;MODE=PostgreSQL" />
-                <property name="username" value="anonymous" />
+                <property name="username" value="sa" />
                 <property name="password" value="" />
             </dataSource>
         </environment>

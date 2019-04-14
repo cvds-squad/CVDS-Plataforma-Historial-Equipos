@@ -1,35 +1,41 @@
 create table rolesUsuario(
-idRol int(5) primary key,
+idRol serial primary key,
 descripcion varchar(500),
 nombre varchar(30));
 
+
 create table TipoElemento(
-idTElemento int(5) primary key,
-Tipo varchar(100),
+Tipo varchar(100) primary key,
 Descripción varchar(100));
 
 
 create table Usuarios(
 nombre varchar(30) not null,
-correo varchar(30) primary key,
-userrol int(5) references rolesUsuario(idRol),
-contraseña varchar (30) not null,
+correo varchar(100) primary key,
+userrol int references rolesUsuario(idRol),
+contraseña varchar (100) not null,
 estado varchar(30) not null);
 
 create table Laboratorios(
-idLab int(5) primary key,
+idLab serial primary key,
 nombre varchar(30) not null,
 usuario varchar(30) references Usuarios(correo),
 descripcion varchar(500));
 
 create table Equipos(
-idEquipo int(5) primary key,
-labs int (5) references Laboratorios(idLab),
+idEquipo serial primary key,
+labs int references Laboratorios(idLab),
 Novedades varchar(500));
 
 create table Elementos(
-idElemento int(5) primary key,
-eqps int(5) references Equipos(idEquipo),
-tipelement int(5) references TipoElemento(idTElemento),
+idElemento serial primary key,
+eqps int references Equipos(idEquipo),
+tipelement varchar references TipoElemento(Tipo),
 marca varchar(20),
-Descripcion varchar(500));
+Descripcion varchar(500),
+disponible bool);
+
+insert into tipoelemento values ('TECLADO','Teclado de pc');
+insert into tipoelemento values ('TORRE','Torre de pc');
+insert into tipoelemento values ('PANTALLA','pantalla de pc');
+insert into tipoelemento values ('MOUSE','Mouse de pc');

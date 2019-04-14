@@ -10,4 +10,6 @@ public interface HistoryService {
 
     public abstract void registrarElemento(Elemento elem) throws HistoryServiceException;
 
+    public abstract Elemento consultarElemento(int id) throws HistoryServiceException;
+
 }

@@ -17,24 +17,24 @@ import static org.quicktheories.generators.SourceDSL.strings;
  * @author 2131381
  */
 public class Generadores {
-    
-    public static Gen<Integer> ids(){
+
+    private static Gen<Integer> ids(){
         return integers().between(1,1000);
-    } 
-    
-    public static Gen<TipoElemento> genTipoElementos(){
+    }
+
+    private static Gen<TipoElemento> genTipoElementos(){
         return Generate.enumValues(TipoElemento.class);
     }
-    
-    public static Gen<String> genMarcas(){
+
+    private static Gen<String> genMarcas(){
         return strings().betweenCodePoints(97,122).ofLengthBetween(5, 10);
     }
     
-    public static Gen<String> genDescripcion(){
+    private static Gen<String> genDescripcion(){
         return strings().betweenCodePoints(97,122).ofLengthBetween(20, 100);
     }
     
-    public static Gen<Boolean> genDisponible(){
+    private static Gen<Boolean> genDisponible(){
         return Generate.booleans();
     }
     
@@ -45,7 +45,7 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(ids,tipElement,marca,descripcion,disponible);            
+            return new Elemento(tipElement,marca,descripcion);
         };   
     }
     
