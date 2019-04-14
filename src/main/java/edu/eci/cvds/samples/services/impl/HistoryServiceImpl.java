@@ -38,7 +38,25 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public void registrarElementoConId(Elemento elem) throws HistoryServiceException {
+        try{
+            elementoDAO.registerElementoConId(elem);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No fue posible registrar el elemento", ex);
+        }
+    }
+
+    @Override
     public Elemento consultarElemento(int id) throws HistoryServiceException {
         return elementoDAO.consultarElemento(id);
+    }
+
+    @Override
+    public void asociarElementoConEquipo(int equipoId, int elementoId) throws HistoryServiceException {
+        try{
+            equipoDAO.asociarElemento(equipoId,elementoId);
+        }catch (PersistenceException  ex){
+            throw new HistoryServiceException("No se pudo asociar el elemento al equipo",ex);
+        }
     }
 }

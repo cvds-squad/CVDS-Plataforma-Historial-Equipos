@@ -14,4 +14,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface EquipoMapper {
     public void registrarEquipo(@Param("equipo") Equipo equipo);
+
+    void eliminarAsociacion(@Param("idEqui") int equipoId,@Param("idElem") int elemId);
+
+    void asociarElemento(@Param("idEqui") int equipoId,@Param("idElem") int elementoId);
 }

@@ -16,5 +16,7 @@ public interface ElementoDAO {
     
     public void registerElemento(Elemento element) throws PersistenceException;
 
+    void registerElementoConId(Elemento element) throws PersistenceException;
+
     public Elemento consultarElemento(int id) throws PersistenceException;
 }

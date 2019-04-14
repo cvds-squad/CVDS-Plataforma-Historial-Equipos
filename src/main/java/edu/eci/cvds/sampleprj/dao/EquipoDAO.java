@@ -15,5 +15,6 @@ import javax.persistence.PersistenceException;
 public interface EquipoDAO {
     
     public void registrarEquipo(Equipo equipo) throws PersistenceException;
-    
+
+    void asociarElemento(int equipoId, int elementoId) throws PersistenceException;
 }

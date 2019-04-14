@@ -32,6 +32,11 @@ public class HistoryServiceStub implements HistoryService {
     }
 
     @Override
+    public void registrarElementoConId(Elemento elem) throws HistoryServiceException {
+
+    }
+
+    @Override
     public Elemento consultarElemento(int id) throws HistoryServiceException {
         return elementosRegistrados.get(id);
     }
@@ -40,9 +45,14 @@ public class HistoryServiceStub implements HistoryService {
     public void registarEquipo(Equipo equipo) throws HistoryServiceException {
         if (!equipos.containsKey(equipo.getIdEquipo())) {
             equipos.put(equipo.getIdEquipo(), equipo);
-	} else {
-            throw new HistoryServiceException("El equipo ya se encuentra registrado.");
-	}
+        } else {
+                throw new HistoryServiceException("El equipo ya se encuentra registrado.");
+        }
+    }
+
+    @Override
+    public void asociarElementoConEquipo(int equipoId, int elementoId){
+
     }
     
     //Poblar

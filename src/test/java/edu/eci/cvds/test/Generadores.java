@@ -45,7 +45,7 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(tipElement,marca,descripcion);
+            return new Elemento(HistoryServicesTest.idElemCont,tipElement,marca,descripcion);
         };   
     }
     

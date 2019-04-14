@@ -31,6 +31,15 @@ public class MyBatisElementoDAO  implements ElementoDAO{
     }
 
     @Override
+    public void registerElementoConId(Elemento element) throws PersistenceException {
+        try{
+            elementoMapper.registerElementoConId(element);
+        }catch (PersistenceException e){
+            throw new PersistenceException("Elemento ya existe",e);
+        }
+    }
+
+    @Override
     public Elemento consultarElemento(int id){
         return elementoMapper.consultElemento(id);
     }

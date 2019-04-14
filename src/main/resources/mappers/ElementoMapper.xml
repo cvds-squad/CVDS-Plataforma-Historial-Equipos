@@ -9,16 +9,23 @@
             VALUES (#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible})
     </insert>
 
+   <insert id="registerElementoConId" parameterType="map">
+       INSERT INTO Elementos (idElemento,tipelement, marca, descripcion, disponible)
+            VALUES (#{elem.idElemento},#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible})
+   </insert>
+
     <select id="consultElemento" resultMap="ElementoResult">
-        SELECT idElemento,tipelement,marca,Descripcion FROM Elementos
+        SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible FROM Elementos
           WHERE idElemento=#{eid}
     </select>
 
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
+       <result property="equipoAsociado" column="eqps"/>
        <result property="tipelement" column="tipelement"/>
        <result property="marca" column="marca"/>
        <result property="descripcion" column="Descripcion"/>
+       <result property="disponible" column="disponible"/>
    </resultMap>
 
 </mapper>

@@ -2,18 +2,16 @@ package edu.eci.cvds.test;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
 import org.apache.ibatis.session.SqlSession;
-//import org.junit.After;
 import org.junit.Test;
 
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.SQLException;
-//import java.sql.Statement;
-
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.quicktheories.QuickTheory.qt;
 
 public class HistoryServicesTest {
@@ -23,22 +21,24 @@ public class HistoryServicesTest {
 
     private HistoryService historyService;
 
-    private int idElemCont;
+    public static int idElemCont = 1;
+    public static int idEquipoCont = 1;
 
     public HistoryServicesTest(){
         historyService = HistoryServicesFactory.getInstance().getHistoryServiceForTesting();
-        idElemCont = 1;
     }
 
     @Test
     public void shouldInsertAndConsultNewElements(){
-        idElemCont = 1;
         qt().forAll(Generadores.genElementos()).check(elem ->{
             try{
-                historyService.registrarElemento(elem);
+                historyService.registrarElementoConId(elem);
 
-                Elemento elemInserted = historyService.consultarElemento(idElemCont++);
+                //System.out.println("REGISTRAR! " + elem+ " id: " + idElemCont);
+                Elemento elemInserted = historyService.consultarElemento(idElemCont);
 
+                //System.out.println("Registrado? " + elemInserted);
+                idElemCont++;
                 return  elem.getDescripcion().equals(elemInserted.getDescripcion()) &&
                         elem.getMarca().equals(elemInserted.getMarca()) &&
                         elem.getTipelement().equals(elemInserted.getTipelement());
@@ -47,28 +47,50 @@ public class HistoryServicesTest {
                 return false;
             }
         });
+
     }
 
+    @Test
+    public void shouldDeletePreviousAffiliationOfElementOnEquipment(){
+        try {
+            historyService.registarEquipo(new Equipo(idEquipoCont));
+            historyService.registrarElementoConId(new Elemento(idElemCont, TipoElemento.MOUSE, "Lenovo", "Lenovo mouse"));
+            historyService.asociarElementoConEquipo(idEquipoCont, idElemCont);
+            int buscarElem = idElemCont;
+            boolean afiliado = historyService.consultarElemento(idElemCont).getEquipoAsociado() == idEquipoCont;
+            idElemCont++;
+            historyService.registrarElementoConId(new Elemento(idElemCont, TipoElemento.MOUSE, "ASUS", "ASUS mouse"));
+            historyService.asociarElementoConEquipo(idEquipoCont, idElemCont);
 
-
-
-    /*
-    @After
-    public void clearDB() throws SQLException,ClassNotFoundException {
-        System.out.println("Borrando");
-
-        String url = "jdbc:h2:file:./target/db/testdb;MODE=PostgreSQL";
-        String driver = "org.h2.Driver";
-        String username = "sa";
-        String password = "";
-
-        Class.forName(driver);
-        Connection connection = DriverManager.getConnection(url,username,password);
-        connection.setAutoCommit(false);
-        Statement statement = connection.createStatement();
-        statement.execute("delete from elementos");
-        connection.commit();
+            Elemento ultimoElementoAsociado = historyService.consultarElemento(idElemCont);
+            Elemento elementoRemovido = historyService.consultarElemento(buscarElem);
+            idElemCont++; idEquipoCont++;
+            assertTrue(ultimoElementoAsociado.getEquipoAsociado() == idEquipoCont-1 &&
+                    elementoRemovido.getEquipoAsociado() == 0 &&
+                    afiliado);
+        }catch (HistoryServiceException e){
+            fail();
+        }
     }
-    */
+
+    @Test
+    public void shouldAffiliateAvailableElementsToEquipment(){
+        qt().forAll(Generadores.genElementos()).check(elem ->{
+            try {
+                historyService.registarEquipo(new Equipo(idEquipoCont));
+                historyService.registrarElementoConId(elem);
+
+                historyService.asociarElementoConEquipo(idEquipoCont,idElemCont);
+                Elemento elemento = historyService.consultarElemento(idElemCont);
+
+                idEquipoCont++;idElemCont++;
+                return !elemento.isDisponible() && elemento.getEquipoAsociado() == idEquipoCont-1;
+            } catch (HistoryServiceException e) {
+
+                return false;
+            }
+        });
+
+    }
 
 }
