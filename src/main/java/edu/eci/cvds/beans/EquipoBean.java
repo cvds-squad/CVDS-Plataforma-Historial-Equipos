@@ -24,6 +24,18 @@ public class EquipoBean implements Serializable {
 
     private Equipo equipo;
 
+    private String marcaTorre;
+    private String descTorre;
+
+    private String marcaPantalla;
+    private String descPantalla;
+
+    private String marcaMouse;
+    private String descMouse;
+
+    private String marcaTeclado;
+    private String descTeclado;
+
     public EquipoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
     }
@@ -36,6 +48,42 @@ public class EquipoBean implements Serializable {
             e.printStackTrace();
         }
         return equipos;
+    }
+
+    public void crearEquipo(){
+        try{
+            historyService.registarEquipo(new Equipo());
+
+            int maxIdElemento = historyService.getIdMaxElemento();
+            int maxIdEquipo = historyService.getIdMaxEquipo();
+
+            Elemento torre = new Elemento(TipoElemento.TORRE,marcaTorre,descTorre);
+            historyService.registrarElemento(torre);
+            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+
+            Elemento mouse = new Elemento(TipoElemento.MOUSE,marcaMouse,descMouse);
+            historyService.registrarElemento(mouse);
+            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+
+            Elemento pantalla = new Elemento(TipoElemento.PANTALLA,marcaPantalla,descPantalla);
+            historyService.registrarElemento(pantalla);
+            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+
+            Elemento teclado = new Elemento(TipoElemento.TECLADO,marcaTeclado,descTeclado);
+            historyService.registrarElemento(teclado);
+            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+            cleanElementos();
+            FacesContext.getCurrentInstance().addMessage("registroEquipo",new FacesMessage(FacesMessage.SEVERITY_INFO,"Equipo registrado correctamente","Equipo registrado correctamente"));
+        }catch (HistoryServiceException ex){
+            FacesContext.getCurrentInstance().addMessage("registroEquipo", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al crear el nuevo equipo","Error al crear el nuevo equipo"));
+        }
+    }
+
+    private void cleanElementos() {
+        marcaMouse = null; descMouse = null;
+        marcaPantalla = null; descPantalla = null;
+        marcaTeclado = null; descTeclado = null;
+        marcaTorre = null; descTorre = null;
     }
 
     public void asociar(List<Elemento> elementos){
@@ -66,5 +114,69 @@ public class EquipoBean implements Serializable {
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public String getMarcaTorre() {
+        return marcaTorre;
+    }
+
+    public void setMarcaTorre(String marcaTorre) {
+        this.marcaTorre = marcaTorre;
+    }
+
+    public String getDescTorre() {
+        return descTorre;
+    }
+
+    public void setDescTorre(String descTorre) {
+        this.descTorre = descTorre;
+    }
+
+    public String getMarcaPantalla() {
+        return marcaPantalla;
+    }
+
+    public void setMarcaPantalla(String marcaPantalla) {
+        this.marcaPantalla = marcaPantalla;
+    }
+
+    public String getDescPantalla() {
+        return descPantalla;
+    }
+
+    public void setDescPantalla(String descPantalla) {
+        this.descPantalla = descPantalla;
+    }
+
+    public String getMarcaMouse() {
+        return marcaMouse;
+    }
+
+    public void setMarcaMouse(String marcaMouse) {
+        this.marcaMouse = marcaMouse;
+    }
+
+    public String getDescMouse() {
+        return descMouse;
+    }
+
+    public void setDescMouse(String descMouse) {
+        this.descMouse = descMouse;
+    }
+
+    public String getMarcaTeclado() {
+        return marcaTeclado;
+    }
+
+    public void setMarcaTeclado(String marcaTeclado) {
+        this.marcaTeclado = marcaTeclado;
+    }
+
+    public String getDescTeclado() {
+        return descTeclado;
+    }
+
+    public void setDescTeclado(String descTeclado) {
+        this.descTeclado = descTeclado;
     }
 }

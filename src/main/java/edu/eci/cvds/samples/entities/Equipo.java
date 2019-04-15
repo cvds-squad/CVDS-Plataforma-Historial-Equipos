@@ -20,6 +20,10 @@ public class Equipo implements Serializable{
     private Elemento teclado;
     private boolean disponible;
 
+    public Equipo(){
+        disponible = true;
+    }
+
     public Equipo(int idEquipo){
         this.idEquipo = idEquipo;
     }

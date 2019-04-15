@@ -83,4 +83,22 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar el equipo con id " + idEquipo, ex);
         }
     }
+
+    @Override
+    public int getIdMaxElemento() throws HistoryServiceException{
+        try{
+            return elementoDAO.getIdMax();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo encontrar la maxima id");
+        }
+    }
+
+    @Override
+    public int getIdMaxEquipo() throws HistoryServiceException {
+        try{
+            return equipoDAO.getIdMax();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo encontrar la maxima id");
+        }
+    }
 }

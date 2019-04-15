@@ -24,6 +24,10 @@
           WHERE disponible = true
     </select>
 
+    <select id="getMaxId" resultType="int">
+        SELECT Max(idElemento) FROM elementos
+    </select>
+
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
        <result property="equipoAsociado" column="eqps"/>

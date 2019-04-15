@@ -62,4 +62,13 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
         }
     }
 
+    @Override
+    public int getIdMax() throws PersistenceException {
+        try{
+            return equipoMapper.getMaxId();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar la maxima id",ex);
+        }
+    }
+
 }

@@ -54,4 +54,13 @@ public class MyBatisElementoDAO  implements ElementoDAO{
         }
     }
 
+    @Override
+    public int getIdMax() throws PersistenceException {
+        try{
+            return elementoMapper.getMaxId();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar la maxima id",ex);
+        }
+    }
+
 }

@@ -29,4 +29,8 @@
         SELECT idEquipo,Novedades,Disponible FROM equipos
           WHERE  idEquipo = #{idEqui}
     </select>
+
+   <select id="getMaxId" resultType="int">
+       SELECT MAX(idEquipo) FROM equipos
+   </select>
 </mapper>

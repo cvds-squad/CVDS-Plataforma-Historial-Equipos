@@ -24,4 +24,6 @@ public interface EquipoMapper {
     List<Equipo> consultarEquipos();
 
     Equipo consultarEquipo(@Param("idEqui") int idEquipo);
+
+    int getMaxId();
 }

@@ -71,6 +71,16 @@ public class HistoryServiceStub implements HistoryService {
         return null;
     }
 
+    @Override
+    public int getIdMaxElemento() throws HistoryServiceException{
+        return 0;
+    }
+
+    @Override
+    public int getIdMaxEquipo() throws HistoryServiceException {
+        return 0;
+    }
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

@@ -22,4 +22,6 @@ public interface ElementoMapper {
     public Elemento consultElemento(@Param("eid") int id);
 
     List<Elemento> consultarElementosDisponibles();
+
+    int getMaxId();
 }

@@ -22,4 +22,6 @@ public interface ElementoDAO {
     public Elemento consultarElemento(int id) throws PersistenceException;
 
     List<Elemento> consultarElementosDisponibles();
+
+    int getIdMax() throws PersistenceException;
 }
