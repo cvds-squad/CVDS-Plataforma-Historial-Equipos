@@ -6,6 +6,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HistoryServiceStub implements HistoryService {
@@ -54,7 +55,18 @@ public class HistoryServiceStub implements HistoryService {
     public void asociarElementoConEquipo(int equipoId, int elementoId){
 
     }
-    
+
+    @Override
+    public List<Equipo> consultarEquipos() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Elemento> consultarElementosDisponibles() throws HistoryServiceException {
+        return null;
+    }
+
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

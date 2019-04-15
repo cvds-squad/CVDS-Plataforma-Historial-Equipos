@@ -9,6 +9,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 public class HistoryServiceImpl implements HistoryService {
 
@@ -57,6 +58,20 @@ public class HistoryServiceImpl implements HistoryService {
             equipoDAO.asociarElemento(equipoId,elementoId);
         }catch (PersistenceException  ex){
             throw new HistoryServiceException("No se pudo asociar el elemento al equipo",ex);
+        }
+    }
+
+    @Override
+    public List<Equipo> consultarEquipos() {
+        return equipoDAO.consultarEquipos();
+    }
+
+    @Override
+    public List<Elemento> consultarElementosDisponibles() throws HistoryServiceException{
+        try{
+            return elementoDAO.consultarElementosDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar elementos disponibles.",ex);
         }
     }
 }

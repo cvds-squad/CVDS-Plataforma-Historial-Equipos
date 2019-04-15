@@ -8,6 +8,8 @@ package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 import edu.eci.cvds.samples.entities.Elemento;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  *
  * @author 2131381
@@ -18,4 +20,6 @@ public interface ElementoMapper {
     void registerElementoConId(@Param("elem") Elemento elem);
 
     public Elemento consultElemento(@Param("eid") int id);
+
+    List<Elemento> consultarElementosDisponibles();
 }

@@ -11,13 +11,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import java.util.List;
 
 
 @ManagedBean(name="elementoBean")
 @RequestScoped
 public class ElementoBean {
 
-    @Inject
     private HistoryService historyService;
 
     private TipoElemento tipoElemento;
@@ -25,6 +25,8 @@ public class ElementoBean {
     private String marca;
 
     private String descripcion;
+
+    private List<Elemento> elementosDisponibles;
 
     public ElementoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
@@ -73,4 +75,23 @@ public class ElementoBean {
         }
         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
     }
+
+    public List<Elemento> consultarElementosDisponibles(){
+        List<Elemento> elems = null;
+        try {
+            elems = historyService.consultarElementosDisponibles();
+        } catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar elementos disponibles","Error al consultar elementos disponibles"));
+        }
+        return elems;
+    }
+
+    public List<Elemento> getElementosDisponibles() {
+        return elementosDisponibles;
+    }
+
+    public void setElementosDisponibles(List<Elemento> elementosDisponibles) {
+        this.elementosDisponibles = elementosDisponibles;
+    }
+
 }

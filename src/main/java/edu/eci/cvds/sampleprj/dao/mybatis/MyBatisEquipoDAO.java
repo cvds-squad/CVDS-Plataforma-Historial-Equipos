@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Equipo;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -43,6 +44,11 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
         }catch(PersistenceException ex){
             throw new PersistenceException("Error al asociar el elemento",ex);
         }
+    }
+
+    @Override
+    public List<Equipo> consultarEquipos() {
+        return equipoMapper.consultarEquipos();
     }
 
 }

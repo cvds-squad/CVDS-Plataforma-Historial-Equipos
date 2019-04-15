@@ -3,6 +3,8 @@ package edu.eci.cvds.samples.services;
 
 import edu.eci.cvds.samples.entities.*;
 
+import java.util.List;
+
 
 public interface HistoryService {
     
@@ -14,4 +16,8 @@ public interface HistoryService {
     Elemento consultarElemento(int id) throws HistoryServiceException;
 
     void asociarElementoConEquipo(int equipoId,int elementoId) throws HistoryServiceException;
+
+    List<Equipo> consultarEquipos() throws HistoryServiceException;
+
+    List<Elemento> consultarElementosDisponibles() throws HistoryServiceException;
 }

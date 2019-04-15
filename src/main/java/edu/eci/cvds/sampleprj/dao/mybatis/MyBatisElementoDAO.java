@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
 import edu.eci.cvds.samples.entities.Elemento;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -43,5 +44,14 @@ public class MyBatisElementoDAO  implements ElementoDAO{
     public Elemento consultarElemento(int id){
         return elementoMapper.consultElemento(id);
     }
-    
+
+    @Override
+    public List<Elemento> consultarElementosDisponibles() {
+        try{
+            return elementoMapper.consultarElementosDisponibles();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se puede consultar",ex);
+        }
+    }
+
 }

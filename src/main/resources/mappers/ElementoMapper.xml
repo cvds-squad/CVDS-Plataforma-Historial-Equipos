@@ -19,6 +19,11 @@
           WHERE idElemento=#{eid}
     </select>
 
+    <select id="consultarElementosDisponibles" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+          WHERE disponible = true
+    </select>
+
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
        <result property="equipoAsociado" column="eqps"/>
