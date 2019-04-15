@@ -6,8 +6,12 @@ import edu.eci.cvds.samples.entities.*;
 
 public interface HistoryService {
     
-    public abstract void registarEquipo(Equipo equipo) throws HistoryServiceException;
+    void registarEquipo(Equipo equipo) throws HistoryServiceException;
 
-    public abstract void registrarElemento(Elemento elem) throws HistoryServiceException;
+    void registrarElemento(Elemento elem) throws HistoryServiceException;
+    void registrarElementoConId(Elemento elem) throws HistoryServiceException;
 
+    Elemento consultarElemento(int id) throws HistoryServiceException;
+
+    void asociarElementoConEquipo(int equipoId,int elementoId) throws HistoryServiceException;
 }

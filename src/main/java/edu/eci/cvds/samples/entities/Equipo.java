@@ -13,12 +13,16 @@ import java.io.Serializable;
  */
 public class Equipo implements Serializable{
   
-    int idEquipo;
-    Elemento torre;
-    Elemento pantalla;
-    Elemento mouse;
-    Elemento teclado;
-    boolean disponible;
+    private int idEquipo;
+    private Elemento torre;
+    private Elemento pantalla;
+    private Elemento mouse;
+    private Elemento teclado;
+    private boolean disponible;
+
+    public Equipo(int idEquipo){
+        this.idEquipo = idEquipo;
+    }
 
     public Equipo(int idEquipo, Elemento torre, Elemento pantalla, Elemento mouse, Elemento teclado) {
         this.idEquipo = idEquipo;

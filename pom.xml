@@ -78,6 +78,7 @@
             <version>1.0.1.Final</version>
         </dependency>
 		
+
         <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
         <dependency>
             <groupId>javax</groupId>
@@ -104,9 +105,9 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.2</version>
+            <version>7.0</version>
         </dependency>
-		
+
         <!--  Seguridad -->
         <dependency>
             <groupId>org.apache.shiro</groupId>

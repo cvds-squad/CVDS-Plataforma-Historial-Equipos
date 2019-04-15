@@ -6,6 +6,7 @@ figure {
 }
 html,
 body {
+    height: 100%;
     overflow-x: hidden;
     color: #000;
     -ms-overflow-style: scrollbar;
@@ -22,6 +23,16 @@ a {
     -webkit-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
+
+.wrapper{
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+
+.push{
+    height: 50px;
+}
+
 .ct-u-paddingTop10 {
     padding-top: 10px !important;
 }

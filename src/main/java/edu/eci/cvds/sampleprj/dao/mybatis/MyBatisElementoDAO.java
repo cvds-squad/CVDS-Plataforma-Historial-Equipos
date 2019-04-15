@@ -26,9 +26,22 @@ public class MyBatisElementoDAO  implements ElementoDAO{
            elementoMapper.registerElemento(element);
        }
        catch(org.apache.ibatis.exceptions.PersistenceException e){
-           System.out.println("ERROR EN EL MAPEER=========00000000000");
-             throw new PersistenceException("Elemento ya existe",e);   
+           throw new PersistenceException("Elemento ya existe",e);
        }
+    }
+
+    @Override
+    public void registerElementoConId(Elemento element) throws PersistenceException {
+        try{
+            elementoMapper.registerElementoConId(element);
+        }catch (PersistenceException e){
+            throw new PersistenceException("Elemento ya existe",e);
+        }
+    }
+
+    @Override
+    public Elemento consultarElemento(int id){
+        return elementoMapper.consultElemento(id);
     }
     
 }

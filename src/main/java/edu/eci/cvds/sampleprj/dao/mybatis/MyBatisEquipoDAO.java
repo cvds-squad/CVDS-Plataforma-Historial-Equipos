@@ -29,5 +29,20 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
              throw new PersistenceException("El equipo ya se encuetra registrado",e);   
        }
     }
-    
+
+    @Override
+    /**
+     * Asocia un elemento a un equipo
+     * @param equipoID El id del equipo a asociar un elemento
+     * @param elementoID El id del elemento a asociar
+     **/
+    public void asociarElemento(int equipoId, int elementoId) throws PersistenceException {
+        try{
+            equipoMapper.eliminarAsociacion(equipoId,elementoId); //eliminar anterior link de elemento
+            equipoMapper.asociarElemento(equipoId,elementoId);
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al asociar el elemento",ex);
+        }
+    }
+
 }

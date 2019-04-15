@@ -2,15 +2,16 @@ package edu.eci.cvds.samples.services;
 
 
 import com.google.inject.Injector;
+import com.google.inject.Guice;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisEquipoDAO;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 import edu.eci.cvds.sampleprj.dao.*;
-import static com.google.inject.Guice.createInjector;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisElementoDAO;
 import edu.eci.cvds.samples.services.impl.HistoryServiceImpl;
 import edu.eci.cvds.samples.services.impl.HistoryServiceStub;
 
-class HistoryServicesFactory{
+public class HistoryServicesFactory{
 
     private static HistoryServicesFactory instance = new HistoryServicesFactory();
 
@@ -20,23 +21,27 @@ class HistoryServicesFactory{
 
     public HistoryServicesFactory(){
 
-        injector = createInjector(new XMLMyBatisModule() {
+        injector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
                 install(JdbcHelper.PostgreSQL);
+                setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
                 bind(ElementoDAO.class).to(MyBatisElementoDAO.class);
                 bind(HistoryService.class).to(HistoryServiceImpl.class);
+                bind(EquipoDAO.class).to(MyBatisEquipoDAO.class);
             }
         });
 
-        testInjector = createInjector(new XMLMyBatisModule() {
+        testInjector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
                 install(JdbcHelper.PostgreSQL);
+                setEnvironmentId("test");
                 setClassPathResource("mybatis-config-h2.xml");
                 bind(ElementoDAO.class).to(MyBatisElementoDAO.class);
-                bind(HistoryService.class).to(HistoryServiceStub.class);
+                bind(HistoryService.class).to(HistoryServiceImpl.class);
+                bind(EquipoDAO.class).to(MyBatisEquipoDAO.class);
             }
         });
 
@@ -46,8 +51,8 @@ class HistoryServicesFactory{
         return injector.getInstance(HistoryService.class);
     }
 
-    public HistoryService getHistoryServieForTesting(){
-        return injector.getInstance(HistoryService.class);
+    public HistoryService getHistoryServiceForTesting(){
+        return testInjector.getInstance(HistoryService.class);
     }
 
     public static HistoryServicesFactory getInstance(){
