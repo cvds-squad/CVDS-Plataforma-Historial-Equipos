@@ -15,13 +15,17 @@
     <title>Registro de Elemento</title>
 </h:head>
 <h:body>
-    <div class="wrapper">
-        <!--Header-->
+    <div class="header">
+        <a href="#default" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+        <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>#{msg.labelInicio}</a><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
+    <<!--div class="wrapper">
+       
         <div class="header">
             <a href="#default" class="logo"><img src="/images/labLogo.png"/>Historial de Equipos</a>
             <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>Inicio</a><a
                     class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-            </div>
+            </div>-->
+
         </div>
         <br/><br/>
         <div class="formdiv">
@@ -37,12 +41,30 @@
                         <h:outputLabel value="Marca: "/>
                         <p:inputText id="marca" value="#{elementoBean.marca}"/>
 
+<<<<<<< HEAD
+    <h:form>
+        <h:panelGrid columns="2" style="margin-bottom: 10px" cellpadding="5">
+            <h:outputLabel value="#{msg.labelTipo}"/>
+            <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
+                <f:selectItems value="#{elementoBean.tipos()}"/>
+            </p:selectOneMenu>
+            <h:outputLabel  value="#{msg.labelMarca}"/>
+            <p:inputText id="marca" value="#{elementoBean.marca}"/>
+
+            <p:outputLabel value="#{msg.labelDesc}"/>
+            <p:inputTextarea rows="5"/>
+
+        </h:panelGrid>
+        <p:commandButton value="#{msg.labelEnviar}"  icon="fa fa-check" />
+    </h:form>
+<!--
                         <p:outputLabel value="Descripcion: "/>
                         <p:inputTextarea rows="5" value="#{elementoBean.descripcion}"/>
 
                         <p:outputLabel value=""/>
                         <p:commandButton value="Registrar" icon="fa fa-database" action="#{elementoBean.registro()}" update="panel"
                             oncomplete="setTimeout(function(){$('[id$=msgs]').hide(1000)},3000);"/>
+>>>>>>> 72a0543e34b88c096ae9ec7cfb68fb2221c7251c-->
 
                     </h:panelGrid>
                 </p:panel>

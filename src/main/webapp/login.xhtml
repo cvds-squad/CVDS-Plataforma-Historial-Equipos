@@ -8,6 +8,35 @@
 
 </h:head>
 <h:body>
+	<div align="center">
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<img src="images/imglab.png" width="200" height="200"/>
+		<br/>
+		<br/>
+		<h:outputText value="#{msg.labelIngresar}"/>
+		<br/>
+		<br/>
+	    <h:form prependId="false">
+	        <h:panelGrid columns="1">
+                    <h:outputText value="#{msg.labelCorreo}"/>
+	            <p:inputText style="width: 350px;" id="username" required="true" value="#{shiroBean.userName}"/>
+				<br/>
+                                <h:outputText value="#{msg.labelContraseÒa}"/>
+	            <p:password style="width: 350px;" id="password" required="true" value="#{shiroBean.userPassword}"/>
+				<br/>
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+                            <h:outputText value="#{msg.labelRecordar}"/>
+	            <p:selectBooleanCheckbox id="rememberMe" value="#{shiroBean.rememberMe}"/>
+	        </h:panelGrid>
+			<br/>
+	        <h:outputText/>
+                <p:commandButton style="width: 350px;" value="#{msg.labelIngresar}" action="#{shiroBean.loginUser}" />
+<!--
 	<div class="wrapper">
 		<div align="center">
 			<br/>
@@ -37,6 +66,7 @@
 				<br/>
 				<h:outputText/>
 				<p:commandButton value="Login" action="#{shiroBean.loginUser}" />
+-->
 
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 			</h:form>
@@ -53,8 +83,8 @@
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<address>
-							<span>Escuela Colombiana de Ingenier√≠a Julio Garavito<br/></span>Laboratorio de Inform√°tica<br/>
-                            AK.45 No.205-59 (Autopista Norte)-Bogot√°<br/>
+							<span>Escuela Colombiana de IngenierÌa Julio Garavito<br/></span>Laboratorio de Inform·tica<br/>
+                            AK.45 No.205-59 (Autopista Norte)-Bogot·<br/>
 							<span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
 						</address>
 					</div>

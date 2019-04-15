@@ -10,27 +10,26 @@
   <link rel="stylesheet" href="/css/menu.css"/>
 </h:head>
 <h:body>
-  <div class="wrapper">
+  <!--<div class="wrapper">-->
 
-    <div class="header">
-      <a href="#default" class="logo"><img src="/images/labLogo.png"/>Historial de Equipos</a>
-      <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-      </div>
-    </div>
 
-    <div class="contenedor-menu">
-      <ul class="menu">
-        <li><a href=""><i class="icono izquierda fas fa-database"></i>Registrar<i class="icono derecha fas fa-angle-down"></i></a>
-          <ul>
-            <li><a href="registroElemento.xhtml">Registrar elemento</a></li>
-            <li><a href="#">Registrar equipo</a></li>
-          </ul>
-        </li>
-        <li><a href=""><i class="icono izquierda fas fa-search"></i>Consultar<i class="icono derecha fas fa-angle-down"></i></a></li>
-      </ul>
-    </div>
-    <div class="push"></div>
-  </div>
+  <div class="header">
+      <a href="#default" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+      <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
+
+
+
+  <div class="contenedor-menu">
+    <ul class="menu">
+        <li><a href=""><i class="icono izquierda fas fa-database"></i>#{msg.labelRegistrar}<i class="icono derecha fas fa-angle-down"></i></a>
+        <ul>
+            <li><a href="registroElemento.xhtml">#{msg.labelRegistrarElement}</a></li>
+            <li><a href="#">#{msg.labelRegistrarEqup}</a></li>
+        </ul>
+      </li>
+        <li><a href=""><i class="icono izquierda fas fa-search"></i>#{msg.labelConsultar}<i class="icono derecha fas fa-angle-down"></i></a></li>
+    </ul>
+
 
   <footer class="ct-footer">
     <div class="container">
@@ -41,8 +40,8 @@
           </div>
           <div class="col-sm-6 col-md-3">
             <address>
-              <span>Escuela Colombiana de Ingenier√≠a Julio Garavito<br/></span>Laboratorio de Inform√°tica<br/>
-              AK.45 No.205-59 (Autopista Norte)-Bogot√°<br/>
+              <span>Escuela Colombiana de IngenierÌa Julio Garavito<br/></span>Laboratorio de Inform·tica<br/>
+              AK.45 No.205-59 (Autopista Norte)-Bogot·<br/>
               <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
             </address>
           </div>
