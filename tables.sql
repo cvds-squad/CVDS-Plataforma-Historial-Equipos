@@ -25,7 +25,8 @@ descripcion varchar(500));
 create table Equipos(
 idEquipo serial primary key,
 labs int references Laboratorios(idLab),
-Novedades varchar(500));
+Novedades varchar(500),
+disponible bool not null);
 
 create table Elementos(
 idElemento serial primary key,
