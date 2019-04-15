@@ -1,9 +1,8 @@
 package edu.eci.cvds.beans;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -18,14 +17,15 @@ import java.io.Serializable;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="shiroBean")
-@RequestScoped
+@SessionScoped
 public class ShiroSecurityBean implements Serializable {
-	
+
 	private String userName;
 	private String userPassword;
 	private boolean rememberMe;
-	
-	public ShiroSecurityBean() {}
+
+	public ShiroSecurityBean() {
+	}
 
 	public String getUserName() {
 		return userName;
@@ -43,33 +43,30 @@ public class ShiroSecurityBean implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public boolean getRememberMe(){
+	public boolean getRememberMe() {
 		return rememberMe;
 	}
 
-	public void setRememberMe(boolean rme){
+	public void setRememberMe(boolean rme) {
 		rememberMe = rme;
 	}
-	
+
 	public void loginUser() {
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, new Sha256Hash(userPassword).toHex(), rememberMe);
 
-            
-            currentUser.login(token);
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
-		}catch(UnknownAccountException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en autenticacion", "Usuario no registrado"));
-		}catch (IncorrectCredentialsException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en autenticacion", "Contraseña incorrecta"));
-		}catch (IOException e){
+			currentUser.login(token);
+
+			FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
+		} catch (UnknownAccountException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no registrado", "Usuario no registrado"));
+		} catch (IncorrectCredentialsException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", "Contraseña incorrecta"));
+		} catch (IOException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en servidor", "Error"));
 		}
 	}
-	
-	public void logOutUser() {
-		SecurityUtils.getSubject().logout();
-	}
+
 }

@@ -1,6 +1,5 @@
 package edu.eci.cvds.beans;
 
-import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.HistoryService;

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
@@ -10,26 +11,30 @@
   <link rel="stylesheet" href="/css/menu.css"/>
 </h:head>
 <h:body>
-  <!--<div class="wrapper">-->
+
+  <div class="wrapper">
 
 
-  <div class="header">
-      <a href="#default" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
-      <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
+    <div class="header">
+        <a href="#default" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+        <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
+        </div>
+    </div>
 
 
-
-  <div class="contenedor-menu">
-    <ul class="menu">
-        <li><a href=""><i class="icono izquierda fas fa-database"></i>#{msg.labelRegistrar}<i class="icono derecha fas fa-angle-down"></i></a>
-        <ul>
-            <li><a href="registroElemento.xhtml">#{msg.labelRegistrarElement}</a></li>
-            <li><a href="#">#{msg.labelRegistrarEqup}</a></li>
-        </ul>
-      </li>
-        <li><a href=""><i class="icono izquierda fas fa-search"></i>#{msg.labelConsultar}<i class="icono derecha fas fa-angle-down"></i></a></li>
-    </ul>
-
+    <div class="contenedor-menu">
+      <ul class="menu">
+          <li><a href=""><i class="icono izquierda fas fa-database"></i>#{msg.labelRegistrar}<i class="icono derecha fas fa-angle-down"></i></a>
+          <ul>
+              <li><a href="registroElemento.xhtml">#{msg.labelRegistrarElement}</a></li>
+              <li><a href="#">#{msg.labelRegistrarEqup}</a></li>
+          </ul>
+        </li>
+          <li><a href=""><i class="icono izquierda fas fa-search"></i>#{msg.labelConsultar}<i class="icono derecha fas fa-angle-down"></i></a></li>
+      </ul>
+    </div>
+    <div class="push"/>
+  </div>
 
   <footer class="ct-footer">
     <div class="container">
@@ -40,8 +45,8 @@
           </div>
           <div class="col-sm-6 col-md-3">
             <address>
-              <span>Escuela Colombiana de Ingeniería Julio Garavito<br/></span>Laboratorio de Informática<br/>
-              AK.45 No.205-59 (Autopista Norte)-Bogotá<br/>
+              <span>Escuela Colombiana de Ingenieria Julio Garavito<br/></span>Laboratorio de Informatica<br/>
+              AK.45 No.205-59 (Autopista Norte)-Bogota<br/>
               <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
             </address>
           </div>
