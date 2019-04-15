@@ -17,25 +17,25 @@
 		<img src="images/imglab.png" width="200" height="200"/>
 		<br/>
 		<br/>
-		<h:outputText value="Sign in" />
+		<h:outputText value="#{msg.labelIngresar}"/>
 		<br/>
 		<br/>
 	    <h:form prependId="false">
 	        <h:panelGrid columns="1">
-	            <h:outputText value="Email Address"/>
-	            <p:inputText id="username" required="true" value="#{shiroBean.userName}"/>
+                    <h:outputText value="#{msg.labelCorreo}"/>
+	            <p:inputText style="width: 350px;" id="username" required="true" value="#{shiroBean.userName}"/>
 				<br/>
-	            <h:outputText value="Password"/>
-	            <p:password id="password" required="true" value="#{shiroBean.userPassword}"/>
+                                <h:outputText value="#{msg.labelContraseña}"/>
+	            <p:password style="width: 350px;" id="password" required="true" value="#{shiroBean.userPassword}"/>
 				<br/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-	            <h:outputText value="Remember me:"/>
+                            <h:outputText value="#{msg.labelRecordar}"/>
 	            <p:selectBooleanCheckbox id="rememberMe" value="#{shiroBean.rememberMe}"/>
 	        </h:panelGrid>
 			<br/>
 	        <h:outputText/>
-	        <p:commandButton value="Login" action="#{shiroBean.loginUser}" />
+                <p:commandButton style="width: 350px;" value="#{msg.labelIngresar}" action="#{shiroBean.loginUser}" />
 
         <p:messages id="messages" autoUpdate="true" closable="true" />
     	</h:form>
