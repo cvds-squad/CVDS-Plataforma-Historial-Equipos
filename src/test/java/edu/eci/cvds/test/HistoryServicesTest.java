@@ -29,6 +29,22 @@ public class HistoryServicesTest {
     }
 
     @Test
+    public void shouldInsertAndConsultNewEquipments(){
+        qt().forAll(Generadores.genEquipos()).check(equipo -> {
+            try{
+                historyService.registarEquipo(equipo);
+                Equipo eq = historyService.consultaEquipo(equipo.getIdEquipo());
+                idEquipoCont++;
+                return equipo.getIdEquipo() == eq.getIdEquipo() &&
+                        equipo.isDisponible() == eq.isDisponible();
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
+    @Test
     public void shouldInsertAndConsultNewElements(){
         qt().forAll(Generadores.genElementos()).check(elem ->{
             try{
@@ -69,6 +85,7 @@ public class HistoryServicesTest {
                     elementoRemovido.getEquipoAsociado() == 0 &&
                     afiliado);
         }catch (HistoryServiceException e){
+            e.printStackTrace();
             fail();
         }
     }

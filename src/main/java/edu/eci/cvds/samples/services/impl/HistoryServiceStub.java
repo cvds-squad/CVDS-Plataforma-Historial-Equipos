@@ -66,6 +66,10 @@ public class HistoryServiceStub implements HistoryService {
         return null;
     }
 
+    @Override
+    public Equipo consultaEquipo(int idEquipo) throws HistoryServiceException{
+        return null;
+    }
 
     //Poblar
     private void poblar(){

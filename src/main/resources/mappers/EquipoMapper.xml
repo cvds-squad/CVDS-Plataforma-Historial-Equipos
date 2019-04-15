@@ -5,8 +5,8 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper">
     <insert parameterType="map" id="registrarEquipo" > 
-        INSERT INTO Equipos (Novedades)
-            VALUES ('Equipo nuevo')
+        INSERT INTO Equipos (Novedades,disponible)
+            VALUES ('Equipo nuevo',#{equipo.disponible})
     </insert>
 
     <update id="eliminarAsociacion" parameterType="map">
@@ -23,5 +23,10 @@
 
     <select id="consultarEquipos" resultType="Equipo">
         SELECT idEquipo FROM equipos
+    </select>
+
+    <select id="consultarEquipo" resultType="Equipo">
+        SELECT idEquipo,Novedades,Disponible FROM equipos
+          WHERE  idEquipo = #{idEqui}
     </select>
 </mapper>

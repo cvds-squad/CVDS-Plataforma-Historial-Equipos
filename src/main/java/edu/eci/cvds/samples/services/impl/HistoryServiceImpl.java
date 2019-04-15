@@ -74,4 +74,13 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar elementos disponibles.",ex);
         }
     }
+
+    @Override
+    public Equipo consultaEquipo(int idEquipo) throws HistoryServiceException{
+        try{
+            return equipoDAO.consultaEquipo(idEquipo);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar el equipo con id " + idEquipo, ex);
+        }
+    }
 }

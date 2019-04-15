@@ -5,6 +5,7 @@
  */
 package edu.eci.cvds.sampleprj.dao;
 
+import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -20,4 +21,7 @@ public interface EquipoDAO {
     void asociarElemento(int equipoId, int elementoId) throws PersistenceException;
 
     List<Equipo> consultarEquipos();
+
+    Equipo consultaEquipo(int idEquipo);
+
 }

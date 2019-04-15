@@ -22,4 +22,6 @@ public interface EquipoMapper {
     void asociarElemento(@Param("idEqui") int equipoId,@Param("idElem") int elementoId);
 
     List<Equipo> consultarEquipos();
+
+    Equipo consultarEquipo(@Param("idEqui") int idEquipo);
 }

@@ -20,4 +20,7 @@ public interface HistoryService {
     List<Equipo> consultarEquipos() throws HistoryServiceException;
 
     List<Elemento> consultarElementosDisponibles() throws HistoryServiceException;
+
+    Equipo consultaEquipo(int idEquipo) throws HistoryServiceException;
+
 }

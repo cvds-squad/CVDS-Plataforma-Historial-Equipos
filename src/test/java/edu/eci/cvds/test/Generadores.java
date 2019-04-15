@@ -49,7 +49,7 @@ public class Generadores {
         };   
     }
     
-    public static Gen<Elemento> genElementosMouse(){
+    private static Gen<Elemento> genElementosMouse(){
         return source->{
             int ids = ids().generate(source);
             TipoElemento mouse = TipoElemento.MOUSE;
@@ -59,7 +59,7 @@ public class Generadores {
             return new Elemento(ids,mouse,marca,descripcion,disponible);            
         };   
     }
-    public static Gen<Elemento> genElementosTorre(){
+    private static Gen<Elemento> genElementosTorre(){
         return source->{
             int ids = ids().generate(source);
             TipoElemento torre = TipoElemento.TORRE;
@@ -69,7 +69,7 @@ public class Generadores {
             return new Elemento(ids,torre,marca,descripcion,disponible);            
         };   
     }
-    public static Gen<Elemento> genElementosPantalla(){
+    private static Gen<Elemento> genElementosPantalla(){
         return source->{
             int ids = ids().generate(source);
             TipoElemento pantalla = TipoElemento.PANTALLA;
@@ -79,7 +79,7 @@ public class Generadores {
             return new Elemento(ids,pantalla,marca,descripcion,disponible);            
         };   
     }
-    public static Gen<Elemento> genElementosTeclado(){
+    private static Gen<Elemento> genElementosTeclado(){
         return source->{
             int ids = ids().generate(source);
             TipoElemento teclado = TipoElemento.TECLADO;
@@ -92,12 +92,11 @@ public class Generadores {
     
     public static Gen<Equipo> genEquipos(){
         return source->{
-            int eId = ids().generate(source);
             Elemento torre = genElementosTorre().generate(source);
             Elemento mouse = genElementosMouse().generate(source);
             Elemento pantalla = genElementosPantalla().generate(source);
             Elemento teclado = genElementosTeclado().generate(source);
-            return new Equipo(eId,torre, pantalla, mouse, teclado);            
+            return new Equipo(HistoryServicesTest.idEquipoCont,torre, pantalla, mouse, teclado);
         };   
     }
 }
