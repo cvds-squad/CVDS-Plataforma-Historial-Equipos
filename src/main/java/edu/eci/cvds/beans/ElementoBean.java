@@ -59,7 +59,9 @@ public class ElementoBean {
         return TipoElemento.values();
     }
 
-
+    /**
+     * Registra un nuevo elemento utilizando los datos de tipoElemento,marca,descripcion
+     **/
     public void registro() {
         Elemento elemento = new Elemento(tipoElemento,marca,descripcion);
         String msg;
@@ -75,6 +77,10 @@ public class ElementoBean {
         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,msg,msg));
     }
 
+    /**
+     * Consulta elementos disponibles
+     * @return Lista de elementos disponibles
+     **/
     public List<Elemento> consultarElementosDisponibles(){
         List<Elemento> elems = null;
         try {

@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface ElementoDAO {
     
-    public void registerElemento(Elemento element) throws PersistenceException;
+    void registerElemento(Elemento element) throws PersistenceException;
 
     void registerElementoConId(Elemento element) throws PersistenceException;
 
-    public Elemento consultarElemento(int id) throws PersistenceException;
+    Elemento consultarElemento(int id) throws PersistenceException;
 
-    List<Elemento> consultarElementosDisponibles();
+    List<Elemento> consultarElementosDisponibles() throws PersistenceException;
 
     int getIdMax() throws PersistenceException;
 }

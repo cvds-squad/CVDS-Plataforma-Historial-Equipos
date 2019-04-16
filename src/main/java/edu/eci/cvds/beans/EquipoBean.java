@@ -40,6 +40,10 @@ public class EquipoBean implements Serializable {
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
     }
 
+    /**
+     * Consulta todos los equipos
+     * @return lista de todos los equipos registrados
+     **/
     public List<Equipo> consultarEquipos(){
         List<Equipo> equipos = null;
         try {
@@ -50,6 +54,9 @@ public class EquipoBean implements Serializable {
         return equipos;
     }
 
+    /**
+     * Crea un equipo, el equipo siempre tiene torre,mouse,teclado y pantalla
+     **/
     public void crearEquipo(){
         try{
             historyService.registarEquipo(new Equipo());
@@ -79,6 +86,9 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    /**
+     * Metodo privado para limpiar los atributos
+     **/
     private void cleanElementos() {
         marcaMouse = null; descMouse = null;
         marcaPantalla = null; descPantalla = null;
@@ -86,6 +96,10 @@ public class EquipoBean implements Serializable {
         marcaTorre = null; descTorre = null;
     }
 
+    /**
+     * Asocia elementos al equipo asignado en el atributo
+     * @param elementos Lista de elementos a asignar
+     **/
     public void asociar(List<Elemento> elementos){
         Set<TipoElemento> set = new HashSet<>();
         for (Elemento elemento : elementos){

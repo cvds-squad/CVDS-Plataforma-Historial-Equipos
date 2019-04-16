@@ -19,6 +19,10 @@ public class HistoryServiceImpl implements HistoryService {
     private EquipoDAO equipoDAO;
 
     @Override
+    /**
+     * Registra un equipo
+     * @param equipo Equipo a registrar
+     * */
     public void registarEquipo(Equipo equipo) throws HistoryServiceException {
         try{
             equipoDAO.registrarEquipo(equipo);
@@ -29,6 +33,10 @@ public class HistoryServiceImpl implements HistoryService {
 
 
     @Override
+    /**
+     * Registra un elemento
+     * @param elem Elemento a registrar
+     * */
     public void registrarElemento(Elemento elem) throws HistoryServiceException {
         try{
             elementoDAO.registerElemento(elem);
@@ -39,6 +47,10 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Registra un elemento al cual se le indico una Id
+     * @param elem Elemento con id a registrar
+     * */
     public void registrarElementoConId(Elemento elem) throws HistoryServiceException {
         try{
             elementoDAO.registerElementoConId(elem);
@@ -48,11 +60,21 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Consulta un elemento dada una id
+     * @param id La id que se utilizara en la busqueda
+     * @return elemento consultado, null en caso de no encontrar
+     * */
     public Elemento consultarElemento(int id) throws HistoryServiceException {
         return elementoDAO.consultarElemento(id);
     }
 
     @Override
+    /**
+     * Asocia un elemento con un equipo
+     * @param equipoId La id del equipo a asociar el elemento
+     * @param elementoId La id del elemento a asociar
+     * */
     public void asociarElementoConEquipo(int equipoId, int elementoId) throws HistoryServiceException {
         try{
             equipoDAO.asociarElemento(equipoId,elementoId);
@@ -62,11 +84,19 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Consulta todos los equipos
+     * @return Lista de todos los equipos
+     **/
     public List<Equipo> consultarEquipos() {
         return equipoDAO.consultarEquipos();
     }
 
     @Override
+    /**
+     * Consulta todos los elementos disponibles
+     * @return Lista de todos los elementos disponibles
+     **/
     public List<Elemento> consultarElementosDisponibles() throws HistoryServiceException{
         try{
             return elementoDAO.consultarElementosDisponibles();
@@ -76,6 +106,11 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Consulta un equipo dada una id
+     * @param id La id que se utiliza en la busqueda
+     * @return El equipo, null en caso de no encontrar
+     * */
     public Equipo consultaEquipo(int idEquipo) throws HistoryServiceException{
         try{
             return equipoDAO.consultaEquipo(idEquipo);
@@ -85,6 +120,10 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Obtiene la id siguiente actual de los elementos registrados
+     * @return id mas alta
+     **/
     public int getIdMaxElemento() throws HistoryServiceException{
         try{
             return elementoDAO.getIdMax();
@@ -94,6 +133,10 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    /**
+     * Obtiene la id siguiente actual de los equipos registrados
+     * @return id mas alta
+     **/
     public int getIdMaxEquipo() throws HistoryServiceException {
         try{
             return equipoDAO.getIdMax();

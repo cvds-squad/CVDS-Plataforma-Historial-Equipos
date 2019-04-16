@@ -24,9 +24,6 @@ public class ShiroSecurityBean implements Serializable {
 	private String userPassword;
 	private boolean rememberMe;
 
-	public ShiroSecurityBean() {
-	}
-
 	public String getUserName() {
 		return userName;
 	}
