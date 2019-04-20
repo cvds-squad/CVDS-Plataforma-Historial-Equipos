@@ -3,7 +3,7 @@
 **Curso:** Ciclos de Vida del Desarrollo de Software \
 **Periodo académico:** 2019-1
 
-##Integrantes y Roles
+## Integrantes y Roles
 
 |     Nombre    |     Rol         |
 |:--------------:|:-------------: |
