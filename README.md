@@ -20,6 +20,11 @@
 ## Descripción del Producto
 
 #### Manual de Usuario
+Para poder utilizar los servicios que ofrece la página es necesario iniciar sesión.
+Las credenciales para ingresar son las siguientes:
++ **Usuario:** *claudia.santiago@escuelaing.edu.co*
++ **Contraseña:** *admin*
+
 #### Funcionalidades Importantes
 
 
