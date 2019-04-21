@@ -25,6 +25,12 @@
 
 ## Arquitectura y Diseño
 
+#### Modelo E-R
+![](resources/Diagrama%20ER.png)
+
+#### Diagrama de Clases (Simplificado)
+![](resources/Diagrama%20Clases.png)
+
 #### Enlaces
 + [Despliegue en Heroku](https://cvds-equipment-history.herokuapp.com/)
 + [Integración Continua (CircleCI)](https://circleci.com/gh/cvds-squad/CVDS-Plataforma-Historial-Equipos)

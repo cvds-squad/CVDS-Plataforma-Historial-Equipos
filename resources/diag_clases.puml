@@ -1,0 +1,64 @@
+@startuml
+class ShiroSecurityBean{
+}
+
+class ElementoBean{
+}
+
+class EquipoBean{
+}
+
+class HistoryServicesFactory{
+}
+
+class HistoryServiceImpl{
+}
+
+class Elemento{
+}
+
+class Equipo{
+}
+
+class MyBatisEquipoDAO{
+}
+
+class MyBatisElementoDAO{
+}
+
+interface HistoryService{
+}
+
+interface ElementoDAO{
+}
+
+interface EquipoDAO{
+}
+
+interface ElementoMapper{
+}
+
+interface EquipoMapper{
+}
+
+
+enum TipoElemento{
+TORRE
+PANTALLA
+TECLADO
+MOUSE
+}
+
+
+HistoryService <|.. HistoryServiceImpl
+
+HistoryServiceImpl --> ElementoDAO : <<injected>>
+HistoryServiceImpl --> EquipoDAO : <<injected>>
+
+ElementoDAO <|.. MyBatisElementoDAO
+EquipoDAO <|.. MyBatisEquipoDAO
+
+MyBatisElementoDAO --> ElementoMapper : <<injected>>
+MyBatisEquipoDAO --> EquipoMapper : <<injected>>
+
+@enduml
