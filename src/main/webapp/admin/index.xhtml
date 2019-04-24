@@ -9,41 +9,63 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
   <link rel="stylesheet" href="/css/menu.css"/>
+  <link rel="stylesheet" href="/css/infoBox.css"/>
+
 </h:head>
 <h:body>
 
   <div class="wrapper">
-
-
     <div class="header">
-        <a href="#default" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
-        <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
-        </div>
+      <a href="" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+      <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a>
+      </div>
     </div>
 
-
-    <div class="contenedor-menu">
-      <ul class="menu">
-        <li><a href=""><i class="icono izquierda fas fa-database"></i>#{msg.labelRegistrar}<i class="icono derecha fas fa-angle-down"></i></a>
-          <ul>
-              <li><a href="registroElemento.xhtml">#{msg.labelRegistrarElement}</a></li>
-              <li><a href="registroEquipo.xhtml">#{msg.labelRegistrarEqup}</a></li>
-          </ul>
-        </li>
-        <li><a href=""><i class="icono izquierda fas fa-search"></i>#{msg.labelConsultar}<i class="icono derecha fas fa-angle-down"></i></a>
-            <ul>
-              <li><a href="consultarNovedad.xhtml">Consultar Novedades</a></li>
+    <div class="container" style="display: inline-block">
+      <div class="row">
+        <div class="col-sm-8 col-md-5">
+          <div class="contenedor-menu">
+            <ul class="menu">
+              <li><a href=""><i class="icono izquierda fas fa-database"></i>#{msg.labelRegistrar}<i class="icono derecha fas fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="registroElemento.xhtml">#{msg.labelRegistrarElement}</a></li>
+                  <li><a href="registroEquipo.xhtml">#{msg.labelRegistrarEqup}</a></li>
+                </ul>
+              </li>
+              <li><a href=""><i class="icono izquierda fas fa-search"></i>#{msg.labelConsultar}<i class="icono derecha fas fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="consultarNovedad.xhtml">Consultar Novedades</a></li>
+                </ul>
+              </li>
+              <li><a href=""><i class="icono izquierda fas fa-link"/>Asociar<i class="icono derecha fas fa-angle-down"/></a>
+                <ul>
+                  <li><a href="asociarElementoEquipo.xhtml">Asociar elemento</a></li>
+                </ul>
+              </li>
             </ul>
-        </li>
-        <li><a href=""><i class="icono izquierda fas fa-link"/>Asociar<i class="icono derecha fas fa-angle-down"/></a>
-          <ul>
-            <li><a href="asociarElementoEquipo.xhtml">Asociar elemento</a></li>
-          </ul>
-        </li>
-      </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-7">
+          <div class="box">
+            <div class="iconbox">
+              <span></span>
+            </div>
+           <div >
+             <h6 class="title">Información</h6>
+             <p style="text-align: justify">Esta plataforma está dirigida a el mantenimiento de los laboratorios de informática de Ingeniería de Sistemas.
+                La plataforma permite registrar y asociar elementos, equipos y laboratorios, también consultar sobre las novedades que se generan a partir de estos cambios.
+             </p>
+           </div>
+
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="push"/>
   </div>
+
+
 
   <footer class="ct-footer">
     <div class="container">
