@@ -23,36 +23,61 @@
             </div>
         </div>
         <br/><br/>
-        <div class="formdiv">
+        <div class="container">
+
             <h:form id = "registEqui">
-                <p:panel header="Registro de elemento" style="width: 370px;" id="panel">
-                    <p:messages id="msgs"/>
-                    <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
+                <center>
+                    <p:panel header="Registro de elemento" style="width: 370px;" id="panel">
+                        <p:messages id="msgs"/>
+                        <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
 
-                        <h:outputLabel value="#{msg.labelTipo}"/>
+                            <h:outputLabel value="#{msg.labelTipo}"/>
 
-                        <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
-                            <f:selectItems value="#{elementoBean.tipos()}"/>
-                        </p:selectOneMenu>
+                            <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
+                                <f:selectItems value="#{elementoBean.tipos()}"/>
+                            </p:selectOneMenu>
 
-                        <h:outputLabel  value="#{msg.labelMarca}"/>
+                            <h:outputLabel  value="#{msg.labelMarca}"/>
 
-                        <p:inputText id="marca2" value="#{elementoBean.marca}"/>
+                            <p:inputText id="marca2" value="#{elementoBean.marca}" required="true"/>
 
-                        <p:outputLabel value="#{msg.labelDesc}"/>
-                        <p:inputTextarea rows="4" value="#{elementoBean.descripcion}"/>
+                            <p:outputLabel value="#{msg.labelDesc}"/>
+                            <p:inputTextarea rows="4" value="#{elementoBean.descripcion}" required="true"/>
 
-                    </p:panelGrid>
-                    <f:facet name="footer">
-                        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
-                            <p:commandButton value="#{msg.labelEnviar}"  icon="fa fa-check" action="#{elementoBean.registro()}" update="registEqui"
-                                             oncomplete="setTimeout(function(){$('[id$=msgs]').hide(1000)},3000);"/>
-                        </div>
-                    </f:facet>
-
-                </p:panel>
+                        </p:panelGrid>
+                        <f:facet name="footer">
+                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                <p:commandButton value="#{msg.labelEnviar}"  icon="fa fa-check" action="#{elementoBean.registro()}" update="registEqui"
+                                                 oncomplete="setTimeout(function(){$('[id$=msgs]').hide(1000)},3000);"/>
+                            </div>
+                        </f:facet>
+                    </p:panel>
+                </center>
+                <br/><br/>
+                <p:fieldset legend="Elementos registrados" id="elementos">
+                    <p:dataTable id="elements" value="#{elementoBean.consultarElementos()}" var="elem"
+                                 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{elem.idElemento}"/>
+                        </p:column>
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{elem.tipelement}"/>
+                        </p:column>
+                        <p:column headerText="Marca">
+                            <h:outputText value="#{elem.marca}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{elem.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
             </h:form>
+
+
         </div>
+
+
         <div class="push"/>
     </div>
 

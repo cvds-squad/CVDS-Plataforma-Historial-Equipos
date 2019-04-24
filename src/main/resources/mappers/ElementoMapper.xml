@@ -24,6 +24,10 @@
           WHERE disponible = true
     </select>
 
+    <select id="consultarElementos" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+    </select>
+
     <select id="getMaxId" resultType="int">
         SELECT Max(idElemento) FROM elementos
     </select>

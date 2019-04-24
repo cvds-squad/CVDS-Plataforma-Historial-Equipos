@@ -81,6 +81,11 @@ public class HistoryServiceStub implements HistoryService {
         return 0;
     }
 
+    @Override
+    public List<Elemento> consultarElementos() {
+        return null;
+    }
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

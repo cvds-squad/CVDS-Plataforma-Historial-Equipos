@@ -15,13 +15,15 @@ import java.util.List;
  * @author 2131381
  */
 public interface ElementoMapper {
-    public void registerElemento(@Param("elem") Elemento elem);
+    void registerElemento(@Param("elem") Elemento elem);
 
     void registerElementoConId(@Param("elem") Elemento elem);
 
-    public Elemento consultElemento(@Param("eid") int id);
+    Elemento consultElemento(@Param("eid") int id);
 
     List<Elemento> consultarElementosDisponibles();
 
     int getMaxId();
+
+    List<Elemento> consultarElementos();
 }

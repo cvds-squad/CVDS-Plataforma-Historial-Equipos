@@ -26,4 +26,6 @@ public interface HistoryService {
     int getIdMaxElemento() throws HistoryServiceException;
 
     int getIdMaxEquipo() throws HistoryServiceException;
+
+    List<Elemento> consultarElementos() throws  HistoryServiceException;
 }

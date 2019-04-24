@@ -91,6 +91,20 @@ public class ElementoBean {
         return elems;
     }
 
+    /**
+     * Consulta todos los elementos
+     * @return Lista de todos los elementos registrados en base de datos
+     **/
+    public List<Elemento> consultarElementos(){
+        List<Elemento> elems = null;
+        try{
+            elems = historyService.consultarElementos();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar los elementos","Error al consultar elementos en la base de datos"));
+        }
+        return elems;
+    }
+
     public List<Elemento> getElementosDisponibles() {
         return elementosDisponibles;
     }

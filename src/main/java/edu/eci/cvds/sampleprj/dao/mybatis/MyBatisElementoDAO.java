@@ -63,4 +63,13 @@ public class MyBatisElementoDAO  implements ElementoDAO{
         }
     }
 
+    @Override
+    public List<Elemento> consultarElementos() throws PersistenceException{
+        try{
+            return elementoMapper.consultarElementos();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar los elementos",ex);
+        }
+    }
+
 }

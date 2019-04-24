@@ -144,4 +144,17 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo encontrar la maxima id");
         }
     }
+
+    @Override
+    /**
+     * Obtiene todos los elementos registrados en la base de datos
+     * @return Lista de elementos
+     **/
+    public List<Elemento> consultarElementos() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarElementos();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los elementos registrados");
+        }
+    }
 }
