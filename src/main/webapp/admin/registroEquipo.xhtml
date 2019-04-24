@@ -24,53 +24,53 @@
         </div>
         <br/>
         <center>
-        <div class="formRegistroEq">
-            <h:form>
-                <p:panel id="panelEquipo" header="Registrar equipo"  style="width: 780px;">
-                    <p:messages id="msgsEquipo" for="registroEquipo"/>
-                    <h:panelGrid columns="5" style="margin-bottom: 10px; width: 110%" cellpadding="5">
+            <div class="formRegistroEq">
+                <h:form>
+                    <p:panel id="panelEquipo" header="Registrar equipo"  style="width: 780px;">
+                        <p:messages id="msgsEquipo" for="registroEquipo"/>
+                        <p:panelGrid columns="5" style="margin-bottom: 10px; width: 100%">
 
-                        <h:outputLabel value="Torre"/>
-                        <h:outputLabel value="Marca: "/>
-                        <h:inputText value="#{equipoBean.marcaTorre}"/>
+                            <h:outputLabel value="Torre"/>
+                            <h:outputLabel value="Marca: "/>
+                            <p:inputText value="#{equipoBean.marcaTorre}"/>
 
-                        <h:outputLabel value="Descripcion: "/>
-                        <h:inputText value="#{equipoBean.descTorre}"/>
-
-
-                        <h:outputLabel value="Pantalla "/>
-                        <h:outputLabel value="Marca: "/>
-                        <h:inputText value="#{equipoBean.marcaPantalla}"/>
-
-                        <h:outputLabel value="Descripcion: "/>
-                        <h:inputText value="#{equipoBean.descPantalla}"/>
+                            <h:outputLabel value="Descripcion: "/>
+                            <p:inputText value="#{equipoBean.descTorre}"/>
 
 
-                        <h:outputLabel value="Teclado"/>
-                        <h:outputLabel value="Marca: "/>
-                        <h:inputText value="#{equipoBean.marcaTeclado}"/>
+                            <h:outputLabel value="Pantalla "/>
+                            <h:outputLabel value="Marca: "/>
+                            <p:inputText value="#{equipoBean.marcaPantalla}"/>
 
-                        <h:outputLabel value="Descripcion: "/>
-                        <h:inputText value="#{equipoBean.descTeclado}"/>
+                            <h:outputLabel value="Descripcion: "/>
+                            <p:inputText value="#{equipoBean.descPantalla}"/>
 
 
-                        <h:outputLabel value="Mouse"/>
-                        <h:outputLabel value="Marca: "/>
-                        <h:inputText value="#{equipoBean.marcaMouse}"/>
+                            <h:outputLabel value="Teclado"/>
+                            <h:outputLabel value="Marca: "/>
+                            <p:inputText value="#{equipoBean.marcaTeclado}"/>
 
-                        <h:outputLabel value="Descripcion: "/>
-                        <h:inputText value="#{equipoBean.descMouse}"/>
+                            <h:outputLabel value="Descripcion: "/>
+                            <p:inputText value="#{equipoBean.descTeclado}"/>
 
-                    </h:panelGrid>
-                    <f:facet name="footer">
-                        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
-                            <p:commandButton value="Registrar" icon="fa fa-check" action="#{equipoBean.crearEquipo}"
-                                             oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="panelEquipo"/>
-                        </div>
-                    </f:facet>
-                </p:panel>
-            </h:form>
-        </div>
+
+                            <h:outputLabel value="Mouse"/>
+                            <h:outputLabel value="Marca: "/>
+                            <p:inputText value="#{equipoBean.marcaMouse}"/>
+
+                            <h:outputLabel value="Descripcion: "/>
+                            <p:inputText value="#{equipoBean.descMouse}"/>
+
+                        </p:panelGrid>
+                        <f:facet name="footer">
+                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                <p:commandButton value="Registrar" icon="fa fa-check" action="#{equipoBean.crearEquipo}"
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="panelEquipo"/>
+                            </div>
+                        </f:facet>
+                    </p:panel>
+                </h:form>
+            </div>
         </center>
         <div class="push"/>
     </div>

@@ -24,27 +24,31 @@
         </div>
         <br/><br/>
         <div class="formdiv">
-
             <h:form id = "registEqui">
-                <p:panel header="Registro de elemento" style="width: 350px;" id="panel">
+                <p:panel header="Registro de elemento" style="width: 370px;" id="panel">
                     <p:messages id="msgs"/>
-                    <h:panelGrid columns="2" style="margin-bottom: 10px" cellpadding="5">
+                    <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
 
-                    <h:outputLabel value="#{msg.labelTipo}"/>
-                    <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
-                        <f:selectItems value="#{elementoBean.tipos()}"/>
-                    </p:selectOneMenu>
-                    <h:outputLabel  value="#{msg.labelMarca}"/>
-                    <p:inputText id="marca2" value="#{elementoBean.marca}"/>
+                        <h:outputLabel value="#{msg.labelTipo}"/>
 
-                    <p:outputLabel value="#{msg.labelDesc}"/>
-                    <p:inputTextarea rows="5" value="#{elementoBean.descripcion}"/>
+                        <p:selectOneMenu value="#{elementoBean.tipoElemento}" style="width:196px">
+                            <f:selectItems value="#{elementoBean.tipos()}"/>
+                        </p:selectOneMenu>
 
-                    <p:outputLabel value=""/>
-                    <p:commandButton value="#{msg.labelEnviar}"  icon="fa fa-check" action="#{elementoBean.registro()}" update="registEqui"
-                                     oncomplete="setTimeout(function(){$('[id$=msgs]').hide(1000)},3000);"/>
+                        <h:outputLabel  value="#{msg.labelMarca}"/>
 
-                </h:panelGrid>
+                        <p:inputText id="marca2" value="#{elementoBean.marca}"/>
+
+                        <p:outputLabel value="#{msg.labelDesc}"/>
+                        <p:inputTextarea rows="4" value="#{elementoBean.descripcion}"/>
+
+                    </p:panelGrid>
+                    <f:facet name="footer">
+                        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                            <p:commandButton value="#{msg.labelEnviar}"  icon="fa fa-check" action="#{elementoBean.registro()}" update="registEqui"
+                                             oncomplete="setTimeout(function(){$('[id$=msgs]').hide(1000)},3000);"/>
+                        </div>
+                    </f:facet>
 
                 </p:panel>
             </h:form>
