@@ -22,7 +22,9 @@
 			<h:outputText value="#{msg.labelIngresar}"/>
 			<br/>
 			<br/>
-			<h:form prependId="false">
+
+			<h:form id="log" prependId="false">
+				<p:growl id="growl" for="shiro" showDetail="true" sticky="true" />
 				<h:panelGrid columns="1">
 						<h:outputText value="#{msg.labelCorreo}"/>
 					<p:inputText style="width: 350px;" id="username" required="true" value="#{shiroBean.userName}"/>
@@ -37,7 +39,7 @@
 				</h:panelGrid>
 				<br/>
 				<h:outputText/>
-					<p:commandButton style="width: 350px;" value="#{msg.labelIngresar}" action="#{shiroBean.loginUser}" />
+					<p:commandButton style="width: 350px;" value="#{msg.labelIngresar}" action="#{shiroBean.loginUser}" update="log"/>
 			</h:form>
 		</div>
 		<div class="push"/>
