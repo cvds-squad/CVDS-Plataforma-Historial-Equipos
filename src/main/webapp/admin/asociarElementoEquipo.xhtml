@@ -25,51 +25,46 @@
             </div>
         </div>
         <br/><br/>
+        <div class="container">
+            <h:form id="equiposForm">
+                <p:fieldset id="equiposTabla" legend="Equipos">
+                    <p:dataTable id="eqps" var="equipo" value="#{equipoBean.consultarEquipos()}" selectionMode="single" rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
 
-        <h:form id="equiposForm">
+                        <p:column headerText="Id" style="text-align: center">
+                            <h:outputText value="#{equipo.idEquipo}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton process="eqps" value="Asociar elementos disponibles" icon="fa fa-link" oncomplete="$('[id$=elementosForm]').show()"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:fieldset>
+            </h:form>
 
-            <p:dataTable id="eqps" var="equipo" value="#{equipoBean.consultarEquipos()}" selectionMode="single" rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
-                <f:facet name="header">
-                    Equipos
-                </f:facet>
-                <p:column headerText="Id" style="text-align: center">
-                    <h:outputText value="#{equipo.idEquipo}"/>
-                </p:column>
-                <f:facet name="footer">
-                    <p:commandButton process="eqps" value="Asociar elementos disponibles" icon="fa fa-link" oncomplete="$('[id$=elementosForm]').show()"/>
-                </f:facet>
-            </p:dataTable>
-        </h:form>
+            <h:form id="elementosForm" style="display: none">
+                <p:growl for="msgsElemento" sticky="true" id="growl"/>
+                <p:fieldset id="elementosTabla" legend="Elementos disponibles">
+                    <p:dataTable id="elems" var="elem" value="#{elementoBean.consultarElementosDisponibles()}" selection="#{elementoBean.elementosDisponibles}" rowKey="#{elem.idElemento}">
+                        <p:column selectionMode="multiple" style="width: 40px; text-align: center"/>
 
-        <h:form id="elementosForm" style="display: none">
-            <p:growl for="msgsElemento" sticky="true" id="growl"/>
-            <p:dataTable id="elems" var="elem" value="#{elementoBean.consultarElementosDisponibles()}" selection="#{elementoBean.elementosDisponibles}" rowKey="#{elem.idElemento}">
+                        <p:column headerText="Tipo" style="text-align: center">
+                            <h:outputText value="#{elem.tipelement}"/>
+                        </p:column>
 
-                <f:facet name="header">
-                    Elementos Disponibles
-                </f:facet>
-                <p:column selectionMode="multiple" style="width: 40px; text-align: center"/>
+                        <p:column headerText="Marca" style="text-align: center">
+                            <h:outputText value="#{elem.marca}"/>
+                        </p:column>
 
-                <p:column headerText="Tipo" style="text-align: center">
-                    <h:outputText value="#{elem.tipelement}"/>
-                </p:column>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{elem.descripcion}"/>
+                        </p:column>
 
-                <p:column headerText="Marca" style="text-align: center">
-                    <h:outputText value="#{elem.marca}"/>
-                </p:column>
-
-                <p:column headerText="Descripcion">
-                    <h:outputText value="#{elem.descripcion}"/>
-                </p:column>
-
-                <f:facet name="footer">
-                    <p:commandButton process="elementosForm" icon="fa fa-link" value="Asociar" update="elementosForm" action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"
-                    oncomplete="setTimeout(function(){$('[id$=elementosForm]').hide(1000)},3000);"/>
-                </f:facet>
-            </p:dataTable>
-        </h:form>
-
-
+                        <f:facet name="footer">
+                            <p:commandButton process="elementosForm" icon="fa fa-link" value="Asociar" update="elementosForm" action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:fieldset>
+            </h:form>
+        </div>
 
         <div class="push"/>
     </div>
