@@ -3,6 +3,7 @@ package edu.eci.cvds.beans;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 
@@ -52,7 +53,7 @@ public class ShiroSecurityBean implements Serializable {
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, new Sha256Hash(userPassword).toHex(), rememberMe);
-
+			currentUser.getSession().setAttribute("Correo",userName);
 
 			currentUser.login(token);
 
@@ -63,6 +64,17 @@ public class ShiroSecurityBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage("shiro", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", "La contraseña ingresada no es correcta"));
 		} catch (IOException e) {
 			FacesContext.getCurrentInstance().addMessage("shiro", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fallo en servidor", "Error"));
+		}
+	}
+
+	public void isLogged(){
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.getSession().getAttribute("Correo") != null){
+			try{
+				FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
+			}catch (IOException e){
+				FacesContext.getCurrentInstance().addMessage("shiro", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al redireccionar","Ocurrio un error en el servidor"));
+			}
 		}
 	}
 
