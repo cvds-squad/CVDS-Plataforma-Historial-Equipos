@@ -1,136 +1,190 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
->
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/header.css"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/css/menu.css"/>
-    <link rel="stylesheet" href="/css/centerform.css"/>
-    <title>Asociar Elementos</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/footer.css" />
+	<link rel="stylesheet" href="/css/header.css" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+		integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+		crossorigin="anonymous" />
+	<link rel="stylesheet" href="/css/menu.css" />
+	<link rel="stylesheet" href="/css/centerform.css" />
+	<link rel="stylesheet" href="/css/button.css" />
+	<title>Asociar Elementos</title>
+	
+	<script type="text/javascript" >
+	onclick => myFunction();
+
+	function myFunction() {
+
+	document.getElementById('$btnAsociar').style.backgroundcolor = "red";
+
+	}
+	</script>
 </h:head>
 <h:body>
-    <div class="wrapper">
-        <!--Header-->
+	<div class="wrapper">
+		<!--Header-->
 
-        <div class="header">
-            <a href="index.xhtml" class="logo"><img src="/images/labLogo.png"/>Historial de Equipos</a>
-            <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>Inicio</a><a
-                    class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-            </div>
-        </div>
-        <br/><br/>
-        <div class="container">
-            <h:form id="equiposForm">
-                <p:fieldset id="equiposTabla" legend="Equipos">
-                    <p:dataTable id="eqps" var="equipo" value="#{equipoBean.consultarEquipos()}" selectionMode="single" rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
+		<div class="header">
+			<a href="index.xhtml" class="logo"><img src="/images/labLogo.png" />Historial
+				de Equipos</a>
+			<div class="header-right">
+				<a class="active" href="index.xhtml"><i
+					class="icono izquierda fas fa-home" />Inicio</a><a class="active"
+					href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+			</div>
+		</div>
+		<br /> <br />
+		<div class="container">
+			<h:form id="equiposForm">
+				<p:fieldset id="equiposTabla" legend="Equipos">
+					<p:dataTable id="eqps" var="equipo"
+						value="#{equipoBean.consultarEquipos()}" selectionMode="single"
+						rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
 
-                        <p:column headerText="Id" style="text-align: center">
-                            <h:outputText value="#{equipo.idEquipo}"/>
-                        </p:column>
-                        <p:column headerText="Torre">
-                            <h:outputText value="#{equipo.torre}"/>
-                        </p:column>
+						<p:column headerText="Id" style="text-align: center">
+							<h:outputText value="#{equipo.idEquipo}" />
+						</p:column>
+						<p:column headerText="Torre">
+							<h:outputText value="#{equipo.torre}" />
+						</p:column>
 
-                        <p:column headerText="Pantalla">
-                            <h:outputText value="#{equipo.pantalla}"/>
-                        </p:column>
+						<p:column headerText="Pantalla">
+							<h:outputText value="#{equipo.pantalla}" />
+						</p:column>
 
-                        <p:column headerText="Teclado">
-                            <h:outputText value="#{equipo.teclado}"/>
-                        </p:column>
+						<p:column headerText="Teclado">
+							<h:outputText value="#{equipo.teclado}" />
+						</p:column>
 
-                        <p:column headerText="Mouse">
-                            <h:outputText value="#{equipo.mouse}"/>
-                        </p:column>
+						<p:column headerText="Mouse">
+							<h:outputText value="#{equipo.mouse}" />
+						</p:column>
 
-                        <f:facet name="footer">
-                            <p:commandButton process="eqps" value="Asociar elementos disponibles" icon="fa fa-link" oncomplete="$('[id$=elementosForm]').show()"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:fieldset>
-            </h:form>
+						<f:facet name="footer">
+							<button type="button" id="btnAsociar" class="btn btn-success btn-primary" data-toggle="modal"
+								data-target="#exampleModal"><i class="fa fa-link"/>Asociar elementos</button>
+						</f:facet>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
 
-            <h:form id="elementosForm" style="display: none">
-                <p:growl for="msgsElemento" sticky="true" id="growl"/>
-                <p:fieldset id="elementosTabla" legend="Elementos disponibles">
-                    <p:dataTable id="elems" var="elem" value="#{elementoBean.consultarElementosDisponibles()}" selection="#{elementoBean.elementosDisponibles}" rowKey="#{elem.idElemento}">
-                        <p:column selectionMode="multiple" style="width: 40px; text-align: center"/>
+			<h:form id="elementosForm">
+				<p:growl for="msgsElemento" sticky="true" id="growl" />
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Elementos disponibles para asociar</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+								</button>
+							</div>
+							<div class="modal-body">
+								<p:fieldset id="elementosTabla" legend="Elementos disponibles">
+									<p:dataTable id="elems" var="elem"
+										value="#{elementoBean.consultarElementosDisponibles()}"
+										selection="#{elementoBean.elementosDisponibles}"
+										rowKey="#{elem.idElemento}">
+										<p:column selectionMode="multiple"
+											style="width: 40px; text-align: center" />
 
-                        <p:column headerText="Tipo" style="text-align: center">
-                            <h:outputText value="#{elem.tipelement}"/>
-                        </p:column>
+										<p:column headerText="Tipo" style="text-align: center">
+											<h:outputText value="#{elem.tipelement}" />
+										</p:column>
 
-                        <p:column headerText="Marca" style="text-align: center">
-                            <h:outputText value="#{elem.marca}"/>
-                        </p:column>
+										<p:column headerText="Marca" style="text-align: center">
+											<h:outputText value="#{elem.marca}" />
+										</p:column>
 
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{elem.descripcion}"/>
-                        </p:column>
+										<p:column headerText="Descripcion">
+											<h:outputText value="#{elem.descripcion}" />
+										</p:column>
 
-                        <f:facet name="footer">
-                            <p:commandButton process="elementosForm" icon="fa fa-link" value="Asociar" update="elementosForm equiposForm" action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:fieldset>
-            </h:form>
-        </div>
-
-        <div class="push"/>
-    </div>
-
-    <!--Footer -->
-    <footer class="ct-footer">
-        <div class="container">
-            <div class="ct-footer-meta text-center-sm">
-                <div class="row">
-                    <div class="col-sm-6 col-md-2">
-                        <img alt="logo" src="/images/labLogo.png"/>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <address>
-                            <span>Escuela Colombiana de Ingeniería Julio Garavito<br/></span>Laboratorio de Informática<br/>
-                            AK.45 No.205-59 (Autopista Norte)-Bogotá<br/>
-                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
-                        </address>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <ul class="ct-socials list-unstyled list-inline">
-                            <li>
-                                <a href="https://www.facebook.com/EscuelaIng/?ref=br_rs" target="_blank"><img
-                                        alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"/></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/Escuelaing" target="_blank"><img alt="twitter"
-                                                                                              src="https://www.solodev.com/assets/footer/twitter-white.png"/></a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/user/escuelacolingenieria/featured"
-                                   target="_blank"><img alt="youtube"
-                                                        src="https://www.solodev.com/assets/footer/youtube-white.png"/></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/escuelaing/?hl=es-la" target="_blank"><img
-                                        alt="instagram"
-                                        src="https://www.solodev.com/assets/footer/instagram-white.png"/></a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
+										<f:facet name="footer">
+											<p:commandButton process="elementosForm" icon="fa fa-link"
+												value="Asociar" update="equiposForm elementosForm"
+												action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"
+												onclick="document.getElementById('closeBtn').click()" />
+										</f:facet>
+									</p:dataTable>
+								</p:fieldset>
+							</div>
+							<div class="modal-footer">
+								<button id="closeBtn" type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
 
 
+
+		<div class="push" />
+	</div>
+
+	<!--Footer -->
+	<footer class="ct-footer">
+		<div class="container">
+			<div class="ct-footer-meta text-center-sm">
+				<div class="row">
+					<div class="col-sm-6 col-md-2">
+						<img alt="logo" src="/images/labLogo.png" />
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<address>
+							<span>Escuela Colombiana de Ingeniería Julio Garavito<br /></span>Laboratorio
+							de Informática<br /> AK.45 No.205-59 (Autopista Norte)-Bogotá<br />
+							<span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+						</address>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<ul class="ct-socials list-unstyled list-inline">
+							<li><a href="https://www.facebook.com/EscuelaIng/?ref=br_rs"
+								target="_blank"><img alt="facebook"
+									src="https://www.solodev.com/assets/footer/facebook-white.png" /></a>
+							</li>
+							<li><a href="https://twitter.com/Escuelaing" target="_blank"><img
+									alt="twitter"
+									src="https://www.solodev.com/assets/footer/twitter-white.png" /></a>
+							</li>
+							<li><a
+								href="https://www.youtube.com/user/escuelacolingenieria/featured"
+								target="_blank"><img alt="youtube"
+									src="https://www.solodev.com/assets/footer/youtube-white.png" /></a>
+							</li>
+							<li><a href="https://www.instagram.com/escuelaing/?hl=es-la"
+								target="_blank"><img alt="instagram"
+									src="https://www.solodev.com/assets/footer/instagram-white.png" /></a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+
+	<!-- jQuery library -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </h:body>
 </html>

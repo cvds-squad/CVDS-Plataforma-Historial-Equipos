@@ -1,0 +1,14 @@
+.btn.btn-success{
+  color: #fff;
+  background-color:  #51A411;
+  border-color: #5cb85c;
+}
+
+.btn.btn-success:active:hover{
+  color: #51A411;
+  background-color:  #fff;
+}
+
+.btn.btn-success:hover{
+	background-color: #70B735;
+}
