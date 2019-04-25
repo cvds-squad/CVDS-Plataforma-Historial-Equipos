@@ -36,6 +36,15 @@ marca varchar(20),
 Descripcion varchar(500),
 disponible bool);
 
+create table Novedad(
+idNovedad serial primary key,
+equipoAsociado int references Equipos(idEquipo),
+elementoAsociado int references elementos(idElemento),
+fecha date not null,
+titulo varchar(50),
+responsable varchar(100) references usuarios(correo),
+detalle varchar(500));
+
 insert into tipoelemento values ('TECLADO','Teclado de pc');
 insert into tipoelemento values ('TORRE','Torre de pc');
 insert into tipoelemento values ('PANTALLA','pantalla de pc');
