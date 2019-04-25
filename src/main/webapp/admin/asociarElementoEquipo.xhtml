@@ -1,32 +1,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="/css/footer.css" />
 	<link rel="stylesheet" href="/css/header.css" />
 	<link
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-		rel="stylesheet" />
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+			rel="stylesheet" />
 	<link rel="stylesheet"
-		href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-		integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-		crossorigin="anonymous" />
+		  href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+		  integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+		  crossorigin="anonymous" />
 	<link rel="stylesheet" href="/css/menu.css" />
 	<link rel="stylesheet" href="/css/centerform.css" />
 	<link rel="stylesheet" href="/css/button.css" />
 	<title>Asociar Elementos</title>
-	
-	<script type="text/javascript" >
-	onclick => myFunction();
 
-	function myFunction() {
-
-	document.getElementById('$btnAsociar').style.backgroundcolor = "red";
-
-	}
-	</script>
 </h:head>
 <h:body>
 	<div class="wrapper">
@@ -37,8 +28,8 @@
 				de Equipos</a>
 			<div class="header-right">
 				<a class="active" href="index.xhtml"><i
-					class="icono izquierda fas fa-home" />Inicio</a><a class="active"
-					href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+						class="icono izquierda fas fa-home" />Inicio</a><a class="active"
+																		   href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
 		</div>
 		<br /> <br />
@@ -46,8 +37,8 @@
 			<h:form id="equiposForm">
 				<p:fieldset id="equiposTabla" legend="Equipos">
 					<p:dataTable id="eqps" var="equipo"
-						value="#{equipoBean.consultarEquipos()}" selectionMode="single"
-						rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
+								 value="#{equipoBean.consultarEquipos()}" selectionMode="single"
+								 rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
 
 						<p:column headerText="Id" style="text-align: center">
 							<h:outputText value="#{equipo.idEquipo}" />
@@ -69,8 +60,9 @@
 						</p:column>
 
 						<f:facet name="footer">
-							<button type="button" id="btnAsociar" class="btn btn-success btn-primary" data-toggle="modal"
-								data-target="#exampleModal"><i class="fa fa-link"/>Asociar elementos</button>
+							<p:commandButton id="btnMachete" process="eqps" value="Asociar elementos" icon="fa fa-link" onclick="document.getElementById('btnAsociar').click()"/>
+							<button type="button" style="display: none" id="btnAsociar" class="btn btn-success btn-primary" data-toggle="modal"
+							data-target="#exampleModal"><i class="fa fa-link"/>Asociar elementos</button>
 						</f:facet>
 					</p:dataTable>
 				</p:fieldset>
@@ -79,24 +71,24 @@
 			<h:form id="elementosForm">
 				<p:growl for="msgsElemento" sticky="true" id="growl" />
 				<div class="modal fade" id="exampleModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
+					 role="dialog" aria-labelledby="exampleModalLabel"
+					 aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Elementos disponibles para asociar</h5>
 								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
+										aria-label="Close">
 								</button>
 							</div>
 							<div class="modal-body">
 								<p:fieldset id="elementosTabla" legend="Elementos disponibles">
 									<p:dataTable id="elems" var="elem"
-										value="#{elementoBean.consultarElementosDisponibles()}"
-										selection="#{elementoBean.elementosDisponibles}"
-										rowKey="#{elem.idElemento}">
+												 value="#{elementoBean.consultarElementosDisponibles()}"
+												 selection="#{elementoBean.elementosDisponibles}"
+												 rowKey="#{elem.idElemento}">
 										<p:column selectionMode="multiple"
-											style="width: 40px; text-align: center" />
+												  style="width: 40px; text-align: center" />
 
 										<p:column headerText="Tipo" style="text-align: center">
 											<h:outputText value="#{elem.tipelement}" />
@@ -111,17 +103,17 @@
 										</p:column>
 
 										<f:facet name="footer">
-											<p:commandButton process="elementosForm" icon="fa fa-link"
-												value="Asociar" update="equiposForm elementosForm"
-												action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"
-												onclick="document.getElementById('closeBtn').click()" />
+											<p:commandButton icon="fa fa-link"
+															 action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"
+															 value="Asociar" update="elementosForm equiposForm"
+															 onclick="document.getElementById('closeBtn').click()" />
 										</f:facet>
 									</p:dataTable>
 								</p:fieldset>
 							</div>
 							<div class="modal-footer">
 								<button id="closeBtn" type="button" class="btn btn-secondary"
-									data-dismiss="modal">Cerrar</button>
+										data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</div>
@@ -153,21 +145,21 @@
 					<div class="col-sm-6 col-md-3">
 						<ul class="ct-socials list-unstyled list-inline">
 							<li><a href="https://www.facebook.com/EscuelaIng/?ref=br_rs"
-								target="_blank"><img alt="facebook"
-									src="https://www.solodev.com/assets/footer/facebook-white.png" /></a>
+								   target="_blank"><img alt="facebook"
+														src="https://www.solodev.com/assets/footer/facebook-white.png" /></a>
 							</li>
 							<li><a href="https://twitter.com/Escuelaing" target="_blank"><img
 									alt="twitter"
 									src="https://www.solodev.com/assets/footer/twitter-white.png" /></a>
 							</li>
 							<li><a
-								href="https://www.youtube.com/user/escuelacolingenieria/featured"
-								target="_blank"><img alt="youtube"
-									src="https://www.solodev.com/assets/footer/youtube-white.png" /></a>
+									href="https://www.youtube.com/user/escuelacolingenieria/featured"
+									target="_blank"><img alt="youtube"
+														 src="https://www.solodev.com/assets/footer/youtube-white.png" /></a>
 							</li>
 							<li><a href="https://www.instagram.com/escuelaing/?hl=es-la"
-								target="_blank"><img alt="instagram"
-									src="https://www.solodev.com/assets/footer/instagram-white.png" /></a>
+								   target="_blank"><img alt="instagram"
+														src="https://www.solodev.com/assets/footer/instagram-white.png" /></a>
 							</li>
 
 						</ul>
@@ -180,11 +172,11 @@
 
 	<!-- jQuery library -->
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </h:body>
 </html>

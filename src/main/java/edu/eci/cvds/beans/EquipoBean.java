@@ -112,6 +112,7 @@ public class EquipoBean implements Serializable {
         }
 
         for (Elemento elemento : elementos){
+            System.out.println(equipo + " " + elemento);
             try{
                 historyService.asociarElementoConEquipo(equipo.getIdEquipo(),elemento.getIdElemento());
             }catch (HistoryServiceException e){
