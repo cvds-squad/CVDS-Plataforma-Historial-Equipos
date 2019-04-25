@@ -33,6 +33,22 @@
                         <p:column headerText="Id" style="text-align: center">
                             <h:outputText value="#{equipo.idEquipo}"/>
                         </p:column>
+                        <p:column headerText="Torre">
+                            <h:outputText value="#{equipo.torre}"/>
+                        </p:column>
+
+                        <p:column headerText="Pantalla">
+                            <h:outputText value="#{equipo.pantalla}"/>
+                        </p:column>
+
+                        <p:column headerText="Teclado">
+                            <h:outputText value="#{equipo.teclado}"/>
+                        </p:column>
+
+                        <p:column headerText="Mouse">
+                            <h:outputText value="#{equipo.mouse}"/>
+                        </p:column>
+
                         <f:facet name="footer">
                             <p:commandButton process="eqps" value="Asociar elementos disponibles" icon="fa fa-link" oncomplete="$('[id$=elementosForm]').show()"/>
                         </f:facet>

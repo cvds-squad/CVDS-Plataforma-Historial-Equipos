@@ -93,4 +93,9 @@ public class Elemento implements Serializable {
     public void setEquipoAsociado(int equipoAsociado) {
         this.equipoAsociado = equipoAsociado;
     }
+
+    @Override
+    public String toString(){
+        return marca + ": " +descripcion;
+    }
 }

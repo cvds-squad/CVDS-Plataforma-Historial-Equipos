@@ -21,9 +21,40 @@
           WHERE idElemento = #{idElem}
     </update>
 
-    <select id="consultarEquipos" resultType="Equipo">
-        SELECT idEquipo FROM equipos
+    <select id="consultarEquipos" resultMap="EquipoResult">
+        select idequipo,torremarca, torredesc,pantallamarca, pantalladesc,tecladomarca, tecladodesc, mousemarca, mousedesc
+        from (select idequipo, marca as torremarca, descripcion as torredesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TORRE') as ttorre
+            join
+            (select idequipo, marca as pantallamarca, descripcion as pantalladesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='PANTALLA') as ppantalla using (idequipo)
+            join
+            (select idequipo, marca as tecladomarca, descripcion as tecladodesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TECLADO') as tteclado using (idequipo)
+            join
+            (select idequipo, marca as mousemarca, descripcion as mousedesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='MOUSE') as mmouse using (idequipo)
     </select>
+
+    <resultMap id="EquipoResult" type="Equipo">
+        <id property="idEquipo" column="idequipo"/>
+        <result property="torre.descripcion" column="torredesc"/>
+        <result property="torre.marca" column="torremarca"/>
+
+        <result property="pantalla.marca" column="pantallamarca"/>
+        <result property="pantalla.descripcion" column="pantalladesc"/>
+
+        <result property="teclado.marca" column="tecladomarca"/>
+        <result property="teclado.descripcion" column="tecladodesc"/>
+
+        <result property="mouse.marca" column="mousemarca"/>
+        <result property="mouse.descripcion" column="mousedesc"/>
+
+    </resultMap>
 
     <select id="consultarEquipo" resultType="Equipo">
         SELECT idEquipo,Novedades,Disponible FROM equipos

@@ -23,55 +23,83 @@
             </div>
         </div>
         <br/>
-        <center>
-            <div class="formRegistroEq">
-                <h:form>
+        <div class="container">
+            <h:form id="formRegEquipo">
+                <center>
                     <p:panel id="panelEquipo" header="Registrar equipo"  style="width: 780px;">
-                        <p:messages id="msgsEquipo" for="registroEquipo"/>
+                        <p:messages id="msgsEquipo" closable="true"/>
+
                         <p:panelGrid columns="5" style="margin-bottom: 10px; width: 100%">
 
                             <h:outputLabel value="Torre"/>
                             <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaTorre}"/>
+                            <p:inputText value="#{equipoBean.marcaTorre}" required="true"/>
 
                             <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descTorre}"/>
+                            <p:inputText value="#{equipoBean.descTorre}" required="true"/>
 
 
                             <h:outputLabel value="Pantalla "/>
                             <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaPantalla}"/>
+                            <p:inputText value="#{equipoBean.marcaPantalla}" required="true"/>
 
                             <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descPantalla}"/>
+                            <p:inputText value="#{equipoBean.descPantalla}" required="true"/>
 
 
                             <h:outputLabel value="Teclado"/>
                             <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaTeclado}"/>
+                            <p:inputText value="#{equipoBean.marcaTeclado}" required="true"/>
 
                             <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descTeclado}"/>
+                            <p:inputText value="#{equipoBean.descTeclado}" required="true"/>
 
 
                             <h:outputLabel value="Mouse"/>
                             <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaMouse}"/>
+                            <p:inputText value="#{equipoBean.marcaMouse}" required="true"/>
 
                             <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descMouse}"/>
+                            <p:inputText value="#{equipoBean.descMouse}" required="true"/>
 
                         </p:panelGrid>
                         <f:facet name="footer">
                             <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
                                 <p:commandButton value="Registrar" icon="fa fa-check" action="#{equipoBean.crearEquipo}"
-                                                 oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="panelEquipo"/>
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="formRegEquipo"/>
                             </div>
                         </f:facet>
                     </p:panel>
-                </h:form>
-            </div>
-        </center>
+                </center>
+                <br/><br/>
+                <p:fieldset legend="Equipos registrados" id="elementos">
+                    <p:dataTable id="elements" value="#{equipoBean.consultarEquipos()}" var="equi"
+                                 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{equi.idEquipo}"/>
+                        </p:column>
+                        <p:column headerText="Torre">
+                            <h:outputText value="#{equi.torre}"/>
+                        </p:column>
+
+                        <p:column headerText="Pantalla">
+                            <h:outputText value="#{equi.pantalla}"/>
+                        </p:column>
+
+                        <p:column headerText="Teclado">
+                            <h:outputText value="#{equi.teclado}"/>
+                        </p:column>
+
+                        <p:column headerText="Mouse">
+                            <h:outputText value="#{equi.mouse}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+            </h:form>
+
+        </div>
+
         <div class="push"/>
     </div>
 

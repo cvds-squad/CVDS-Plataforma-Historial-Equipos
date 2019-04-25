@@ -90,7 +90,7 @@ public class Equipo implements Serializable{
         this.disponible = disponible;
     }
     
-    
+
     
     
 }

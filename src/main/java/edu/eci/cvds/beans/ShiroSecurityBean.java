@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 
 import org.apache.shiro.SecurityUtils;
@@ -18,7 +19,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="shiroBean")
-@SessionScoped
+@ViewScoped
 public class ShiroSecurityBean implements Serializable {
 
 	private String userName;
@@ -53,9 +54,10 @@ public class ShiroSecurityBean implements Serializable {
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, new Sha256Hash(userPassword).toHex(), rememberMe);
-			currentUser.getSession().setAttribute("Correo",userName);
+
 
 			currentUser.login(token);
+			currentUser.getSession().setAttribute("Correo",userName);
 
 			FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
 		} catch (UnknownAccountException e) {
