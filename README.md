@@ -48,3 +48,23 @@ Las credenciales para ingresar son las siguientes:
 |Andrés Quintero|Team Developer   |
 |Julián Benítez |Team Developer   |
 
+#### Metodología
+
+
+#### Taiga
+[Taiga backlog](https://tree.taiga.io/project/julianbenitez99-historial-de-equipos-labinfo/backlog)
+
+#### Release-burndown chart
+
+
+### Sprints
+
+#### Sprint 1
+Sprint-backlog
+![Sprint-backlog](resources/sprint1backlog.png)
+
+Sprint-burndown chart
+![Sprint-burndown chart](resources/sprint1burndown.png)
+ 
+
+ 
