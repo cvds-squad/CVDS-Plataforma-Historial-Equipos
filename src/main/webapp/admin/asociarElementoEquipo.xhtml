@@ -75,7 +75,7 @@
                         </p:column>
 
                         <f:facet name="footer">
-                            <p:commandButton process="elementosForm" icon="fa fa-link" value="Asociar" update="elementosForm" action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"/>
+                            <p:commandButton process="elementosForm" icon="fa fa-link" value="Asociar" update="elementosForm equiposForm" action="#{equipoBean.asociar(elementoBean.elementosDisponibles)}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:fieldset>
