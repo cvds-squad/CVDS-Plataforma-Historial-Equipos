@@ -57,14 +57,15 @@ Las credenciales para ingresar son las siguientes:
 #### Release-burndown chart
 
 
-### Sprints
+## Sprints
 
-#### Sprint 1
-Sprint-backlog
-![Sprint-backlog](resources/sprint1backlog.png)
+### Sprint 1
+**Sprint-backlog**
 
-Sprint-burndown chart
-![Sprint-burndown chart](resources/sprint1burndown.png)
+![Sprint-backlog](resources/sprint1backlog.PNG)
+
+**Sprint-burndown chart**
+![Sprint-burndown chart](resources/sprint1burndown.PNG)
  
 
  
