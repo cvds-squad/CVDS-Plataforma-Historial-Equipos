@@ -39,7 +39,7 @@ disponible bool);
 create table Novedad(
 idNovedad serial primary key,
 equipoAsociado int references Equipos(idEquipo),
-elementoAsociado int references elementos(idelemento) not null,
+elementoAsociado int references elementos(idElemento),
 fecha date not null,
 titulo varchar(50),
 responsable varchar(100) references usuarios(correo),
