@@ -34,7 +34,8 @@ eqps int references Equipos(idEquipo),
 tipelement varchar references TipoElemento(Tipo),
 marca varchar(20),
 Descripcion varchar(500),
-disponible bool);
+disponible bool,
+de_baja bool);
 
 create table Novedad(
 idNovedad serial primary key,
