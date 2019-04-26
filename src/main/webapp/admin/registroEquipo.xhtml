@@ -299,7 +299,7 @@
                         <div class="modal-body">
                             <center>
                                 <h:form id="crearTecladoForm">
-                                    <p:panel header="Crear Torre" style="width: 370px;" id="panelTeclado">
+                                    <p:panel header="Crear Teclado" style="width: 370px;" id="panelTeclado">
                                         <p:messages id="msgsTeclado"/>
                                         <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
 
@@ -343,7 +343,7 @@
                         <div class="modal-body">
                             <center>
                                 <h:form>
-                                    <p:fieldset id="elementosTeclado" legend="Pantallas disponibles">
+                                    <p:fieldset id="elementosTeclado" legend="Teclados disponibles">
                                         <p:dataTable id="elemsTecl" var="elem"
                                                      value="#{elementoBean.consultarTecladosDisponibles()}"
                                                      selection="#{equipoBean.tecladoSeleccionado}"
@@ -397,7 +397,7 @@
                         <div class="modal-body">
                             <center>
                                 <h:form id="crearMouseForm">
-                                    <p:panel header="Crear Torre" style="width: 370px;" id="panelMouse">
+                                    <p:panel header="Crear Mouse" style="width: 370px;" id="panelMouse">
                                         <p:messages id="msgsMouse"/>
                                         <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
 
@@ -441,7 +441,7 @@
                         <div class="modal-body">
                             <center>
                                 <h:form>
-                                    <p:fieldset id="elementosMouse" legend="Pantallas disponibles">
+                                    <p:fieldset id="elementosMouse" legend="Mouses disponibles">
                                         <p:dataTable id="elemsMouse" var="elem"
                                                      value="#{elementoBean.consultarMousesDisponibles()}"
                                                      selection="#{equipoBean.mouseSeleccionado}"
