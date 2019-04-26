@@ -37,7 +37,9 @@
                 <p:fieldset id="equiposTabla" legend="Equipos">
                     <p:dataTable id="eqps" var="equipo"
                                  value="#{equipoBean.consultarEquipos()}" selectionMode="single"
-                                 rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}">
+                                 rowKey="#{equipo.idEquipo}" selection="#{equipoBean.equipo}"
+                                 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
 
                         <p:column headerText="Id" style="text-align: center">
                             <h:outputText value="#{equipo.idEquipo}" />
@@ -85,7 +87,9 @@
                                     <p:dataTable id="elems" var="elem"
                                                  value="#{elementoBean.consultarElementosDisponibles()}"
                                                  selection="#{elementoBean.elementosDisponibles}"
-                                                 rowKey="#{elem.idElemento}">
+                                                 rowKey="#{elem.idElemento}"
+                                                 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15">
                                         <p:column selectionMode="multiple"
                                                   style="width: 40px; text-align: center" />
 

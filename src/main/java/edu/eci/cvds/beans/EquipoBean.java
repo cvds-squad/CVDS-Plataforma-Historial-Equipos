@@ -7,20 +7,22 @@ import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @ManagedBean(name="equipoBean")
 @SessionScoped
 public class EquipoBean implements Serializable {
 
     private HistoryService historyService;
+
+    private Map<String,List<String>> crearElementos;
+    private Map<String,Elemento> asociarElementos;
 
     private Equipo equipo;
 
@@ -36,8 +38,24 @@ public class EquipoBean implements Serializable {
     private String marcaTeclado;
     private String descTeclado;
 
+    private String checkTorre;
+    private String checkPantalla;
+    private String checkMouse;
+    private String checkTeclado;
+
+    private Elemento torreSeleccionada;
+    private Elemento pantallaSeleccionada;
+    private Elemento tecladoSeleccionado;
+    private Elemento mouseSeleccionado;
+
     public EquipoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
+        crearElementos =  new HashMap<>();
+        asociarElementos = new HashMap<>();
+        checkTorre = "&#10008;";
+        checkMouse = "&#10008;";
+        checkPantalla = "&#10008;";
+        checkTeclado = "&#10008;";
     }
 
     /**
@@ -59,26 +77,25 @@ public class EquipoBean implements Serializable {
      **/
     public void crearEquipo(){
         try{
+            String ok = "&#10004;";
+            if (!checkMouse.equals(ok) || !checkPantalla.equals(ok) || !checkTorre.equals(ok) || !checkTeclado.equals(ok) ){
+                FacesContext.getCurrentInstance().addMessage("registroEquipo", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Debe asociar o crear todos los elementos","Debe asociar o crear todos los elementos"));
+                return;
+            }
             historyService.registarEquipo(new Equipo());
 
             int maxIdElemento = historyService.getIdMaxElemento();
             int maxIdEquipo = historyService.getIdMaxEquipo();
 
-            Elemento torre = new Elemento(TipoElemento.TORRE,marcaTorre,descTorre);
-            historyService.registrarElemento(torre);
-            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+            for (Map.Entry<String, Elemento> entry : asociarElementos.entrySet()) {
+                historyService.asociarElementoConEquipo(maxIdEquipo,entry.getValue().getIdElemento());
+            }
 
-            Elemento mouse = new Elemento(TipoElemento.MOUSE,marcaMouse,descMouse);
-            historyService.registrarElemento(mouse);
-            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
-
-            Elemento pantalla = new Elemento(TipoElemento.PANTALLA,marcaPantalla,descPantalla);
-            historyService.registrarElemento(pantalla);
-            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
-
-            Elemento teclado = new Elemento(TipoElemento.TECLADO,marcaTeclado,descTeclado);
-            historyService.registrarElemento(teclado);
-            historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+            for (Map.Entry<String,List<String>> entry: crearElementos.entrySet()){
+                Elemento r = new Elemento(TipoElemento.valueOf(entry.getKey().toUpperCase()),entry.getValue().get(0),entry.getValue().get(1));
+                historyService.registrarElemento(r);
+                historyService.asociarElementoConEquipo(maxIdEquipo,++maxIdElemento);
+            }
             cleanElementos();
             FacesContext.getCurrentInstance().addMessage("registroEquipo",new FacesMessage(FacesMessage.SEVERITY_INFO,"Equipo registrado correctamente","Equipo registrado correctamente"));
         }catch (HistoryServiceException ex){
@@ -94,6 +111,10 @@ public class EquipoBean implements Serializable {
         marcaPantalla = null; descPantalla = null;
         marcaTeclado = null; descTeclado = null;
         marcaTorre = null; descTorre = null;
+        checkTorre = "&#10008;";
+        checkMouse = "&#10008;";
+        checkPantalla = "&#10008;";
+        checkTeclado = "&#10008;";
     }
 
     /**
@@ -120,6 +141,90 @@ public class EquipoBean implements Serializable {
             }
         }
         FacesContext.getCurrentInstance().addMessage("msgsElemento",new FacesMessage(FacesMessage.SEVERITY_INFO,"Elementos asociados correctamente","Elementos asociados correctamente"));
+    }
+
+    public void crearTorre(){
+        if (asociarElementos.containsKey("torre")) asociarElementos.remove("torre");
+        if (crearElementos.containsKey("torre")) crearElementos.remove("torre");
+        List<String> elems = new ArrayList<>();
+        elems.add(marcaTorre);
+        elems.add(descTorre);
+        checkTorre = "&#10004;";
+        crearElementos.put("torre",elems);
+    }
+
+    public void asociarTorre(){
+        if (torreSeleccionada == null){
+            FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció torre","No asoció torre"));
+        }else{
+            checkTorre = "&#10004;";
+            if (crearElementos.containsKey("torre")) crearElementos.remove("torre");
+            if (asociarElementos.containsKey("torre")) asociarElementos.remove("torre");
+            asociarElementos.put("torre",torreSeleccionada);
+        }
+    }
+
+    public void crearPantalla(){
+        if (asociarElementos.containsKey("pantalla")) asociarElementos.remove("pantalla");
+        if (crearElementos.containsKey("pantalla")) crearElementos.remove("pantalla");
+        List<String> elems = new ArrayList<>();
+        elems.add(marcaPantalla);
+        elems.add(descPantalla);
+        checkPantalla = "&#10004;";
+        crearElementos.put("pantalla",elems);
+    }
+
+    public void asociarPantalla(){
+        if (pantallaSeleccionada == null){
+            FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció pantalla","No asoció pantalla"));
+        }else{
+            checkPantalla = "&#10004;";
+            if (crearElementos.containsKey("pantalla")) crearElementos.remove("pantalla");
+            if (asociarElementos.containsKey("pantalla")) asociarElementos.remove("pantalla");
+            asociarElementos.put("pantalla",pantallaSeleccionada);
+        }
+    }
+
+    public void crearTeclado(){
+        if (asociarElementos.containsKey("teclado")) asociarElementos.remove("teclado");
+        if (crearElementos.containsKey("teclado")) crearElementos.remove("teclado");
+        List<String> elems = new ArrayList<>();
+        elems.add(marcaTeclado);
+        elems.add(descTeclado);
+        checkTeclado = "&#10004;";
+        crearElementos.put("teclado",elems);
+    }
+
+    public void asociarTeclado(){
+        if (tecladoSeleccionado == null){
+            FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció teclado","No asoció teclado"));
+        }else{
+            checkTeclado = "&#10004;";
+            if (crearElementos.containsKey("teclado")) crearElementos.remove("teclado");
+            if (asociarElementos.containsKey("teclado")) asociarElementos.remove("teclado");
+            asociarElementos.put("teclado",tecladoSeleccionado);
+        }
+    }
+
+    public void crearMouse(){
+        if (asociarElementos.containsKey("mouse")) asociarElementos.remove("mouse");
+        if (crearElementos.containsKey("mouse")) crearElementos.remove("mouse");
+        List<String> elems = new ArrayList<>();
+        elems.add(marcaMouse);
+        elems.add(descMouse);
+        checkMouse = "&#10004;";
+        crearElementos.put("mouse",elems);
+    }
+
+    public void asociarMouse(){
+        if (mouseSeleccionado == null){
+            FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció mouse","No asoció mouse"));
+        }else{
+            checkMouse = "&#10004;";
+            if (crearElementos.containsKey("mouse")) crearElementos.remove("mouse");
+            if (asociarElementos.containsKey("mouse")) asociarElementos.remove("mouse");
+            asociarElementos.put("mouse",mouseSeleccionado);
+        }
     }
 
     public Equipo getEquipo() {
@@ -192,5 +297,69 @@ public class EquipoBean implements Serializable {
 
     public void setDescTeclado(String descTeclado) {
         this.descTeclado = descTeclado;
+    }
+
+    public String getCheckTorre() {
+        return checkTorre;
+    }
+
+    public void setCheckTorre(String checkTorre) {
+        this.checkTorre = checkTorre;
+    }
+
+    public String getCheckPantalla() {
+        return checkPantalla;
+    }
+
+    public void setCheckPantalla(String checkPantalla) {
+        this.checkPantalla = checkPantalla;
+    }
+
+    public String getCheckMouse() {
+        return checkMouse;
+    }
+
+    public void setCheckMouse(String checkMouse) {
+        this.checkMouse = checkMouse;
+    }
+
+    public String getCheckTeclado() {
+        return checkTeclado;
+    }
+
+    public void setCheckTeclado(String checkTeclado) {
+        this.checkTeclado = checkTeclado;
+    }
+
+    public void setTorreSeleccionada(Elemento torreSeleccionada) {
+        this.torreSeleccionada = torreSeleccionada;
+    }
+
+    public Elemento getTorreSeleccionada(){
+        return torreSeleccionada;
+    }
+
+    public Elemento getPantallaSeleccionada() {
+        return pantallaSeleccionada;
+    }
+
+    public void setPantallaSeleccionada(Elemento pantallaSeleccionada) {
+        this.pantallaSeleccionada = pantallaSeleccionada;
+    }
+
+    public Elemento getTecladoSeleccionado() {
+        return tecladoSeleccionado;
+    }
+
+    public void setTecladoSeleccionado(Elemento tecladoSeleccionado) {
+        this.tecladoSeleccionado = tecladoSeleccionado;
+    }
+
+    public Elemento getMouseSeleccionado() {
+        return mouseSeleccionado;
+    }
+
+    public void setMouseSeleccionado(Elemento mouseSeleccionado) {
+        this.mouseSeleccionado = mouseSeleccionado;
     }
 }

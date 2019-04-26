@@ -105,6 +105,48 @@ public class ElementoBean {
         return elems;
     }
 
+    public List<Elemento> consultarTorresDisponibles(){
+        List<Elemento> torresDisponibles = null;
+        try{
+            torresDisponibles = historyService.consultarTorresDisponibles();
+        }catch(HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar torres disponibles","Error al consultar torres disponibles"));
+        }
+        return torresDisponibles;
+    }
+
+    public List<Elemento> consultarPantallasDisponibles(){
+        List<Elemento> pantallasDisponibles = null;
+        try{
+            pantallasDisponibles = historyService.consultarPantallasDisponibles();
+        }catch(HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar torres disponibles","Error al consultar torres disponibles"));
+        }
+        return pantallasDisponibles;
+    }
+
+    public List<Elemento> consultarTecladosDisponibles(){
+        List<Elemento> tecladosDisponibles = null;
+        try{
+            tecladosDisponibles = historyService.consultarTecladosDisponibles();
+        }catch(HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar torres disponibles","Error al consultar torres disponibles"));
+        }
+        return tecladosDisponibles;
+    }
+
+    public List<Elemento> consultarMousesDisponibles(){
+        List<Elemento> mousesDisponibles = null;
+        try{
+            mousesDisponibles = historyService.consultarMousesDisponibles();
+        }catch(HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar torres disponibles","Error al consultar torres disponibles"));
+        }
+        return mousesDisponibles;
+    }
+
+
+
     public List<Elemento> getElementosDisponibles() {
         return elementosDisponibles;
     }
@@ -112,5 +154,6 @@ public class ElementoBean {
     public void setElementosDisponibles(List<Elemento> elementosDisponibles) {
         this.elementosDisponibles = elementosDisponibles;
     }
+
 
 }

@@ -157,4 +157,40 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar los elementos registrados");
         }
     }
+
+    @Override
+    public List<Elemento> consultarTorresDisponibles() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarTorresDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarPantallasDisponibles() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarPantallasDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarTecladosDisponibles() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarTecladosDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarMousesDisponibles() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarMousesDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
 }

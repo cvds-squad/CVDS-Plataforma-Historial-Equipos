@@ -72,4 +72,40 @@ public class MyBatisElementoDAO  implements ElementoDAO{
         }
     }
 
+    @Override
+    public List<Elemento> consultarTorresDisponibles() {
+        try{
+            return elementoMapper.consultarTorresDisponibles();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar las torres disponibles",ex);
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarPantallasDisponibles() {
+        try{
+            return elementoMapper.consultarPantallasDisponibles();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar las torres disponibles",ex);
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarTecladosDisponibles() {
+        try{
+            return elementoMapper.consultarTecladosDisponibles();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar las torres disponibles",ex);
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarMousesDisponibles() {
+        try{
+            return elementoMapper.consultarMousesDisponibles();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar las torres disponibles",ex);
+        }
+    }
+
 }

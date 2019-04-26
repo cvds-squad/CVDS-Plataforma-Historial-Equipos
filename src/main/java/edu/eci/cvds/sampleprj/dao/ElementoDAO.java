@@ -26,4 +26,12 @@ public interface ElementoDAO {
     int getIdMax() throws PersistenceException;
 
     List<Elemento> consultarElementos();
+
+    List<Elemento> consultarTorresDisponibles();
+
+    List<Elemento> consultarPantallasDisponibles();
+
+    List<Elemento> consultarTecladosDisponibles();
+
+    List<Elemento> consultarMousesDisponibles();
 }

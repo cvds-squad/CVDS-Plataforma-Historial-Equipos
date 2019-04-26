@@ -28,4 +28,12 @@ public interface HistoryService {
     int getIdMaxEquipo() throws HistoryServiceException;
 
     List<Elemento> consultarElementos() throws  HistoryServiceException;
+
+    List<Elemento> consultarTorresDisponibles() throws HistoryServiceException;
+
+    List<Elemento> consultarPantallasDisponibles() throws HistoryServiceException;
+
+    List<Elemento> consultarTecladosDisponibles() throws HistoryServiceException;
+
+    List<Elemento> consultarMousesDisponibles() throws HistoryServiceException;
 }

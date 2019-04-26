@@ -86,6 +86,26 @@ public class HistoryServiceStub implements HistoryService {
         return null;
     }
 
+    @Override
+    public List<Elemento> consultarTorresDisponibles() {
+        return null;
+    }
+
+    @Override
+    public List<Elemento> consultarPantallasDisponibles() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Elemento> consultarTecladosDisponibles() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Elemento> consultarMousesDisponibles() throws HistoryServiceException {
+        return null;
+    }
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

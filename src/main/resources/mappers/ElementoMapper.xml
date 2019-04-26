@@ -28,6 +28,26 @@
         SELECT idElemento,tipelement,marca,descripcion FROM elementos
     </select>
 
+    <select id="consultarTorresDisponibles" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+            WHERE disponible=true AND tipelement = 'TORRE';
+    </select>
+
+    <select id="consultarPantallasDisponibles" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+            WHERE disponible=true AND tipelement = 'PANTALLA';
+    </select>
+
+    <select id="consultarTecladosDisponibles" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+            WHERE disponible=true AND tipelement = 'TECLADO';
+    </select>
+
+    <select id="consultarMousesDisponibles" resultType="Elemento">
+        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+            WHERE disponible=true AND tipelement = 'MOUSE';
+    </select>
+
     <select id="getMaxId" resultType="int">
         SELECT Max(idElemento) FROM elementos
     </select>

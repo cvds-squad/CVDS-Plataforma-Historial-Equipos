@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="/css/menu.css"/>
     <link rel="stylesheet" href="/css/centerform.css"/>
     <title>Registro de Equipo</title>
+
 </h:head>
 <h:body>
+
     <div class="wrapper">
         <div class="header">
             <a href="index.xhtml" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
@@ -29,48 +31,39 @@
                     <p:panel id="panelEquipo" header="Registrar equipo"  style="width: 780px;">
                         <p:messages id="msgsEquipo" closable="true"/>
 
-                        <p:panelGrid columns="5" style="margin-bottom: 10px; width: 100%">
+                        <p:panelGrid columns="4" style="margin-bottom: 10px; width: 100%; text-align: center">
 
-                            <h:outputLabel value="Torre"/>
-                            <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaTorre}" required="true"/>
+                            <p:outputLabel value="Torre"/>
+                            <p:commandButton id="crearETorre" value="Crear elemento" icon="fa fa-database" onclick="document.getElementById('btnCrearTorre').click();"/>
+                            <p:commandButton id="asociarETorre" value="Asociar elemento" icon="fa fa-link" onclick="document.getElementById('btnAsociarTorre').click();"/>
+                            <h:outputLabel id="okTorre" value="Creado/Asociado: #{equipoBean.checkTorre}" escape="false"/>
 
-                            <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descTorre}" required="true"/>
+                            <p:outputLabel value="Pantalla"/>
+                            <p:commandButton id="crearEPantalla" value="Crear elemento" icon="fa fa-database" onclick="document.getElementById('btnCrearPantalla').click()"/>
+                            <p:commandButton id="asociarEPantalla" value="Asociar elemento" icon="fa fa-link" onclick="document.getElementById('btnAsociarPantalla').click()"/>
+                            <h:outputLabel id="okPantalla" value="Creado/Asociado: #{equipoBean.checkPantalla}" escape="false"/>
 
+                            <p:outputLabel value="Teclado"/>
+                            <p:commandButton id="crearETeclado" value="Crear elemento" icon="fa fa-database" onclick="document.getElementById('btnCrearTeclado').click()"/>
+                            <p:commandButton id="asociarETeclado" value="Asociar elemento" icon="fa fa-link" onclick="document.getElementById('btnAsociarTeclado').click()"/>
+                            <p:outputLabel id="okTeclado" value="Creado/Asociado: #{equipoBean.checkTeclado}" escape="false"/>
 
-                            <h:outputLabel value="Pantalla "/>
-                            <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaPantalla}" required="true"/>
-
-                            <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descPantalla}" required="true"/>
-
-
-                            <h:outputLabel value="Teclado"/>
-                            <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaTeclado}" required="true"/>
-
-                            <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descTeclado}" required="true"/>
-
-
-                            <h:outputLabel value="Mouse"/>
-                            <h:outputLabel value="Marca: "/>
-                            <p:inputText value="#{equipoBean.marcaMouse}" required="true"/>
-
-                            <h:outputLabel value="Descripcion: "/>
-                            <p:inputText value="#{equipoBean.descMouse}" required="true"/>
+                            <p:outputLabel value="Mouse"/>
+                            <p:commandButton id="crearEMouse" value="Crear elemento" icon="fa fa-database" onclick="document.getElementById('btnCrearMouse').click()"/>
+                            <p:commandButton id="asociarEMouse" value="Asociar elemento" icon="fa fa-link" onclick="document.getElementById('btnAsociarMouse').click()"/>
+                            <p:outputLabel id="okMouse" value="Creado/Asociado: #{equipoBean.checkMouse}" escape="false"/>
 
                         </p:panelGrid>
                         <f:facet name="footer">
                             <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
-                                <p:commandButton value="Registrar" icon="fa fa-check" action="#{equipoBean.crearEquipo}"
-                                                 oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="formRegEquipo"/>
+                                <p:commandButton value="Registrar" icon="fa fa-check"
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);" update="formRegEquipo"
+                                                actionListener="#{equipoBean.crearEquipo()}"/>
                             </div>
                         </f:facet>
                     </p:panel>
                 </center>
+
                 <br/><br/>
                 <p:fieldset legend="Equipos registrados" id="elementos">
                     <p:dataTable id="elements" value="#{equipoBean.consultarEquipos()}" var="equi"
@@ -98,11 +91,399 @@
                 </p:fieldset>
             </h:form>
 
+            <!-- Modal para creacion de torre-->
+            <button type="button" id="btnCrearTorre"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#crearTorreModal"/>
+            <div class="modal fade" id="crearTorreModal" tabindex="-1" role="dialog" aria-labelledby="crearTorreModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="crearTorreModalLabel">Crear Torre</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form id="crearTorreForm">
+                                    <p:panel header="Crear Torre" style="width: 370px;" id="panel">
+                                        <p:messages id="msgs"/>
+                                        <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
+
+                                            <h:outputLabel  value="#{msg.labelMarca}"/>
+
+                                            <p:inputText id="MarcaTorre" value="#{equipoBean.marcaTorre}" required="true"/>
+
+                                            <p:outputLabel value="#{msg.labelDesc}"/>
+                                            <p:inputTextarea id="DescripcionTorre" rows="4" value="#{equipoBean.descTorre}" required="true"/>
+
+                                        </p:panelGrid>
+                                        <f:facet name="footer">
+                                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                                <p:commandButton value="Crear" icon="fa fa-database" actionListener="#{equipoBean.crearTorre()}"
+                                                                 oncomplete="document.getElementById('closeCrearTorreBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"/>
+                                            </div>
+                                        </f:facet>
+                                    </p:panel>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeCrearTorreBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para asociacion de torre-->
+            <button type="button" id="btnAsociarTorre"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#asociarTorreModal"/>
+            <div class="modal fade" id="asociarTorreModal" tabindex="-1" role="dialog" aria-labelledby="asociarTorreModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="asociarTorreModalLabel">Asociación de Torre</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form>
+                                    <p:fieldset id="elementosTabla" legend="Torres disponibles">
+                                        <p:dataTable id="elems" var="elem"
+                                                     value="#{elementoBean.consultarTorresDisponibles()}"
+                                                     selection="#{equipoBean.torreSeleccionada}"
+                                                     selectionMode="single"
+                                                     rowKey="#{elem.idElemento}"
+                                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15">
+
+                                            <p:column headerText="Marca" style="text-align: center">
+                                                <h:outputText value="#{elem.marca}" />
+                                            </p:column>
+
+                                            <p:column headerText="Descripcion">
+                                                <h:outputText value="#{elem.descripcion}" />
+                                            </p:column>
+
+                                            <f:facet name="footer">
+                                                <p:commandButton icon="fa fa-link"
+                                                                 value="Asociar"
+                                                                 oncomplete="document.getElementById('closeAsociarTorreBtn').click(); setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 actionListener="#{equipoBean.asociarTorre()}"
+                                                                 update="formRegEquipo"/>
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </p:fieldset>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAsociarTorreBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal para creacion de pantalla -->
+            <button type="button" id="btnCrearPantalla"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#crearPantallaModal"/>
+            <div class="modal fade" id="crearPantallaModal" tabindex="-1" role="dialog" aria-labelledby="crearPantallaModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="crearPantallaModalLabel">Crear Pantalla</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form id="crearPantallaForm">
+                                    <p:panel header="Crear Pantalla" style="width: 370px;" id="panelPantalla">
+                                        <p:messages id="Pantallamsgs"/>
+                                        <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
+
+                                            <h:outputLabel  value="#{msg.labelMarca}"/>
+
+                                            <p:inputText id="MarcaPantalla" value="#{equipoBean.marcaPantalla}" required="true"/>
+
+                                            <p:outputLabel value="#{msg.labelDesc}"/>
+                                            <p:inputTextarea id="DescripcionPantalla" rows="4" value="#{equipoBean.descPantalla}" required="true"/>
+
+                                        </p:panelGrid>
+                                        <f:facet name="footer">
+                                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                                <p:commandButton value="Crear" icon="fa fa-database"
+                                                                 oncomplete="document.getElementById('closeCrearPantallaBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"
+                                                                 actionListener="#{equipoBean.crearPantalla()}"/>
+                                            </div>
+                                        </f:facet>
+                                    </p:panel>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeCrearPantallaBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para asociacion de pantalla -->
+            <button type="button" id="btnAsociarPantalla"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#asociarPantallaModal"/>
+            <div class="modal fade" id="asociarPantallaModal" tabindex="-1" role="dialog" aria-labelledby="asociarPantallaModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="asociarPantallaModalLabel">Asociación de Pantalla</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form>
+                                    <p:fieldset id="elementosPantalla" legend="Pantallas disponibles">
+                                        <p:dataTable id="elemsPant" var="elem"
+                                                     value="#{elementoBean.consultarPantallasDisponibles()}"
+                                                     selection="#{equipoBean.pantallaSeleccionada}"
+                                                     selectionMode="single"
+                                                     rowKey="#{elem.idElemento}"
+                                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15">
+
+                                            <p:column headerText="Id" style="text-align: center;">
+                                                <h:outputText value="#{elem.idElemento}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Marca" style="text-align: center">
+                                                <h:outputText value="#{elem.marca}" />
+                                            </p:column>
+
+                                            <p:column headerText="Descripcion">
+                                                <h:outputText value="#{elem.descripcion}" />
+                                            </p:column>
+
+                                            <f:facet name="footer">
+                                                <p:commandButton icon="fa fa-link"
+                                                                 value="Asociar"
+                                                                 oncomplete="document.getElementById('closeAsociarPantallaBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"
+                                                                 actionListener="#{equipoBean.asociarPantalla()}"/>
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </p:fieldset>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAsociarPantallaBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Crear teclado -->
+            <button type="button" id="btnCrearTeclado"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#crearTecladoModal"/>
+            <div class="modal fade" id="crearTecladoModal" tabindex="-1" role="dialog" aria-labelledby="crearTecladoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="crearTecladoModalLabel">Crear Teclado</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form id="crearTecladoForm">
+                                    <p:panel header="Crear Torre" style="width: 370px;" id="panelTeclado">
+                                        <p:messages id="msgsTeclado"/>
+                                        <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
+
+                                            <h:outputLabel  value="#{msg.labelMarca}"/>
+
+                                            <p:inputText id="MarcaTeclado" value="#{equipoBean.marcaTeclado}" required="true"/>
+
+                                            <p:outputLabel value="#{msg.labelDesc}"/>
+                                            <p:inputTextarea id="DescripcionTeclado" rows="4" value="#{equipoBean.descTeclado}" required="true"/>
+
+                                        </p:panelGrid>
+                                        <f:facet name="footer">
+                                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                                <p:commandButton value="Crear" icon="fa fa-database" actionListener="#{equipoBean.crearTeclado()}"
+                                                                 oncomplete="document.getElementById('closeCrearTecladoBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"/>
+                                            </div>
+                                        </f:facet>
+                                    </p:panel>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeCrearTecladoBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal asociar teclado -->
+            <button type="button" id="btnAsociarTeclado"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#asociarTecladoModal"/>
+            <div class="modal fade" id="asociarTecladoModal" tabindex="-1" role="dialog" aria-labelledby="asociarTecladoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="asociarTecladoModalLabel">Asociación de Teclado</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form>
+                                    <p:fieldset id="elementosTeclado" legend="Pantallas disponibles">
+                                        <p:dataTable id="elemsTecl" var="elem"
+                                                     value="#{elementoBean.consultarTecladosDisponibles()}"
+                                                     selection="#{equipoBean.tecladoSeleccionado}"
+                                                     selectionMode="single"
+                                                     rowKey="#{elem.idElemento}"
+                                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15">
+
+                                            <p:column headerText="Id" style="text-align: center;">
+                                                <h:outputText value="#{elem.idElemento}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Marca" style="text-align: center">
+                                                <h:outputText value="#{elem.marca}" />
+                                            </p:column>
+
+                                            <p:column headerText="Descripcion">
+                                                <h:outputText value="#{elem.descripcion}" />
+                                            </p:column>
+
+                                            <f:facet name="footer">
+                                                <p:commandButton icon="fa fa-link"
+                                                                 value="Asociar"
+                                                                 oncomplete="document.getElementById('closeAsociarTecladoBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"
+                                                                 actionListener="#{equipoBean.asociarTeclado()}"/>
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </p:fieldset>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAsociarTecladoBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal crear Mouse -->
+            <button type="button" id="btnCrearMouse"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#crearMouseModal"/>
+            <div class="modal fade" id="crearMouseModal" tabindex="-1" role="dialog" aria-labelledby="crearMouseModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="crearMouseModalLabel">Crear Mouse</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form id="crearMouseForm">
+                                    <p:panel header="Crear Torre" style="width: 370px;" id="panelMouse">
+                                        <p:messages id="msgsMouse"/>
+                                        <p:panelGrid columns="2" style="margin-bottom: 10px; width=100%" cellpadding="2">
+
+                                            <h:outputLabel  value="#{msg.labelMarca}"/>
+
+                                            <p:inputText id="MarcaMouse" value="#{equipoBean.marcaMouse}" required="true"/>
+
+                                            <p:outputLabel value="#{msg.labelDesc}"/>
+                                            <p:inputTextarea id="DescripcionMouse" rows="4" value="#{equipoBean.descMouse}" required="true"/>
+
+                                        </p:panelGrid>
+                                        <f:facet name="footer">
+                                            <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" style="text-align: center">
+                                                <p:commandButton value="Crear" icon="fa fa-database" actionListener="#{equipoBean.crearMouse()}"
+                                                                 oncomplete="document.getElementById('closeCrearMouseBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"/>
+                                            </div>
+                                        </f:facet>
+                                    </p:panel>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeCrearMouseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal asociar Mouse -->
+            <button type="button" id="btnAsociarMouse"  class="btn btn-primary" style="display: none" data-toggle="modal" data-target="#asociarMouseModal"/>
+            <div class="modal fade" id="asociarMouseModal" tabindex="-1" role="dialog" aria-labelledby="asociarMouseModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="asociarMouseModalLabel">Asociación de Mouse</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <center>
+                                <h:form>
+                                    <p:fieldset id="elementosMouse" legend="Pantallas disponibles">
+                                        <p:dataTable id="elemsMouse" var="elem"
+                                                     value="#{elementoBean.consultarMousesDisponibles()}"
+                                                     selection="#{equipoBean.mouseSeleccionado}"
+                                                     selectionMode="single"
+                                                     rowKey="#{elem.idElemento}"
+                                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowsPerPageTemplate="5,10,15">
+
+                                            <p:column headerText="Id" style="text-align: center;">
+                                                <h:outputText value="#{elem.idElemento}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Marca" style="text-align: center">
+                                                <h:outputText value="#{elem.marca}" />
+                                            </p:column>
+
+                                            <p:column headerText="Descripcion">
+                                                <h:outputText value="#{elem.descripcion}" />
+                                            </p:column>
+
+                                            <f:facet name="footer">
+                                                <p:commandButton icon="fa fa-link"
+                                                                 value="Asociar"
+                                                                 oncomplete="document.getElementById('closeAsociarMouseBtn').click();setTimeout(function(){$('[id$=msgsEquipo]').hide(1000)},3000);"
+                                                                 update="formRegEquipo"
+                                                                 actionListener="#{equipoBean.asociarMouse()}"/>
+                                            </f:facet>
+                                        </p:dataTable>
+                                    </p:fieldset>
+                                </h:form>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAsociarMouseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="push"/>
         </div>
-
-        <div class="push"/>
     </div>
-
     <!--Footer -->
     <footer class="ct-footer">
         <div class="container">
@@ -147,8 +528,13 @@
         </div>
 
     </footer>
-
-
+    <!-- jQuery library -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'/>
+    <!-- Latest compiled JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
 
 </h:body>
 </html>
