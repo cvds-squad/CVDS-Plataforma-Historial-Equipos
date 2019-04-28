@@ -4,12 +4,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
-    <title>Registro de Novedad</title>
+    <title>Dar Baja Elemento</title>
 
 </h:head>
 <h:body>
@@ -26,7 +25,7 @@
         <div class="container">
             <h:form id="elementoDarBajaForm">
                 <p:panel header="DAR DE BAJA ELEMENTO" style="text-align: center">
-                    <p:messages id="msgsDarBaja"/>
+                    <p:messages id="msgsDarBaja" closable="true"/>
                     <p:fieldset id="elementosBajar" legend="Elementos para dar de baja">
                         <p:dataTable id="elems" var="elem"
                                      value="#{elementoBean.consultarElementosNoAsociados()}" selectionMode="single"
@@ -52,7 +51,15 @@
                                                  icon="fas fa-minus-circle"
                                                  update="elementoDarBajaForm"
                                                  actionListener="#{elementoBean.darBajaElemento()}"
-                                                 oncomplete="setTimeout(function(){$('[id$=msgsDarBaja]').hide(1000)},3000);"/>
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsDarBaja]').hide(1000)},3000);">
+                                    <p:confirm header="Confirmación" message="¿Dar de baja este elemento?" icon="fas fa-exclamation-triangle"/>
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <center>
+                                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+                                    </center>
+                                </p:confirmDialog>
                             </f:facet>
                         </p:dataTable>
                     </p:fieldset>
@@ -102,15 +109,11 @@
 
     </footer>
 
-    <!-- jQuery library -->
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'/>
+
     <!-- Latest compiled JavaScript -->
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js"/>
-    <script src="/js/novedad.js"/>
+
 
 </h:body>
 </html>
