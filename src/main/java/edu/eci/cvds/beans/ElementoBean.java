@@ -27,6 +27,8 @@ public class ElementoBean {
 
     private List<Elemento> elementosDisponibles;
 
+    private Elemento elementoDarBajar;
+
     public ElementoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
     }
@@ -145,7 +147,17 @@ public class ElementoBean {
         return mousesDisponibles;
     }
 
+    public List<Elemento> consultarElementosNoAsociados(){
+        return null;
+    }
 
+    public void darBajaElemento(){
+        if (elementoDarBajar != null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Servicio en construccion", "Servicio en construccion"));
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un elemento", "Seleccione un elemento"));
+        }
+    }
 
     public List<Elemento> getElementosDisponibles() {
         return elementosDisponibles;
@@ -156,4 +168,11 @@ public class ElementoBean {
     }
 
 
+    public Elemento getElementoDarBajar() {
+        return elementoDarBajar;
+    }
+
+    public void setElementoDarBajar(Elemento elementoDarBajar) {
+        this.elementoDarBajar = elementoDarBajar;
+    }
 }

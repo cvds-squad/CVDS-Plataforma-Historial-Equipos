@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
+    <title>Registro de Novedad</title>
+
+</h:head>
+<h:body>
+
+    <div class="wrapper">
+        <div class="header">
+            <a href="index.xhtml" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+            <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a></div>
+            <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>#{msg.labelInicio}</a></div>
+        </div>
+
+        <br/><br/>
+
+        <div class="container">
+            <h:form id="elementoDarBajaForm">
+                <p:panel header="DAR DE BAJA ELEMENTO" style="text-align: center">
+                    <p:messages id="msgsDarBaja"/>
+                    <p:fieldset id="elementosBajar" legend="Elementos para dar de baja">
+                        <p:dataTable id="elems" var="elem"
+                                     value="#{elementoBean.consultarElementosNoAsociados()}" selectionMode="single"
+                                     rowKey="#{elem.idElemento}" selection="#{elementoBean.elementoDarBajar}"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{elem.idElemento}"/>
+                            </p:column>
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{elem.tipelement}"/>
+                            </p:column>
+                            <p:column headerText="Marca">
+                                <h:outputText value="#{elem.marca}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{elem.descripcion}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <p:commandButton id="darBajaBtn"
+                                                 value="Dar Baja"
+                                                 icon="fas fa-minus-circle"
+                                                 update="elementoDarBajaForm"
+                                                 actionListener="#{elementoBean.darBajaElemento()}"
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsDarBaja]').hide(1000)},3000);"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:fieldset>
+                </p:panel>
+            </h:form>
+        </div>
+
+
+        <div class="push"/>
+    </div>
+
+    <footer class="ct-footer">
+        <div class="container">
+            <div class="ct-footer-meta text-center-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2">
+                        <img alt="logo" src="/images/labLogo.png"/>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <address>
+                            <span>Escuela Colombiana de Ingenieria Julio Garavito<br/></span>Laboratorio de Informatica<br/>
+                            AK.45 No.205-59 (Autopista Norte)-Bogota<br/>
+                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+                        </address>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <ul class="ct-socials list-unstyled list-inline">
+                            <li>
+                                <a href="https://www.facebook.com/EscuelaIng/?ref=br_rs" target="_blank"><img alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Escuelaing" target="_blank"><img alt="twitter" src="https://www.solodev.com/assets/footer/twitter-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/user/escuelacolingenieria/featured" target="_blank"><img alt="youtube" src="https://www.solodev.com/assets/footer/youtube-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/escuelaing/?hl=es-la" target="_blank"><img alt="instagram" src="https://www.solodev.com/assets/footer/instagram-white.png"/></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- jQuery library -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'/>
+    <!-- Latest compiled JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"/>
+    <script src="/js/novedad.js"/>
+
+</h:body>
+</html>
