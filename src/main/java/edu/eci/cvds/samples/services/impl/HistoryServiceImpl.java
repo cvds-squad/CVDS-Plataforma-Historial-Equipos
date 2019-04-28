@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
+import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 
 import edu.eci.cvds.samples.services.HistoryService;
@@ -21,7 +23,8 @@ public class HistoryServiceImpl implements HistoryService {
     private EquipoDAO equipoDAO;
     @Inject
     private NovedadDAO novedadDAO;
-    
+    @Inject
+    private LaboratorioDAO laboratorioDAO;
     
     @Override
     /**
@@ -204,7 +207,7 @@ public class HistoryServiceImpl implements HistoryService {
         try{
             novedadDAO.registrarNovedad(novedad);
         }catch (PersistenceException ex){
-            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+            throw new HistoryServiceException("Error al registrar novedad");
         }
     }
 
@@ -213,7 +216,7 @@ public class HistoryServiceImpl implements HistoryService {
         try{
             return novedadDAO.consultarNovedadId(idNovedad);
         }catch (PersistenceException ex){
-            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+            throw new HistoryServiceException("No se pudo consultar la novedad");
         }
     }
 
@@ -222,7 +225,7 @@ public class HistoryServiceImpl implements HistoryService {
         try{
             return novedadDAO.consultarNovedadEquipo(idEquipo);
         }catch (PersistenceException ex){
-            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+            throw new HistoryServiceException("No se pudo consultar la novedad");
         }
     }
 
@@ -231,7 +234,25 @@ public class HistoryServiceImpl implements HistoryService {
         try{
             return novedadDAO.consultarNovedadElementoEquipo(idElemento, idEquipo);
         }catch (PersistenceException ex){
-            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+            throw new HistoryServiceException("No se pudo consultar la novedad");
+        }
+    }
+
+    @Override
+    public void registrarLaboratorio(Laboratorio laboratorio) throws HistoryServiceException {
+        try{
+            laboratorioDAO.registrarLaboratorio(laboratorio);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("Error al registar novedad");
+        }
+    }
+
+    @Override
+    public Laboratorio consultarLaboratorio(int idLab) throws HistoryServiceException {
+        try{
+            return laboratorioDAO.consultarLaboratorio(idLab);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar el laboratorio");
         }
     }
 }

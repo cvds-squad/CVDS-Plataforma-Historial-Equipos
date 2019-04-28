@@ -45,4 +45,9 @@ public interface HistoryService {
     public Novedad consultarNovedadDadoEquipo (int idEquipo) throws HistoryServiceException;
     
     public Novedad consultarNovedadDadoElementoEquipo (int idElemento, int idEquipo) throws HistoryServiceException;
+    
+    public void registrarLaboratorio(Laboratorio laboratorio) throws HistoryServiceException;
+    
+    public Laboratorio consultarLaboratorio (int idLab) throws HistoryServiceException;
+    
 }

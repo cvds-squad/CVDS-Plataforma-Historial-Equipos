@@ -108,22 +108,32 @@ public class HistoryServiceStub implements HistoryService {
     
         @Override
     public void registrarNovedad(Novedad novedad) throws HistoryServiceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public Novedad consultarNovedadDadoId(int idNovedad) throws HistoryServiceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Novedad consultarNovedadDadoEquipo(int idEquipo) throws HistoryServiceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw null;
     }
 
     @Override
     public Novedad consultarNovedadDadoElementoEquipo(int idElemento, int idEquipo) throws HistoryServiceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw null;
+    }
+    
+        @Override
+    public void registrarLaboratorio(Laboratorio laboratorio) throws HistoryServiceException {
+        
+    }
+
+    @Override
+    public Laboratorio consultarLaboratorio(int idLab) throws HistoryServiceException {
+        throw null;
     }
 
     //Poblar
@@ -153,4 +163,5 @@ public class HistoryServiceStub implements HistoryService {
         nuevosElemenRegis.put(-2, Elemento2);
         nuevosElemenRegis.put(-4, Elemento4);
     }   
+
 }
