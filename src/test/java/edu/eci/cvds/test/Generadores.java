@@ -7,7 +7,9 @@ package edu.eci.cvds.test;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
+import java.sql.Date;
 import org.quicktheories.core.Gen;
 import org.quicktheories.generators.Generate;
 import static org.quicktheories.generators.SourceDSL.integers;
@@ -36,6 +38,10 @@ public class Generadores {
     
     private static Gen<Boolean> genDisponible(){
         return Generate.booleans();
+    }
+    
+    private static Gen<Date> genDate(){
+	return Generate.longRange(0,100).map(l -> new Date(l));
     }
     
     public static Gen<Elemento> genElementos(){
@@ -97,6 +103,17 @@ public class Generadores {
             Elemento pantalla = genElementosPantalla().generate(source);
             Elemento teclado = genElementosTeclado().generate(source);
             return new Equipo(HistoryServicesTest.idEquipoCont,torre, pantalla, mouse, teclado);
+        };   
+    }
+    public static Gen<Novedad> genNovedades(){
+        return source->{
+            int equipo = genEquipos().generate(source).getIdEquipo();
+            int elemento = genElementos().generate(source).getIdElemento();
+            Date fecha = genDate().generate(source);
+            String titulo = genMarcas().generate(source);
+            String responsable = genDescripcion().generate(source);
+            String detalle = genDescripcion().generate(source);
+            return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
         };   
     }
 }
