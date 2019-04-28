@@ -7,6 +7,7 @@ package edu.eci.cvds.test;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import java.sql.Date;
@@ -114,6 +115,16 @@ public class Generadores {
             String responsable = genDescripcion().generate(source);
             String detalle = genDescripcion().generate(source);
             return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
+        };   
+    }
+    
+        public static Gen<Laboratorio> genLaboratorios(){
+        return source->{
+            int idLab = ids().generate(source);
+            String nombre = genMarcas().generate(source);
+            String usuario = genMarcas().generate(source);
+            String descripcion = genDescripcion().generate(source);
+            return new Laboratorio(idLab, nombre, usuario, descripcion);
         };   
     }
 }
