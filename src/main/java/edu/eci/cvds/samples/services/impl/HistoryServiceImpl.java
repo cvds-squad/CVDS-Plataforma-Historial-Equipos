@@ -4,7 +4,9 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
+import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
 
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
@@ -17,7 +19,10 @@ public class HistoryServiceImpl implements HistoryService {
     private ElementoDAO elementoDAO;
     @Inject
     private EquipoDAO equipoDAO;
-
+    @Inject
+    private NovedadDAO novedadDAO;
+    
+    
     @Override
     /**
      * Registra un equipo
@@ -189,6 +194,42 @@ public class HistoryServiceImpl implements HistoryService {
     public List<Elemento> consultarMousesDisponibles() throws HistoryServiceException {
         try{
             return elementoDAO.consultarMousesDisponibles();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public void registrarNovedad(Novedad novedad) throws HistoryServiceException {
+        try{
+            novedadDAO.registrarNovedad(novedad);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoId(int idNovedad) throws HistoryServiceException {
+        try{
+            return novedadDAO.consultarNovedadId(idNovedad);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoEquipo(int idEquipo) throws HistoryServiceException {
+        try{
+            return novedadDAO.consultarNovedadEquipo(idEquipo);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las torres disponibles");
+        }
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoElementoEquipo(int idElemento, int idEquipo) throws HistoryServiceException {
+        try{
+            return novedadDAO.consultarNovedadElementoEquipo(idElemento, idEquipo);
         }catch (PersistenceException ex){
             throw new HistoryServiceException("No se pudo consultar las torres disponibles");
         }

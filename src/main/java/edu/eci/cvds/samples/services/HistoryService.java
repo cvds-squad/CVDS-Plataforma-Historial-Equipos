@@ -4,6 +4,7 @@ package edu.eci.cvds.samples.services;
 import edu.eci.cvds.samples.entities.*;
 
 import java.util.List;
+import javax.persistence.PersistenceException;
 
 
 public interface HistoryService {
@@ -36,4 +37,12 @@ public interface HistoryService {
     List<Elemento> consultarTecladosDisponibles() throws HistoryServiceException;
 
     List<Elemento> consultarMousesDisponibles() throws HistoryServiceException;
+    
+    public void registrarNovedad(Novedad novedad) throws HistoryServiceException;
+    
+    public Novedad consultarNovedadDadoId (int idNovedad) throws HistoryServiceException;
+    
+    public Novedad consultarNovedadDadoEquipo (int idEquipo) throws HistoryServiceException;
+    
+    public Novedad consultarNovedadDadoElementoEquipo (int idElemento, int idEquipo) throws HistoryServiceException;
 }

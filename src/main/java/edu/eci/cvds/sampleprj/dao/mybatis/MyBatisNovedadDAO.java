@@ -31,7 +31,7 @@ public class MyBatisNovedadDAO implements NovedadDAO {
     }
 
     @Override
-    public Novedad consultarNovedadId(int idNovedad) {
+    public Novedad consultarNovedadId(int idNovedad) throws PersistenceException {
         try{
             return novedadMapper.consultarNovedadId(idNovedad);
         }catch (PersistenceException ex){
@@ -40,7 +40,7 @@ public class MyBatisNovedadDAO implements NovedadDAO {
     }
 
     @Override
-    public Novedad consultarNovedadEquipo(int idEquipo) {
+    public Novedad consultarNovedadEquipo(int idEquipo) throws PersistenceException {
         try{
             return novedadMapper.consultarNovedadEquipo(idEquipo);
         }catch (PersistenceException ex){
@@ -49,7 +49,7 @@ public class MyBatisNovedadDAO implements NovedadDAO {
     }
 
     @Override
-    public Novedad consultarNovedadElementoEquipo(int idElemento, int idEquipo) {
+    public Novedad consultarNovedadElementoEquipo(int idElemento, int idEquipo) throws PersistenceException {
         try{
             return novedadMapper.consultarNovedadElementoEquipo(idElemento, idEquipo);
         }catch (PersistenceException ex){

@@ -5,18 +5,19 @@
  */
 package edu.eci.cvds.samples.entities;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 public class Novedad {
     
     private int elementoAsociado;
     private int equipoAsociado;
-    private Calendar fecha;
+    private Date fecha;
     private String titulo;
     private String responsable;
     private String detalle;
 
-    public Novedad(int elementoAsociado, int equipoAsociado, Calendar fecha, String titulo, String responsable, String detalle) {
+    public Novedad(int elementoAsociado, int equipoAsociado, Date fecha, String titulo, String responsable, String detalle) {
         this.elementoAsociado = elementoAsociado;
         this.equipoAsociado = equipoAsociado;
         this.fecha = fecha;
@@ -42,11 +43,11 @@ public class Novedad {
         this.equipoAsociado = equipoAsociado;
     }
 
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

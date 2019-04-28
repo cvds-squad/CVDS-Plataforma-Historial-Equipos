@@ -17,10 +17,10 @@ public interface NovedadDAO {
     
     public void registrarNovedad(Novedad novedad) throws PersistenceException;
     
-    public Novedad consultarNovedadId (int idNovedad);
+    public Novedad consultarNovedadId (int idNovedad) throws PersistenceException;
     
-    public Novedad consultarNovedadEquipo (int idEquipo);
+    public Novedad consultarNovedadEquipo (int idEquipo) throws PersistenceException;
     
-    public Novedad consultarNovedadElementoEquipo (int idElemento, int idEquipo);
+    public Novedad consultarNovedadElementoEquipo (int idElemento, int idEquipo) throws PersistenceException;
              
 }

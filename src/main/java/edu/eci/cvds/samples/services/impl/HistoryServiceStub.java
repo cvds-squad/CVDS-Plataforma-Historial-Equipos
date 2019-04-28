@@ -105,6 +105,26 @@ public class HistoryServiceStub implements HistoryService {
     public List<Elemento> consultarMousesDisponibles() throws HistoryServiceException {
         return null;
     }
+    
+        @Override
+    public void registrarNovedad(Novedad novedad) throws HistoryServiceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoId(int idNovedad) throws HistoryServiceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoEquipo(int idEquipo) throws HistoryServiceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Novedad consultarNovedadDadoElementoEquipo(int idElemento, int idEquipo) throws HistoryServiceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     //Poblar
     private void poblar(){

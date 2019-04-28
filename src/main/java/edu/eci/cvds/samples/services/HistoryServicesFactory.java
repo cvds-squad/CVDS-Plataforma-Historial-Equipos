@@ -8,6 +8,7 @@ import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisElementoDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisNovedadDAO;
 import edu.eci.cvds.samples.services.impl.HistoryServiceImpl;
 import edu.eci.cvds.samples.services.impl.HistoryServiceStub;
 
@@ -30,6 +31,7 @@ public class HistoryServicesFactory{
                 bind(ElementoDAO.class).to(MyBatisElementoDAO.class);
                 bind(HistoryService.class).to(HistoryServiceImpl.class);
                 bind(EquipoDAO.class).to(MyBatisEquipoDAO.class);
+                bind(NovedadDAO.class).to(MyBatisNovedadDAO.class);
             }
         });
 
@@ -42,6 +44,7 @@ public class HistoryServicesFactory{
                 bind(ElementoDAO.class).to(MyBatisElementoDAO.class);
                 bind(HistoryService.class).to(HistoryServiceImpl.class);
                 bind(EquipoDAO.class).to(MyBatisEquipoDAO.class);
+                bind(NovedadDAO.class).to(MyBatisNovedadDAO.class);
             }
         });
 
