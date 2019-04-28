@@ -16,6 +16,16 @@ public class Novedad {
     private String responsable;
     private String detalle;
 
+    public Novedad(int elementoAsociado, int equipoAsociado, Calendar fecha, String titulo, String responsable, String detalle) {
+        this.elementoAsociado = elementoAsociado;
+        this.equipoAsociado = equipoAsociado;
+        this.fecha = fecha;
+        this.titulo = titulo;
+        this.responsable = responsable;
+        this.detalle = detalle;
+    }
+    
+
     public int getElementoAsociado() {
         return elementoAsociado;
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper">
+    
+   <resultMap id="NovedadResult" type="Novedad">
+       <id property="idNovedad" column="idNovedad"/>
+       <result property="equipoAsociado" column="equipoAsociado"/>
+       <result property="elementoAsociado" column="elementoAsociado"/>
+       <result property="fecha" column="fecha"/>
+       <result property="titulo" column="titulo"/>
+       <result property="usuario" column="responsable"/>
+       <result property="detalle" column="detalle"/>
+   </resultMap>
+   
+    <insert parameterType="map" id="registrarNovedad" > 
+        INSERT INTO Novedad (idNovedad, equipoAsociado, elementoAsociado, fecha, titulo, responsable, detalle )
+            VALUES ( (SELECT COUNT(*) FROM Novedad)+1
+                    ,#{novedad.equipoAsociado}, #{novedad.elementoAsociado}, #{novedad.fecha}, #{novedad.titulo}, #{novedad.responsable}, #{novedad.detalle})
+    </insert>
+
+</mapper>
