@@ -29,5 +29,31 @@ public class MyBatisNovedadDAO implements NovedadDAO {
              throw new PersistenceException("La novedad ya se encuetra registrada",e);   
        }
     }
-    
+
+    @Override
+    public Novedad consultarNovedadId(int idNovedad) {
+        try{
+            return novedadMapper.consultarNovedadId(idNovedad);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar novedad",ex);
+        }
+    }
+
+    @Override
+    public Novedad consultarNovedadEquipo(int idEquipo) {
+        try{
+            return novedadMapper.consultarNovedadEquipo(idEquipo);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar novedad",ex);
+        }
+    }
+
+    @Override
+    public Novedad consultarNovedadElementoEquipo(int idElemento, int idEquipo) {
+        try{
+            return novedadMapper.consultarNovedadElementoEquipo(idElemento, idEquipo);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar novedad",ex);
+        }
+    }
 }

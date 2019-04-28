@@ -15,4 +15,10 @@ import org.apache.ibatis.annotations.Param;
 public interface NovedadMapper {
     
     public void registrarNovedad(@Param("novedad") Novedad novedad);
+    
+    public Novedad consultarNovedadId (@Param("idNovedad") int idNovedad);
+    
+    public Novedad consultarNovedadEquipo (@Param("idEquipo") int idEquipo);
+    
+    public Novedad consultarNovedadElementoEquipo (@Param("idElemento") int idElemento, @Param("idEquipo") int idEquipo );
 }

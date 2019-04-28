@@ -20,5 +20,23 @@
             VALUES ( (SELECT COUNT(*) FROM Novedad)+1
                     ,#{novedad.equipoAsociado}, #{novedad.elementoAsociado}, #{novedad.fecha}, #{novedad.titulo}, #{novedad.responsable}, #{novedad.detalle})
     </insert>
+    
+    <select id="consultarNovedadId" resultType="Novedad">
+        SELECT equipoAsociado, elementoAsociado, fecha, titulo, responsable, detalle    
+        FROM Novedad
+        WHERE  idNovedad = #{idNovedad}
+    </select>
+    
+    <select id="consultarNovedadEquipo" resultType="Novedad">
+        SELECT  idNovedad, elementoAsociado, fecha, titulo, responsable, detalle    
+        FROM Novedad
+        WHERE  equipoAsociado = #{idEquipo}
+    </select>
+    
+    <select id="consultarNovedadElementoEquipo" resultType="Novedad">
+        SELECT  idNovedad, fecha, titulo, responsable, detalle    
+        FROM Novedad
+        WHERE  elementoAsociado = #{idElemento}  AND equipoAsociado = #{idEquipo}
+    </select>
 
 </mapper>

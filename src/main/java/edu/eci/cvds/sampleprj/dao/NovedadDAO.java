@@ -8,6 +8,7 @@ package edu.eci.cvds.sampleprj.dao;
 import edu.eci.cvds.samples.entities.Novedad;
 import javax.persistence.PersistenceException;
 
+
 /**
  *
  * @author jcortes
@@ -15,4 +16,11 @@ import javax.persistence.PersistenceException;
 public interface NovedadDAO {
     
     public void registrarNovedad(Novedad novedad) throws PersistenceException;
+    
+    public Novedad consultarNovedadId (int idNovedad);
+    
+    public Novedad consultarNovedadEquipo (int idEquipo);
+    
+    public Novedad consultarNovedadElementoEquipo (int idElemento, int idEquipo);
+             
 }
