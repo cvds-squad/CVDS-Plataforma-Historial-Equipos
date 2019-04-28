@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper">
+    
+   <resultMap id="LaboratorioResult" type="Laboratorio">
+       <id property="idLab" column="idLab"/>
+       <result property="nombre" column="nombre"/>
+       <result property="usuario" column="usuario"/>
+       <result property="descripcion" column="descripcion"/>
+   </resultMap>
+   
+    <insert parameterType="map" id="registrarLaboratorio" > 
+        INSERT INTO Laboratorios (idLab, nombre, usuario, descripcion)
+            VALUES (#{laboratorio.idLab}, #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion},)
+    </insert>
+    
+    <select id="consultarLaboratorio" resultType="Laboratorio">
+        SELECT nombre, usuario, descripcion    
+        FROM Laboratorios
+        WHERE  idLab = #{idLab}
+    </select>

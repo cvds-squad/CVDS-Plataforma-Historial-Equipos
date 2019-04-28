@@ -6,7 +6,6 @@
 package edu.eci.cvds.samples.entities;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 public class Novedad {
     
