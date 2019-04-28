@@ -92,7 +92,61 @@
                 </div>
                 <button id="equipoBtn" data-toggle="collapse" data-target="#equipo" style="display: none"/>
                 <div id="equipo" class="collapse">
+                    <h:form id="regNovEquipo">
+                        <p:panel header="Novedad para equipo">
+                            <p:outputLabel>Seleccione el equipo para el cual desea generar una novedad</p:outputLabel>
+                            <p:fieldset legend="Equipos registrados" id="equipos">
+                                <p:dataTable id="equipments"
+                                             value="#{equipoBean.consultarEquipos()}"
+                                             selection="#{novedadBean.equipoSeleccionado}"
+                                             rowKey="#{equi.idEquipo}"
+                                             selectionMode="single"
+                                             var="equi"
+                                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15">
+                                    <p:column headerText="Id">
+                                        <h:outputText value="#{equi.idEquipo}"/>
+                                    </p:column>
+                                    <p:column headerText="Torre">
+                                        <h:outputText value="#{equi.torre}"/>
+                                    </p:column>
 
+                                    <p:column headerText="Pantalla">
+                                        <h:outputText value="#{equi.pantalla}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Teclado">
+                                        <h:outputText value="#{equi.teclado}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Mouse">
+                                        <h:outputText value="#{equi.mouse}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:fieldset>
+                            <br/>
+
+                            <p:panel header="Detalle de novedad" style="width:35%">
+                                <p:messages id="msgsNovEqui" closable="true" for="equipo"/>
+                                <p:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel value="Titulo"/>
+                                    <p:inputText required="true" value="#{novedadBean.equipoNovedadTitulo}"/>
+
+                                    <p:outputLabel value="Descripción"/>
+                                    <p:inputTextarea rows="4" required="true" value="#{novedadBean.equipoNovedadDescripcion}"/>
+                                </p:panelGrid>
+                                <f:facet name="footer" style="width:35%">
+                                    <center>
+                                        <p:commandButton icon="fa fa-check"
+                                                         value="Crear novedad" update="regNovEquipo"
+                                                         actionListener="#{novedadBean.registroNovedadEquipo()}"
+                                                         oncomplete="setTimeout(function(){$('[id$=msgsNovEqui]').hide(1000)},3000);"/>
+                                    </center>
+                                </f:facet>
+                            </p:panel>
+
+                        </p:panel>
+                    </h:form>
                 </div>
             </center>
 
