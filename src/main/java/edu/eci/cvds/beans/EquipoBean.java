@@ -48,6 +48,20 @@ public class EquipoBean implements Serializable {
     private Elemento tecladoSeleccionado;
     private Elemento mouseSeleccionado;
 
+    private Equipo equipoDarBaja;
+
+    private boolean darBajaTorre;
+    private boolean quitarAsociacionTorre;
+
+    private boolean darBajaPantalla;
+    private boolean quitarAsociacionPantalla;
+
+    private boolean darBajaTeclado;
+    private boolean quitarAsociacionTeclado;
+
+    private boolean darBajaMouse;
+    private boolean quitarAsociacionMouse;
+
     public EquipoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
         crearElementos =  new HashMap<>();
@@ -227,6 +241,67 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    public void darBajaEquipo(){
+        if (equipoDarBaja != null){
+            if (!darBajaMouse && !darBajaTeclado && !darBajaPantalla && !darBajaTorre &&
+                    !quitarAsociacionMouse && !quitarAsociacionTeclado && !quitarAsociacionTorre && !quitarAsociacionPantalla){
+                FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_WARN,"Debe seleccionar los estados de los elementos","Debe seleccionar los estados de los elementos"));
+            }else{
+                FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_INFO,"Servicio en construccion","Servicio en construccion"));
+                resetBooleans();
+            }
+        }
+        else {
+            FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un equipo", "Seleccione un equipo"));
+        }
+    }
+
+    private void resetBooleans() {
+        darBajaTorre = false;
+        quitarAsociacionTorre = false;
+
+        darBajaPantalla = false;
+        quitarAsociacionPantalla = false;
+
+        darBajaTeclado = false;
+        quitarAsociacionTeclado = false;
+
+        darBajaMouse = false;
+        quitarAsociacionMouse = false;
+    }
+
+    public void resetBajaTorre(){
+        darBajaTorre = false;
+    }
+
+    public void resetBajaPantalla(){
+        darBajaPantalla = false;
+    }
+
+    public void resetBajaTeclado(){
+        darBajaTeclado = false;
+    }
+
+    public void resetBajaMouse(){
+        darBajaMouse = false;
+    }
+
+    public void resetAsociacionTorre(){
+        quitarAsociacionTorre = false;
+    }
+
+    public void resetAsociacionPantalla(){
+        quitarAsociacionPantalla = false;
+    }
+
+    public void resetAsociacionTeclado(){
+        quitarAsociacionTeclado = false;
+    }
+
+    public void resetAsociacionMouse(){
+        quitarAsociacionMouse = false;
+    }
+
     public Equipo getEquipo() {
         return equipo;
     }
@@ -361,5 +436,77 @@ public class EquipoBean implements Serializable {
 
     public void setMouseSeleccionado(Elemento mouseSeleccionado) {
         this.mouseSeleccionado = mouseSeleccionado;
+    }
+
+    public Equipo getEquipoDarBaja() {
+        return equipoDarBaja;
+    }
+
+    public void setEquipoDarBaja(Equipo equipoDarBaja) {
+        this.equipoDarBaja = equipoDarBaja;
+    }
+
+    public boolean isDarBajaTorre() {
+        return darBajaTorre;
+    }
+
+    public void setDarBajaTorre(boolean darBajaTorre) {
+        this.darBajaTorre = darBajaTorre;
+    }
+
+    public boolean isQuitarAsociacionTorre() {
+        return quitarAsociacionTorre;
+    }
+
+    public void setQuitarAsociacionTorre(boolean quitarAsociacionTorre) {
+        this.quitarAsociacionTorre = quitarAsociacionTorre;
+    }
+
+    public boolean isDarBajaPantalla() {
+        return darBajaPantalla;
+    }
+
+    public void setDarBajaPantalla(boolean darBajaPantalla) {
+        this.darBajaPantalla = darBajaPantalla;
+    }
+
+    public boolean isQuitarAsociacionPantalla() {
+        return quitarAsociacionPantalla;
+    }
+
+    public void setQuitarAsociacionPantalla(boolean quitarAsociacionPantalla) {
+        this.quitarAsociacionPantalla = quitarAsociacionPantalla;
+    }
+
+    public boolean isDarBajaTeclado() {
+        return darBajaTeclado;
+    }
+
+    public void setDarBajaTeclado(boolean darBajaTeclado) {
+        this.darBajaTeclado = darBajaTeclado;
+    }
+
+    public boolean isQuitarAsociacionTeclado() {
+        return quitarAsociacionTeclado;
+    }
+
+    public void setQuitarAsociacionTeclado(boolean quitarAsociacionTeclado) {
+        this.quitarAsociacionTeclado = quitarAsociacionTeclado;
+    }
+
+    public boolean isDarBajaMouse() {
+        return darBajaMouse;
+    }
+
+    public void setDarBajaMouse(boolean darBajaMouse) {
+        this.darBajaMouse = darBajaMouse;
+    }
+
+    public boolean isQuitarAsociacionMouse() {
+        return quitarAsociacionMouse;
+    }
+
+    public void setQuitarAsociacionMouse(boolean quitarAsociacionMouse) {
+        this.quitarAsociacionMouse = quitarAsociacionMouse;
     }
 }

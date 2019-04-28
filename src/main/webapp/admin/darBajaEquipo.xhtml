@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
+    <title>Dar Baja Equipo</title>
+
+</h:head>
+<h:body>
+
+    <div class="wrapper">
+        <div class="header">
+            <a href="index.xhtml" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+            <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a></div>
+            <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>#{msg.labelInicio}</a></div>
+        </div>
+
+        <br/><br/>
+
+        <div class="container">
+            <h:form id="equipoDarBajaForm">
+                <p:panel header="DAR DE BAJA EQUIPO" style="text-align: center">
+                    <p:messages id="msgsDarBajaEquipo" closable="true" for="equipoDarBaja"/>
+                    <p:fieldset id="equiposBajar" legend="Equipos para dar de baja">
+                        <p:dataTable id="equipos" var="equi"
+                                     value="#{equipoBean.consultarEquipos()}" selectionMode="single"
+                                     rowKey="#{equi.idEquipo}" selection="#{equipoBean.equipoDarBaja}"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{equi.idEquipo}"/>
+                            </p:column>
+                            <p:column headerText="Torre">
+                                <h:outputText value="#{equi.torre}"/>
+                            </p:column>
+
+                            <p:column headerText="Pantalla">
+                                <h:outputText value="#{equi.pantalla}"/>
+                            </p:column>
+
+                            <p:column headerText="Teclado">
+                                <h:outputText value="#{equi.teclado}"/>
+                            </p:column>
+
+                            <p:column headerText="Mouse">
+                                <h:outputText value="#{equi.mouse}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:fieldset>
+                    <f:facet name="footer">
+                        <center>
+                            <p:commandButton id="darBajaBtn"
+                                             value="Seleccionar"
+                                             icon="fas fa-check"
+                                             update="@form"
+                                             oncomplete="PF('elemChooser').show()">
+                            </p:commandButton>
+                        </center>
+                    </f:facet>
+                </p:panel>
+
+                <p:dialog widgetVar="elemChooser" showEffect="fade" hideEffect="fade" header="Elementos del equipo">
+                    <center>
+                        <p:panel header="Escoger estado de los elementos del equipo">
+                            <p:panelGrid>
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column>Elementos Asociados</p:column>
+                                        <p:column>Estado</p:column>
+                                    </p:row>
+                                </f:facet>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Torre: #{equipoBean.equipoDarBaja.torre}"/></p:column>
+                                    <p:column>
+                                        <h:panelGrid columns="2">
+                                            <p:selectBooleanCheckbox id="darBTorre" value="#{equipoBean.darBajaTorre}" itemLabel="Dar de Baja">
+                                                <p:ajax update="quitarATorre" listener="#{equipoBean.resetAsociacionTorre()}"/>
+                                            </p:selectBooleanCheckbox>
+                                            <p:selectBooleanCheckbox id="quitarATorre" value="#{equipoBean.quitarAsociacionTorre}" itemLabel="Eliminar asociación">
+                                                <p:ajax update="darBTorre" listener="#{equipoBean.resetBajaTorre()}"/>
+                                            </p:selectBooleanCheckbox>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Pantalla: #{equipoBean.equipoDarBaja.pantalla}"/></p:column>
+                                    <p:column>
+                                        <h:panelGrid columns="2">
+                                            <p:selectBooleanCheckbox id="darBPantalla" value="#{equipoBean.darBajaPantalla}" itemLabel="Dar de Baja">
+                                                <p:ajax update="quitarAPantalla" listener="#{equipoBean.resetAsociacionPantalla()}"/>
+                                            </p:selectBooleanCheckbox>
+                                            <p:selectBooleanCheckbox id="quitarAPantalla" value="#{equipoBean.quitarAsociacionPantalla}" itemLabel="Eliminar asociación">
+                                                <p:ajax update="darBPantalla" listener="#{equipoBean.resetBajaPantalla()}"/>
+                                            </p:selectBooleanCheckbox>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Teclado: #{equipoBean.equipoDarBaja.teclado}"/></p:column>
+                                    <p:column>
+                                        <h:panelGrid columns="2">
+                                            <p:selectBooleanCheckbox id="darBTeclado" value="#{equipoBean.darBajaTeclado}" itemLabel="Dar de Baja">
+                                                <p:ajax update="quitarATeclado" listener="#{equipoBean.resetAsociacionTeclado()}"/>
+                                            </p:selectBooleanCheckbox>
+                                            <p:selectBooleanCheckbox id="quitarATeclado" value="#{equipoBean.quitarAsociacionTeclado}" itemLabel="Eliminar asociación">
+                                                <p:ajax update="darBTeclado" listener="#{equipoBean.resetBajaTeclado()}"/>
+                                            </p:selectBooleanCheckbox>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Mouse: #{equipoBean.equipoDarBaja.mouse}"/></p:column>
+                                    <p:column>
+                                        <h:panelGrid columns="2">
+                                            <p:selectBooleanCheckbox id="darBMouse" value="#{equipoBean.darBajaMouse}" itemLabel="Dar de Baja">
+                                                <p:ajax update="quitarAMouse" listener="#{equipoBean.resetAsociacionMouse()}"/>
+                                            </p:selectBooleanCheckbox>
+                                            <p:selectBooleanCheckbox id="quitarAMouse" value="#{equipoBean.quitarAsociacionMouse}" itemLabel="Eliminar asociación">
+                                                <p:ajax update="darBMouse" listener="#{equipoBean.resetBajaMouse()}"/>
+                                            </p:selectBooleanCheckbox>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+                                    <p:commandButton id="btn"
+                                                     value="Dar de baja"
+                                                     icon="fas fa-minus-circle"
+                                                     update="@form"
+                                                     actionListener="#{equipoBean.darBajaEquipo()}"
+                                                     oncomplete="setTimeout(function(){$('[id$=msgsDarBajaEquipo]').hide(1000)},3000);">
+                                        <p:confirm header="Confirmación" message="¿Dar de baja este equipo?" icon="fas fa-exclamation-triangle"/>
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" appendTo="@(body)">
+                                        <center>
+                                            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" onclick="PF('elemChooser').hide();" update="equipoDarBajaForm"  />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+                                        </center>
+                                    </p:confirmDialog>
+                                </center>
+                            </f:facet>
+                        </p:panel>
+                    </center>
+                </p:dialog>
+            </h:form>
+        </div>
+
+
+        <div class="push"/>
+    </div>
+
+    <footer class="ct-footer">
+        <div class="container">
+            <div class="ct-footer-meta text-center-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2">
+                        <img alt="logo" src="/images/labLogo.png"/>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <address>
+                            <span>Escuela Colombiana de Ingenieria Julio Garavito<br/></span>Laboratorio de Informatica<br/>
+                            AK.45 No.205-59 (Autopista Norte)-Bogota<br/>
+                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+                        </address>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <ul class="ct-socials list-unstyled list-inline">
+                            <li>
+                                <a href="https://www.facebook.com/EscuelaIng/?ref=br_rs" target="_blank"><img alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Escuelaing" target="_blank"><img alt="twitter" src="https://www.solodev.com/assets/footer/twitter-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/user/escuelacolingenieria/featured" target="_blank"><img alt="youtube" src="https://www.solodev.com/assets/footer/youtube-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/escuelaing/?hl=es-la" target="_blank"><img alt="instagram" src="https://www.solodev.com/assets/footer/instagram-white.png"/></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+    <!-- Latest compiled JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
+
+
+</h:body>
+</html>
