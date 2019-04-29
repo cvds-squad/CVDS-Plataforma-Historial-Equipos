@@ -300,4 +300,13 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("El elemento ya está de baja."); 
         }
     }
+
+    @Override
+    public void darBajaEquipo(int idEquipo) throws HistoryServiceException {
+        try{
+            equipoDAO.darDeBajaEqp(idEquipo);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("El equipo ya está de baja.");
+        }
+    }
 }

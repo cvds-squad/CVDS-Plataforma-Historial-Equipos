@@ -19,6 +19,7 @@ public class Equipo implements Serializable{
     private Elemento mouse;
     private Elemento teclado;
     private boolean disponible;
+    private boolean de_baja;
 
     public Equipo(){
         disponible = true;
@@ -40,6 +41,16 @@ public class Equipo implements Serializable{
         this.mouse = mouse;
         this.teclado = teclado;
         this.disponible = true; //al crear siempre es disponible
+    }
+    
+     public Equipo(int idEquipo, Elemento torre, Elemento pantalla, Elemento mouse, Elemento teclado, boolean de_baja) {
+        this.idEquipo = idEquipo;
+        this.torre = torre;
+        this.pantalla = pantalla;
+        this.mouse = mouse;
+        this.teclado = teclado;
+        this.disponible = true; //al crear siempre es disponible
+        this.de_baja = false;
     }
 
     public int getIdEquipo() {
@@ -89,8 +100,14 @@ public class Equipo implements Serializable{
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-    
 
-    
+    public boolean isDe_baja() {
+        return de_baja;
+    }
+
+    public void setDe_baja(boolean de_baja) {
+        this.de_baja = de_baja;
+    }
+   
     
 }

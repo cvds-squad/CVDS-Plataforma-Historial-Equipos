@@ -5,7 +5,7 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper">
     <insert parameterType="map" id="registrarEquipo" > 
-        INSERT INTO Equipos (Novedades,disponible)
+        INSERT INTO Equipos (Novedades,disponible,false)
             VALUES ('Equipo nuevo',#{equipo.disponible})
     </insert>
 
@@ -61,13 +61,19 @@
           WHERE  idEquipo = #{idEqui}
     </select>
 
-   <select id="getMaxId" resultType="int">
-       SELECT MAX(idEquipo) FROM equipos
-   </select>
+    <select id="getMaxId" resultType="int">
+        SELECT MAX(idEquipo) FROM equipos
+    </select>
 
     <select id="consultarLabAsociado" resultType="Integer">
         SELECT labs FROM equipos
             WHERE idEquipo = #{idEquipo}
     </select>
+    
+    <update id = "setDarDeBaja">
+        UPDATE Equipos set 
+            de_baja = true
+        where idEquipo = #{idEquipo}  
+    </update>
 
 </mapper>

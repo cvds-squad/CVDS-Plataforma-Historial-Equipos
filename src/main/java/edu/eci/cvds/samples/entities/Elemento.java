@@ -62,7 +62,7 @@ public class Elemento implements Serializable {
         this.marca = marca;
         this.descripcion = descripcion;
         this.disponible = disponible;
-        this.de_baja = de_baja;
+        this.de_baja = false;
     }
 
     public int getIdElemento() {

@@ -71,8 +71,16 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
         try{
             return equipoMapper.consultarLabAsociado(idEquipo);
         }catch (PersistenceException ex){
-            throw  new PersistenceException("Error al consultar el laboratorio asociado");
+            throw new PersistenceException("Error al consultar el laboratorio asociado");
         }
     }
 
+    @Override
+    public void darDeBajaEqp(int idEquipo) throws PersistenceException {
+        try{
+            equipoMapper.setDarDeBaja(idEquipo);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al dar de baja al equipo");
+        }
+    }
 }

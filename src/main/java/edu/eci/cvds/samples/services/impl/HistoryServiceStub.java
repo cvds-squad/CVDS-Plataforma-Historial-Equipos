@@ -192,4 +192,12 @@ public class HistoryServiceStub implements HistoryService {
        }
     }
 
+    @Override
+    public void darBajaEquipo(int idEquipo) throws HistoryServiceException {
+        if (equipos.containsKey(idEquipo)){
+           Equipo eqp = equipos.get(idEquipo);
+           eqp.setDe_baja(true);
+       }
+    }
+
 }

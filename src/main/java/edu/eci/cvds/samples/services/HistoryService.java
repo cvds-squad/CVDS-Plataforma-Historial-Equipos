@@ -59,4 +59,6 @@ public interface HistoryService {
     Integer consultarLabAsociadoAEquipo(int idEquipo) throws  HistoryServiceException;
     
     void darBajaElemento(int id) throws HistoryServiceException;
+    
+    void darBajaEquipo(int idEquipo) throws HistoryServiceException;
 }

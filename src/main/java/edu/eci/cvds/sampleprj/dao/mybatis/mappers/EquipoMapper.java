@@ -28,4 +28,6 @@ public interface EquipoMapper {
     int getMaxId();
 
     Integer consultarLabAsociado(@Param("idEquipo") int idEquipo);
+    
+    void setDarDeBaja(@Param("idEquipo") int idEquipo);
 }

@@ -27,4 +27,6 @@ public interface EquipoDAO {
     int getIdMax() throws PersistenceException;
 
     Integer consultarLabAsociado(int idEquipo);
+    
+    void darDeBajaEqp(int idEquipo) throws PersistenceException;
 }
