@@ -2,6 +2,7 @@ package edu.eci.cvds.beans;
 
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
@@ -12,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean(name="laboratorioBean")
@@ -30,17 +32,20 @@ public class LaboratorioBean implements Serializable {
     }
 
     public void crearLaboratorio(){
-        //TODO: crear novedad para cada equipo / si estaba un equipo asociado a otro generar novedad de retiro
+        //TODO: si estaba un equipo asociado a otro generar novedad de retiro
         Laboratorio laboratorio = new Laboratorio(labNombre,ShiroSecurityBean.getUser(),labDescripcion,(ArrayList<Equipo>)labEquipos);
+        Date utilDate = new Date();
         try {
             historyService.registrarLaboratorio(laboratorio);
             int maxLabId = historyService.getIdMaxLaboratorio();
             for (Equipo equipo : labEquipos){
                 historyService.asociarEquipoConLaboratorio(maxLabId,equipo.getIdEquipo());
+                historyService.registrarNovedad(new Novedad(null,equipo.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Asociación a laboratorio",ShiroSecurityBean.getUser(),"Se asoció al laboratorio " + labNombre + " el equipo con id: " + equipo.getIdEquipo()));
             }
             clean();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Laboratorio registrado correctamente","Laboratorio registrado correctamente"));
         } catch (HistoryServiceException e) {
+            e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo registrar el laboratorio","No se pudo registrar el laboratorio"));
         }
     }

@@ -16,9 +16,8 @@
    </resultMap>
    
     <insert parameterType="map" id="registrarNovedad" > 
-        INSERT INTO Novedad (idNovedad, equipoAsociado, elementoAsociado, fecha, titulo, responsable, detalle )
-            VALUES ( (SELECT COUNT(*) FROM Novedad)+1
-                    ,#{novedad.equipoAsociado}, #{novedad.elementoAsociado}, #{novedad.fecha}, #{novedad.titulo}, #{novedad.responsable}, #{novedad.detalle})
+        INSERT INTO Novedad (equipoAsociado, elementoAsociado, fecha, titulo, responsable, detalle )
+            VALUES (#{novedad.equipoAsociado}, #{novedad.elementoAsociado}, #{novedad.fecha}, #{novedad.titulo}, #{novedad.responsable}, #{novedad.detalle})
     </insert>
     
     <select id="consultarNovedadId" resultType="Novedad">

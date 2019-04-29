@@ -9,14 +9,14 @@ import java.sql.Date;
 
 public class Novedad {
     
-    private int elementoAsociado;
-    private int equipoAsociado;
+    private Integer elementoAsociado;
+    private Integer equipoAsociado;
     private Date fecha;
     private String titulo;
     private String responsable;
     private String detalle;
 
-    public Novedad(int elementoAsociado, int equipoAsociado, Date fecha, String titulo, String responsable, String detalle) {
+    public Novedad(Integer elementoAsociado, Integer equipoAsociado, Date fecha, String titulo, String responsable, String detalle) {
         this.elementoAsociado = elementoAsociado;
         this.equipoAsociado = equipoAsociado;
         this.fecha = fecha;
@@ -26,7 +26,7 @@ public class Novedad {
     }
     
 
-    public int getElementoAsociado() {
+    public Integer getElementoAsociado() {
         return elementoAsociado;
     }
 
@@ -34,7 +34,7 @@ public class Novedad {
         this.elementoAsociado = elementoAsociado;
     }
 
-    public int getEquipoAsociado() {
+    public Integer getEquipoAsociado() {
         return equipoAsociado;
     }
 
