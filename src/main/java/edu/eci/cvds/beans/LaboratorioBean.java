@@ -41,6 +41,10 @@ public class LaboratorioBean implements Serializable {
             for (Equipo equipo : labEquipos){
                 historyService.asociarEquipoConLaboratorio(maxLabId,equipo.getIdEquipo());
                 historyService.registrarNovedad(new Novedad(null,equipo.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Asociación a laboratorio",ShiroSecurityBean.getUser(),"Se asoció al laboratorio " + labNombre + " el equipo con id: " + equipo.getIdEquipo()));
+                Integer labAnterior = historyService.consultarLabAsociadoAEquipo(equipo.getIdEquipo());
+                if ( labAnterior != null){
+                    historyService.registrarNovedad(new Novedad(null,equipo.getIdEquipo(), new java.sql.Date(utilDate.getTime()),"Desasoción de laboratorio",ShiroSecurityBean.getUser(),"Se desasoció del laboratorio " + historyService.consultarLaboratorio(labAnterior).getNombre() + " el equipo con id: " + equipo.getIdEquipo()));
+                }
             }
             clean();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Laboratorio registrado correctamente","Laboratorio registrado correctamente"));

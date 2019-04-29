@@ -151,6 +151,11 @@ public class HistoryServiceStub implements HistoryService {
         return null;
     }
 
+    @Override
+    public Integer consultarLabAsociadoAEquipo(int idE) throws HistoryServiceException {
+        return null;
+    }
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

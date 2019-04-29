@@ -66,4 +66,13 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
         }
     }
 
+    @Override
+    public Integer consultarLabAsociado(int idEquipo) {
+        try{
+            return equipoMapper.consultarLabAsociado(idEquipo);
+        }catch (PersistenceException ex){
+            throw  new PersistenceException("Error al consultar el laboratorio asociado");
+        }
+    }
+
 }

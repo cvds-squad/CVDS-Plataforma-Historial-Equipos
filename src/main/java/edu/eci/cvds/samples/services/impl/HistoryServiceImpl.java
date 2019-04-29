@@ -282,4 +282,13 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar los laboratorios");
         }
     }
+
+    @Override
+    public Integer consultarLabAsociadoAEquipo(int idEquipo) throws HistoryServiceException {
+        try{
+            return equipoDAO.consultarLabAsociado(idEquipo);
+        }catch (PersistenceException ex){
+            throw  new HistoryServiceException("No se pudo consultar el laboratorio asociado");
+        }
+    }
 }

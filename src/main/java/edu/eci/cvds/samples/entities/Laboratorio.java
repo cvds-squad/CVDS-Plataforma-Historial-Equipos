@@ -27,6 +27,14 @@ public class Laboratorio {
         this.equipos = new ArrayList<Equipo>();
     }
 
+    public Laboratorio(String nombre, String usuario, String descripcion) {
+        this.idLab = idLab;
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.descripcion = descripcion;
+        this.equipos = new ArrayList<Equipo>();
+    }
+
     public Laboratorio(String nombre, String usuario, String descripcion, ArrayList<Equipo> equipos){
         this.nombre = nombre;
         this.usuario = usuario;

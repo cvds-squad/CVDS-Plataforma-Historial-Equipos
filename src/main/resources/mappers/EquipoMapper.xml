@@ -64,4 +64,10 @@
    <select id="getMaxId" resultType="int">
        SELECT MAX(idEquipo) FROM equipos
    </select>
+
+    <select id="consultarLabAsociado" resultType="Integer">
+        SELECT labs FROM equipos
+            WHERE idEquipo = #{idEquipo}
+    </select>
+
 </mapper>

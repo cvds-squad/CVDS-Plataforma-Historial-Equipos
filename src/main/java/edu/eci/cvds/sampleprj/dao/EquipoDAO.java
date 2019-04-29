@@ -25,4 +25,6 @@ public interface EquipoDAO {
     Equipo consultaEquipo(int idEquipo);
 
     int getIdMax() throws PersistenceException;
+
+    Integer consultarLabAsociado(int idEquipo);
 }

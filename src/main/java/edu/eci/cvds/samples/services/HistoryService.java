@@ -55,4 +55,6 @@ public interface HistoryService {
     void asociarEquipoConLaboratorio(int maxLabId, int idEquipo) throws HistoryServiceException;
 
     List<Laboratorio> consultarLaboratorios() throws HistoryServiceException;
+
+    Integer consultarLabAsociadoAEquipo(int idEquipo) throws  HistoryServiceException;
 }
