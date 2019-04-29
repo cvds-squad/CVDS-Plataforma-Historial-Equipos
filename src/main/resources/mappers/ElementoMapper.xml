@@ -52,7 +52,7 @@
         SELECT Max(idElemento) FROM elementos
     </select>
     
-    <update id = "setDarDeBaja"
+    <update id = "setDarDeBaja">
         UPDATE Elementos set 
             de_baja = true
         where eqps is null and idElemento = #{eid}  
