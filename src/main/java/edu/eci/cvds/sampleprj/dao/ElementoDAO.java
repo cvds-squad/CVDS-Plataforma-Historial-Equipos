@@ -36,4 +36,8 @@ public interface ElementoDAO {
     List<Elemento> consultarMousesDisponibles();
     
     void darDeBajaElem(int id) throws PersistenceException;
+
+    List<Elemento> consultarElementosNoAsociados();
+
+    List<Elemento> consultarElementosDadosDeBaja();
 }

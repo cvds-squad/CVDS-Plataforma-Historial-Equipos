@@ -1,6 +1,7 @@
 package edu.eci.cvds.beans;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
@@ -9,13 +10,16 @@ import edu.eci.cvds.samples.services.HistoryServicesFactory;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 
 @ManagedBean(name="elementoBean")
-@RequestScoped
-public class ElementoBean {
+@SessionScoped
+public class ElementoBean implements Serializable {
 
     private HistoryService historyService;
 
@@ -147,15 +151,49 @@ public class ElementoBean {
         return mousesDisponibles;
     }
 
+    /**
+     * Consulta elementos no asociados a equipos
+     * @return lista de elementos no asociados
+     **/
     public List<Elemento> consultarElementosNoAsociados(){
-        return null;
+        List<Elemento> elementos = null;
+        try{
+            elementos = historyService.consultarElementosNoAsociados();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar elementos no asociados","Error al consultar elementos no asociados"));
+        }
+        return elementos;
     }
 
+    /**
+     * Consulta elementos que se han dado de baja
+     * @return lista de elementos dados de baja
+     **/
+    public List<Elemento> consultarElementosBajados(){
+        List<Elemento> elementos = null;
+        try{
+            elementos = historyService.consultarElementosDadosDeBaja();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar elementos no asociados","Error al consultar elementos no asociados"));
+        }
+        return elementos;
+    }
+
+    /**
+     * Da de baja al elemento escogido
+     */
     public void darBajaElemento(){
-        if (elementoDarBajar != null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Servicio en construccion", "Servicio en construccion"));
-        }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un elemento", "Seleccione un elemento"));
+        Date utilDate = new Date();
+        try {
+            if (elementoDarBajar != null) {
+                historyService.registrarNovedad(new Novedad(elementoDarBajar.getIdElemento(), null, new java.sql.Date(utilDate.getTime()), "Dar baja elemento", ShiroSecurityBean.getUser(), "Se dio de baja al elemento " + elementoDarBajar));
+                historyService.darBajaElemento(elementoDarBajar.getIdElemento());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento dado de baja correctamente", "Elemento dado de baja correctamente"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un elemento", "Seleccione un elemento"));
+            }
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al intentar dar de baja al elemento", "Error al intentar dar de baja al elemento"));
         }
     }
 

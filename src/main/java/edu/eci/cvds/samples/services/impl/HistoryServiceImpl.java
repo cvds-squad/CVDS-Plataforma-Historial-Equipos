@@ -309,4 +309,22 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("El equipo ya está de baja.");
         }
     }
+
+    @Override
+    public List<Elemento> consultarElementosNoAsociados() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarElementosNoAsociados();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los elementos no asociados");
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarElementosDadosDeBaja() throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarElementosDadosDeBaja();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar elementos dado de baja");
+        }
+    }
 }

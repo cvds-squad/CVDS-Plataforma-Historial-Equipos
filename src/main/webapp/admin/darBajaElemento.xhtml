@@ -26,7 +26,7 @@
             <h:form id="elementoDarBajaForm">
                 <p:panel header="DAR DE BAJA ELEMENTO" style="text-align: center">
                     <p:messages id="msgsDarBaja" closable="true"/>
-                    <p:fieldset id="elementosBajar" legend="Elementos para dar de baja">
+                    <p:fieldset id="elementosBajar" legend="Elementos no asociados a un equipo">
                         <p:dataTable id="elems" var="elem"
                                      value="#{elementoBean.consultarElementosNoAsociados()}" selectionMode="single"
                                      rowKey="#{elem.idElemento}" selection="#{elementoBean.elementoDarBajar}"
@@ -49,7 +49,7 @@
                                 <p:commandButton id="darBajaBtn"
                                                  value="Dar Baja"
                                                  icon="fas fa-minus-circle"
-                                                 update="elementoDarBajaForm"
+                                                 update="@form"
                                                  actionListener="#{elementoBean.darBajaElemento()}"
                                                  oncomplete="setTimeout(function(){$('[id$=msgsDarBaja]').hide(1000)},3000);">
                                     <p:confirm header="Confirmación" message="¿Dar de baja este elemento?" icon="fas fa-exclamation-triangle"/>
@@ -61,6 +61,27 @@
                                     </center>
                                 </p:confirmDialog>
                             </f:facet>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <br/><br/>
+                    <p:fieldset id="elementosBajados" legend="Elementos dados de baja">
+                        <p:dataTable id="elemsBajados" var="elem"
+                                     value="#{elementoBean.consultarElementosBajados()}"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{elem.idElemento}"/>
+                            </p:column>
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{elem.tipelement}"/>
+                            </p:column>
+                            <p:column headerText="Marca">
+                                <h:outputText value="#{elem.marca}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{elem.descripcion}"/>
+                            </p:column>
+
                         </p:dataTable>
                     </p:fieldset>
                 </p:panel>

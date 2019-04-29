@@ -36,4 +36,8 @@ public interface ElementoMapper {
     List<Elemento> consultarMousesDisponibles();
     
     void setDarDeBaja(@Param("eid") int id);
+
+    List<Elemento> consultarElementosNoAsociados();
+
+    List<Elemento> consultarElementosDadosDeBaja();
 }

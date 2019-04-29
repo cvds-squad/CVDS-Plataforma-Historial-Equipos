@@ -58,6 +58,16 @@
         where eqps is null and idElemento = #{eid}  
     </update>
 
+    <select id="consultarElementosNoAsociados" resultMap="ElementoResult">
+        SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible,de_baja FROM Elementos
+         WHERE eqps IS null and not de_baja ;
+    </select>
+
+    <select id="consultarElementosDadosDeBaja" resultMap="ElementoResult">
+        SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible,de_baja FROM Elementos
+            WHERE de_baja
+    </select>
+
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
        <result property="equipoAsociado" column="eqps"/>

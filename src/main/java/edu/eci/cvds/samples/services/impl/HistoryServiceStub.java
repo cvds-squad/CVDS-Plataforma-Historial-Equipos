@@ -200,4 +200,14 @@ public class HistoryServiceStub implements HistoryService {
        }
     }
 
+    @Override
+    public List<Elemento> consultarElementosNoAsociados() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Elemento> consultarElementosDadosDeBaja() throws HistoryServiceException {
+        return null;
+    }
+
 }

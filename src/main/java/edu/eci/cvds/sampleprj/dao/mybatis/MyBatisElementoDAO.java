@@ -116,4 +116,22 @@ public class MyBatisElementoDAO  implements ElementoDAO{
             throw new PersistenceException("El elemento ya está de baja", ex);
         }
     }
+
+    @Override
+    public List<Elemento> consultarElementosNoAsociados() {
+        try{
+            return elementoMapper.consultarElementosNoAsociados();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar elementos no asociados", ex);
+        }
+    }
+
+    @Override
+    public List<Elemento> consultarElementosDadosDeBaja() {
+        try{
+            return elementoMapper.consultarElementosDadosDeBaja();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar elementos dados de baja");
+        }
+    }
 }
