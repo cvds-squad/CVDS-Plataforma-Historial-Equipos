@@ -5,8 +5,8 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper">
     <insert parameterType="map" id="registrarEquipo" > 
-        INSERT INTO Equipos (Novedades,disponible,false)
-            VALUES ('Equipo nuevo',#{equipo.disponible})
+        INSERT INTO Equipos (Novedades,disponible,de_baja)
+            VALUES ('Equipo nuevo',#{equipo.disponible},false)
     </insert>
 
     <update id="eliminarAsociacion" parameterType="map">
