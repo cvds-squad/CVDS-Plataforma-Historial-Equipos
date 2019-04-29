@@ -34,4 +34,6 @@ public interface ElementoMapper {
     List<Elemento> consultarTecladosDisponibles();
 
     List<Elemento> consultarMousesDisponibles();
+    
+    void setDarDeBaja(@Param("eid") int id);
 }

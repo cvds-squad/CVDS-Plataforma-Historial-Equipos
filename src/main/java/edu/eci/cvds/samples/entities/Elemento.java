@@ -17,6 +17,7 @@ public class Elemento implements Serializable {
     private String descripcion;
     private boolean disponible;
     private Integer equipoAsociado;
+    private boolean de_baja; 
     
     public Elemento(){
     
@@ -53,6 +54,15 @@ public class Elemento implements Serializable {
         this.marca = marca;
         this.descripcion = descripcion;
         this.disponible = disponible;
+    }
+    
+    public Elemento(int ids, TipoElemento tipElement, String marca, String descripcion, boolean disponible,boolean de_baja) {
+        this.idElemento = ids;
+        this.tipelement= tipElement;
+        this.marca = marca;
+        this.descripcion = descripcion;
+        this.disponible = disponible;
+        this.de_baja = de_baja;
     }
 
     public int getIdElemento() {

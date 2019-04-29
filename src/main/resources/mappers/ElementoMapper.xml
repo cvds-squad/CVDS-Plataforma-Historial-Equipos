@@ -5,8 +5,8 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper">
     <insert parameterType="map" id="registerElemento" > 
-        INSERT INTO Elementos (tipelement, marca, descripcion, disponible)
-            VALUES (#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible})
+        INSERT INTO Elementos (tipelement, marca, descripcion, disponible, de_baja)
+            VALUES (#{elem.tipelement},#{elem.marca},#{elem.descripcion},#{elem.disponible}, false)
     </insert>
 
    <insert id="registerElementoConId" parameterType="map">
@@ -51,6 +51,12 @@
     <select id="getMaxId" resultType="int">
         SELECT Max(idElemento) FROM elementos
     </select>
+    
+    <update id = "setDarDeBaja"
+        UPDATE Elementos set 
+            de_baja = true
+        where eqps is null and idElemento = #{eid}  
+    </update>
 
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
@@ -59,6 +65,7 @@
        <result property="marca" column="marca"/>
        <result property="descripcion" column="Descripcion"/>
        <result property="disponible" column="disponible"/>
+       <result property="de_baja" column="de_baja"/>
    </resultMap>
 
 </mapper>

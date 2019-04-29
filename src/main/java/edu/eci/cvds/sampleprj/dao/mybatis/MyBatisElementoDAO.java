@@ -108,4 +108,12 @@ public class MyBatisElementoDAO  implements ElementoDAO{
         }
     }
 
+    @Override
+    public void darDeBajaElem(int id) throws PersistenceException {
+        try{
+            elementoMapper.setDarDeBaja(id);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("El elemento ya está de baja", ex);
+        }
+    }
 }
