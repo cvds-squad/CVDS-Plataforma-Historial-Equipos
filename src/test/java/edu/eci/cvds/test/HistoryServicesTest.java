@@ -82,7 +82,7 @@ public class HistoryServicesTest {
             Elemento elementoRemovido = historyService.consultarElemento(buscarElem);
             idElemCont++; idEquipoCont++;
             assertTrue(ultimoElementoAsociado.getEquipoAsociado() == idEquipoCont-1 &&
-                    elementoRemovido.getEquipoAsociado() == 0 &&
+                    elementoRemovido.getEquipoAsociado() == null &&
                     afiliado);
         }catch (HistoryServiceException e){
             e.printStackTrace();

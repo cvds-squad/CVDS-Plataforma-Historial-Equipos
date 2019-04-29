@@ -25,7 +25,7 @@
     </select>
 
     <select id="consultarElementos" resultType="Elemento">
-        SELECT idElemento,tipelement,marca,descripcion FROM elementos
+        SELECT idElemento,eqps,tipelement,marca,descripcion FROM elementos
     </select>
 
     <select id="consultarTorresDisponibles" resultType="Elemento">

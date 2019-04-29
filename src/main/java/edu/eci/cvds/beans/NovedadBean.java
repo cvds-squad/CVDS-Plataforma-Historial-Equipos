@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -54,7 +55,11 @@ public class NovedadBean implements Serializable {
             if (elementoSeleccionado != null) {
 
                 historyService.registrarNovedad(new Novedad(elementoSeleccionado.getIdElemento(), null, new java.sql.Date(utilDate.getTime()), elementoNovedadTitulo, ShiroSecurityBean.getUser(), elementoNovedadDescripcion));
-
+                Integer equipAsociado = historyService.consultarElemento(elementoSeleccionado.getIdElemento()).getEquipoAsociado();
+                if (equipAsociado != null){
+                    Equipo equipo = historyService.consultaEquipo(equipAsociado);
+                    historyService.registrarNovedad(new Novedad(null, equipo.getIdEquipo(), new java.sql.Date(utilDate.getTime()), elementoNovedadTitulo, ShiroSecurityBean.getUser(), elementoNovedadDescripcion));
+                }
                 FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_INFO, "Novedad registrada correctamente", "Novedad registrada correctamente"));
                 cleanElemento();
             } else {

@@ -16,7 +16,7 @@ public class Elemento implements Serializable {
     private String marca;
     private String descripcion;
     private boolean disponible;
-    private int equipoAsociado;
+    private Integer equipoAsociado;
     
     public Elemento(){
     
@@ -30,6 +30,16 @@ public class Elemento implements Serializable {
     }
 
     public Elemento(int id,TipoElemento tipElement, String marca, String descripcion){
+        this.equipoAsociado = equipoAsociado;
+        this.idElemento = id;
+        this.tipelement = tipElement;
+        this.marca = marca;
+        this.descripcion = descripcion;
+        this.disponible = true; //Al crear un elemento siempre esta disponible
+    }
+
+    public Elemento(int id,Integer equipoAsociado,TipoElemento tipElement, String marca, String descripcion){
+        this.equipoAsociado = equipoAsociado;
         this.idElemento = id;
         this.tipelement = tipElement;
         this.marca = marca;
@@ -86,11 +96,11 @@ public class Elemento implements Serializable {
     }
 
 
-    public int getEquipoAsociado() {
+    public Integer getEquipoAsociado() {
         return equipoAsociado;
     }
 
-    public void setEquipoAsociado(int equipoAsociado) {
+    public void setEquipoAsociado(Integer equipoAsociado) {
         this.equipoAsociado = equipoAsociado;
     }
 
