@@ -107,7 +107,24 @@ public class HistoryServicesTest {
                 return false;
             }
         });
+    }
 
+    @Test
+    public void shouldUnsubscribeElement(){
+        qt().forAll(Generadores.genElementos()).check(elem ->{
+            try{
+                boolean deBajaUno,deBajaDos;
+                historyService.registrarElemento(elem);
+                deBajaUno = elem.isDe_baja();
+                historyService.darBajaElemento(idElemCont);
+                deBajaDos = historyService.consultarElemento(idElemCont).isDe_baja();
+                idElemCont++;
+                return !deBajaUno &&  deBajaDos;
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
     }
 
 }

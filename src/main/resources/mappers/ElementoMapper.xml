@@ -15,7 +15,7 @@
    </insert>
 
     <select id="consultElemento" resultMap="ElementoResult">
-        SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible FROM Elementos
+        SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible,de_baja FROM Elementos
           WHERE idElemento=#{eid}
     </select>
 
