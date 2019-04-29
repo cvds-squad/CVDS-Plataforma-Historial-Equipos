@@ -34,6 +34,12 @@ public class Equipo implements Serializable{
         this.disponible = disponible;
     }
 
+    public Equipo(int idEquipo,String novedad,boolean disponible,boolean de_baja){
+        this.idEquipo = idEquipo;
+        this.disponible = disponible;
+        this.de_baja = de_baja;
+    }
+
     public Equipo(int idEquipo, Elemento torre, Elemento pantalla, Elemento mouse, Elemento teclado) {
         this.idEquipo = idEquipo;
         this.torre = torre;

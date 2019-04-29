@@ -22,8 +22,8 @@
     </update>
 
     <select id="consultarEquipos" resultMap="EquipoResult">
-        select idequipo,torremarca, torredesc,pantallamarca, pantalladesc,tecladomarca, tecladodesc, mousemarca, mousedesc
-        from (select idequipo, marca as torremarca, descripcion as torredesc
+        select idequipo,torremarca, torredesc,pantallamarca, pantalladesc,tecladomarca, tecladodesc, mousemarca, mousedesc, de_baja
+        from (select idequipo, marca as torremarca, descripcion as torredesc, equipos.de_baja as de_baja
                 from elementos join equipos on idequipo=eqps
                 where tipelement='TORRE') as ttorre
             join
@@ -38,6 +38,7 @@
             (select idequipo, marca as mousemarca, descripcion as mousedesc
                 from elementos join equipos on idequipo=eqps
                 where tipelement='MOUSE') as mmouse using (idequipo)
+
     </select>
 
     <resultMap id="EquipoResult" type="Equipo">
@@ -54,10 +55,11 @@
         <result property="mouse.marca" column="mousemarca"/>
         <result property="mouse.descripcion" column="mousedesc"/>
 
+        <result property="de_baja" column="de_baja"/>
     </resultMap>
 
     <select id="consultarEquipo" resultType="Equipo">
-        SELECT idEquipo,Novedades,Disponible FROM equipos
+        SELECT idEquipo,Novedades,Disponible,de_baja FROM equipos
           WHERE  idEquipo = #{idEqui}
     </select>
 

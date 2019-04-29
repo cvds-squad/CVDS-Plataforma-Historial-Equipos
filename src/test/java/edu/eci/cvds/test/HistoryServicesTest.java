@@ -127,4 +127,22 @@ public class HistoryServicesTest {
         });
     }
 
+    @Test
+    public void shouldUnsuscribeEquipment(){
+        qt().forAll(Generadores.genEquipos()).check(equi ->{
+            try{
+                boolean deBajaUno,deBajaDos;
+                historyService.registarEquipo(equi);
+                deBajaUno = equi.isDe_baja();
+                historyService.darBajaEquipo(idEquipoCont);
+                deBajaDos = historyService.consultaEquipo(idEquipoCont).isDe_baja();
+                idEquipoCont++;
+                return !deBajaUno && deBajaDos;
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
 }
