@@ -32,16 +32,15 @@ public class LaboratorioBean implements Serializable {
     }
 
     public void crearLaboratorio(){
-        //TODO: si estaba un equipo asociado a otro generar novedad de retiro
         Laboratorio laboratorio = new Laboratorio(labNombre,ShiroSecurityBean.getUser(),labDescripcion,(ArrayList<Equipo>)labEquipos);
         Date utilDate = new Date();
         try {
             historyService.registrarLaboratorio(laboratorio);
             int maxLabId = historyService.getIdMaxLaboratorio();
             for (Equipo equipo : labEquipos){
+                Integer labAnterior = historyService.consultarLabAsociadoAEquipo(equipo.getIdEquipo());
                 historyService.asociarEquipoConLaboratorio(maxLabId,equipo.getIdEquipo());
                 historyService.registrarNovedad(new Novedad(null,equipo.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Asociación a laboratorio",ShiroSecurityBean.getUser(),"Se asoció al laboratorio " + labNombre + " el equipo con id: " + equipo.getIdEquipo()));
-                Integer labAnterior = historyService.consultarLabAsociadoAEquipo(equipo.getIdEquipo());
                 if ( labAnterior != null){
                     historyService.registrarNovedad(new Novedad(null,equipo.getIdEquipo(), new java.sql.Date(utilDate.getTime()),"Desasoción de laboratorio",ShiroSecurityBean.getUser(),"Se desasoció del laboratorio " + historyService.consultarLaboratorio(labAnterior).getNombre() + " el equipo con id: " + equipo.getIdEquipo()));
                 }
