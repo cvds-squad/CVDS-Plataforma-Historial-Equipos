@@ -13,8 +13,8 @@
    </resultMap>
    
     <insert parameterType="map" id="registrarLaboratorio" > 
-        INSERT INTO Laboratorios (idLab, nombre, usuario, descripcion)
-            VALUES (#{laboratorio.idLab}, #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion},)
+        INSERT INTO Laboratorios ( nombre, usuario, descripcion)
+            VALUES ( #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion})
     </insert>
     
     <select id="consultarLaboratorio" resultType="Laboratorio">
@@ -22,4 +22,20 @@
         FROM Laboratorios
         WHERE  idLab = #{idLab}
     </select>
+
+    <select id="getMaxIdLaboratorio" resultType="int">
+        SELECT MAX(idLab) FROM laboratorios
+    </select>
+
+    <update id="asociarEquipoConLaboratorio">
+        UPDATE Equipos
+            SET labs = #{idLab}, disponible = FALSE
+            WHERE idEquipo = #{idEquipo}
+    </update>
+
+    <select id="consultarLaboratorios" resultType="Laboratorio">
+        SELECT idLab, nombre, usuario, descripcion
+        FROM Laboratorios
+    </select>
+
 </mapper>

@@ -136,6 +136,21 @@ public class HistoryServiceStub implements HistoryService {
         throw null;
     }
 
+    @Override
+    public int getIdMaxLaboratorio() {
+        return 0;
+    }
+
+    @Override
+    public void asociarEquipoConLaboratorio(int maxLabId, int idEquipo) throws HistoryServiceException {
+
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratorios() throws HistoryServiceException {
+        return null;
+    }
+
     //Poblar
     private void poblar(){
         TipoElemento TE1 = TipoElemento.MOUSE;

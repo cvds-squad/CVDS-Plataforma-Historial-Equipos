@@ -80,4 +80,8 @@ public class ShiroSecurityBean implements Serializable {
 		}
 	}
 
+	public static String getUser(){
+		return (String) SecurityUtils.getSubject().getSession().getAttribute("Correo");
+	}
+
 }

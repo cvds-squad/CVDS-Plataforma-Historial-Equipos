@@ -49,5 +49,10 @@ public interface HistoryService {
     public void registrarLaboratorio(Laboratorio laboratorio) throws HistoryServiceException;
     
     public Laboratorio consultarLaboratorio (int idLab) throws HistoryServiceException;
-    
+
+    int getIdMaxLaboratorio() throws HistoryServiceException;
+
+    void asociarEquipoConLaboratorio(int maxLabId, int idEquipo) throws HistoryServiceException;
+
+    List<Laboratorio> consultarLaboratorios() throws HistoryServiceException;
 }

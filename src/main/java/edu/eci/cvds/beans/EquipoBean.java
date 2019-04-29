@@ -98,7 +98,8 @@ public class EquipoBean implements Serializable {
             }
             historyService.registarEquipo(new Equipo());
 
-            int maxIdElemento = historyService.getIdMaxElemento();
+            Integer maxIdElemento = historyService.getIdMaxElemento();
+            if (maxIdElemento == null) maxIdElemento = 1;
             int maxIdEquipo = historyService.getIdMaxEquipo();
 
             for (Map.Entry<String, Elemento> entry : asociarElementos.entrySet()) {

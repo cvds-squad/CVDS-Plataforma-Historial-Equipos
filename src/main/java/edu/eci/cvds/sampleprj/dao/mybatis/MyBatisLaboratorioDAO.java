@@ -12,6 +12,7 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -40,5 +41,32 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
             throw new PersistenceException("Error al consultar el laboratorio",ex);
         }
     }
-    
+
+    @Override
+    public int getMaxIdLaboratorio() {
+        try{
+            return laboratorioMapper.getMaxIdLaboratorio();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar la maxima id del laboratorio",ex);
+        }
+    }
+
+    @Override
+    public void asociarEquipoConLaboratorio(int maxLabId, int idEquipo) {
+        try{
+            laboratorioMapper.asociarEquipoConLaboratorio(maxLabId,idEquipo);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al asociar equipo con laboratorio",ex);
+        }
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratorios() {
+        try{
+            return laboratorioMapper.consultarLaboratorios();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar los laboratorios");
+        }
+    }
+
 }

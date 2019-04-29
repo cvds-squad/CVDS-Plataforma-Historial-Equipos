@@ -6,6 +6,7 @@
 package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Laboratorio;
+import java.util.List;
 /**
  *
  * @author jcortes
@@ -15,5 +16,10 @@ public interface LaboratorioDAO {
     public void registrarLaboratorio(Laboratorio laboratorio);
     
     public Laboratorio consultarLaboratorio (int idLab);
-    
+
+    int getMaxIdLaboratorio();
+
+    void asociarEquipoConLaboratorio(int maxLabId, int idEquipo);
+
+    List<Laboratorio> consultarLaboratorios();
 }

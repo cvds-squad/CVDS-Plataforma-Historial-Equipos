@@ -255,4 +255,31 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar el laboratorio");
         }
     }
+
+    @Override
+    public int getIdMaxLaboratorio() throws HistoryServiceException {
+        try{
+            return laboratorioDAO.getMaxIdLaboratorio();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar la id maxima de laboratorio");
+        }
+    }
+
+    @Override
+    public void asociarEquipoConLaboratorio(int maxLabId, int idEquipo) throws HistoryServiceException {
+        try{
+            laboratorioDAO.asociarEquipoConLaboratorio(maxLabId,idEquipo);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo asociar el equipo con el laboratorio");
+        }
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratorios() throws HistoryServiceException {
+        try{
+            return laboratorioDAO.consultarLaboratorios();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los laboratorios");
+        }
+    }
 }

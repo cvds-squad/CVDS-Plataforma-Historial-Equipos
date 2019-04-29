@@ -19,7 +19,7 @@ estado varchar(30) not null);
 create table Laboratorios(
 idLab serial primary key,
 nombre varchar(30) not null,
-usuario varchar(30) references Usuarios(correo),
+usuario varchar(100) references Usuarios(correo),
 descripcion varchar(500));
 
 create table Equipos(
