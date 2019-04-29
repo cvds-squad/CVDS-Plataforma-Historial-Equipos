@@ -2,6 +2,10 @@ package edu.eci.cvds.beans;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
+import edu.eci.cvds.samples.services.HistoryService;
+import edu.eci.cvds.samples.services.HistoryServiceException;
+import edu.eci.cvds.samples.services.HistoryServicesFactory;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,10 +13,13 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.Date;
 
 @ManagedBean
 @SessionScoped
 public class NovedadBean implements Serializable {
+
+    private HistoryService historyService;
 
     private Elemento elementoSeleccionado;
 
@@ -26,6 +33,10 @@ public class NovedadBean implements Serializable {
 
     private String equipoNovedadDescripcion;
 
+    public NovedadBean(){
+        historyService = HistoryServicesFactory.getInstance().getHistoryService();
+    }
+
     public Elemento getElementoSeleccionado() {
         return elementoSeleccionado;
     }
@@ -38,12 +49,19 @@ public class NovedadBean implements Serializable {
      * Registra la novedad de un elemento seleccionado de una tabla
      * */
     public void registroNovedadElemento(){
-        if (elementoSeleccionado != null){
-            FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_INFO,"Servicio en construccion","Servicio en construccion"));
-            cleanElemento();
-        }
-        else {
-            FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un elemento", "Seleccione un elemento"));
+        Date utilDate = new Date();
+        try {
+            if (elementoSeleccionado != null) {
+
+                historyService.registrarNovedad(new Novedad(elementoSeleccionado.getIdElemento(), null, new java.sql.Date(utilDate.getTime()), elementoNovedadTitulo, ShiroSecurityBean.getUser(), elementoNovedadDescripcion));
+
+                FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_INFO, "Novedad registrada correctamente", "Novedad registrada correctamente"));
+                cleanElemento();
+            } else {
+                FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un elemento", "Seleccione un elemento"));
+            }
+        }catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage("elemento", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al registrar la novedad", "Error al registrar la novedad"));
         }
     }
 
@@ -51,13 +69,19 @@ public class NovedadBean implements Serializable {
      * Registra la novedad de un equipo seleccionado de una tabla
      * */
     public void registroNovedadEquipo(){
-        System.out.println(equipoSeleccionado + " " +equipoNovedadTitulo + " " + equipoNovedadDescripcion);
-        if (equipoSeleccionado != null){
-            FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_INFO,"Servicio en construccion","Servicio en construccion"));
-            cleanEquipo();
-        }
-        else {
-            FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un equipo", "Seleccione un equipo"));
+        Date utilDate = new Date();
+        try {
+            if (equipoSeleccionado != null) {
+
+                historyService.registrarNovedad(new Novedad(null, equipoSeleccionado.getIdEquipo(), new java.sql.Date(utilDate.getTime()), equipoNovedadTitulo, ShiroSecurityBean.getUser(), equipoNovedadDescripcion));
+
+                FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_INFO, "Novedad registrada correctamente", "Novedad registrada correctamente"));
+                cleanEquipo();
+            } else {
+                FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un equipo", "Seleccione un equipo"));
+            }
+        }catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al registrar la novedad", "Error al registrar la novedad"));
         }
     }
 
