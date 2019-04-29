@@ -114,6 +114,14 @@ public class Elemento implements Serializable {
         this.equipoAsociado = equipoAsociado;
     }
 
+    public boolean isDe_baja() {
+        return de_baja;
+    }
+
+    public void setDe_baja(boolean de_baja) {
+        this.de_baja = de_baja;
+    }
+
     @Override
     public String toString(){
         return marca + ": " +descripcion;

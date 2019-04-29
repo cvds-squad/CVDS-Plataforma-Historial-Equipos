@@ -184,4 +184,12 @@ public class HistoryServiceStub implements HistoryService {
         nuevosElemenRegis.put(-4, Elemento4);
     }   
 
+    @Override
+    public void darBajaElemento(int id) throws HistoryServiceException {
+       if (elementosRegistrados.containsKey(id)){
+           Elemento el = elementosRegistrados.get(id);
+           el.setDe_baja(true);
+       }
+    }
+
 }

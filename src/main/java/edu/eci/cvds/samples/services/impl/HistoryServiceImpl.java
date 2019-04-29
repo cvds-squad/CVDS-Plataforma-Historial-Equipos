@@ -291,4 +291,13 @@ public class HistoryServiceImpl implements HistoryService {
             throw  new HistoryServiceException("No se pudo consultar el laboratorio asociado");
         }
     }
+
+    @Override
+    public void darBajaElemento(int id) throws HistoryServiceException {
+        try{
+            elementoDAO.darDeBajaElem(id);
+        }catch(PersistenceException ex){
+            throw new HistoryServiceException("El elemento ya está de baja."); 
+        }
+    }
 }
