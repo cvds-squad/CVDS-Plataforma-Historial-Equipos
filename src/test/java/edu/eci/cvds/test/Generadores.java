@@ -122,9 +122,9 @@ public class Generadores {
         return source->{
             int idLab = ids().generate(source);
             String nombre = genMarcas().generate(source);
-            String usuario = genMarcas().generate(source);
+            String usuario = "predeterminado";
             String descripcion = genDescripcion().generate(source);
-            return new Laboratorio(idLab, nombre, usuario, descripcion);
+            return new Laboratorio(HistoryServicesTest.idLaboratory, nombre, usuario, descripcion);
         };   
     }
 }

@@ -3,6 +3,7 @@ package edu.eci.cvds.test;
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
@@ -25,6 +26,7 @@ public class HistoryServicesTest {
 
     public static int idElemCont = 1;
     public static int idEquipoCont = 1;
+    public static int idLaboratory = 1;
 
     public HistoryServicesTest(){
         historyService = HistoryServicesFactory.getInstance().getHistoryServiceForTesting();
@@ -165,4 +167,22 @@ public class HistoryServicesTest {
             }
         });
     }
+
+    @Test
+    public void shouldRegisterAndConsultNewLaboratory(){
+        qt().forAll(Generadores.genLaboratorios()).check(laboratorio -> {
+            try {
+                historyService.registrarLaboratorio(laboratorio);
+                Laboratorio laboratorioCompare = historyService.consultarLaboratorio(idLaboratory);
+                idLaboratory++;
+                return laboratorio.getNombre().equals(laboratorioCompare.getNombre()) &&
+                            laboratorio.getDescripcion().equals(laboratorioCompare.getDescripcion()) &&
+                            laboratorio.getUsuario().equals(laboratorioCompare.getUsuario());
+            }catch (HistoryServiceException ex){
+                ex.printStackTrace();
+                return false;
+            }
+        });
+    }
+
 }

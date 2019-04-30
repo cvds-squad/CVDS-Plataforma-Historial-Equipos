@@ -51,3 +51,6 @@ insert into tipoelemento values ('TECLADO','Teclado de pc');
 insert into tipoelemento values ('TORRE','Torre de pc');
 insert into tipoelemento values ('PANTALLA','pantalla de pc');
 insert into tipoelemento values ('MOUSE','Mouse de pc');
+
+insert into rolesUsuario (descripcion,nombre) values ('test admin','test');
+insert into Usuarios (nombre, correo, userrol, contraseña, estado) values ('testname','predeterminado',1,'123','activo');

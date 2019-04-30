@@ -243,7 +243,7 @@ public class HistoryServiceImpl implements HistoryService {
         try{
             laboratorioDAO.registrarLaboratorio(laboratorio);
         }catch (PersistenceException ex){
-            throw new HistoryServiceException("Error al registar novedad");
+            throw new HistoryServiceException("Error al registar laboratorio");
         }
     }
 
