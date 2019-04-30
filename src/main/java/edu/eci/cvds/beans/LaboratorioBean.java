@@ -107,14 +107,32 @@ public class LaboratorioBean implements Serializable {
     public void desasociarEquipos(){
         Date utilDate = new Date();
         if (labDesasociar != null) {
-            for (Equipo equipo : labDesasociarEquipos) {
-                //servicio de desasociar pendiente
+            if (labDesasociarEquipos.size() != 0) {
+                for (Equipo equipo : labDesasociarEquipos) {
+                    //servicio de desasociar pendiente
+                }
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "construccion", "construccion"));
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"construccion","construccion"));
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione por lo menos un equipo","Seleccione por lo menos un equipo"));
+            }
         }
         else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione por lo menos un equipo","Seleccione por lo menos un equipo"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione un laboratorio","Seleccione un laboratorio"));
         }
+    }
+
+    public List<Equipo> consultarEquiposDeLaboratorioDesasociar(){
+        List<Equipo> equipos = null;
+        try{
+
+            if (labDesasociar != null)
+                equipos = historyService.consultarEquiposDeLaboratorio(labDesasociar.getIdLab());
+
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null , new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar los equipos del laboratorio","Error al consultar los equipos del laboratorio"));
+        }
+        return equipos;
     }
 
     private void clean() {

@@ -226,4 +226,9 @@ public class HistoryServiceStub implements HistoryService
         return null;
     }
 
+    @Override
+    public List<Equipo> consultarEquiposDeLaboratorio(int idLab) {
+        return null;
+    }
+
 }

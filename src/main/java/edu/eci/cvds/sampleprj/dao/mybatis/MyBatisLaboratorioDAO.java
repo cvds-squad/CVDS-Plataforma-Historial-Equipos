@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper;
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import javax.persistence.PersistenceException;
@@ -66,6 +67,15 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
             return laboratorioMapper.consultarLaboratorios();
         }catch (PersistenceException ex){
             throw new PersistenceException("Error al consultar los laboratorios");
+        }
+    }
+
+    @Override
+    public List<Equipo> consultarEquiposDeLaboratorio(int idLab) {
+        try{
+            return laboratorioMapper.consultarEquiposDeLaboratorio(idLab);
+        }catch (PersistenceException e){
+            throw new PersistenceException("Error al consultar los equipos del laboratorio",e);
         }
     }
 

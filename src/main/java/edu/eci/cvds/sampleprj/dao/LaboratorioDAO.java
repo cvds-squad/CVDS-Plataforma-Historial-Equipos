@@ -5,6 +5,7 @@
  */
 package edu.eci.cvds.sampleprj.dao;
 
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import java.util.List;
 /**
@@ -22,4 +23,6 @@ public interface LaboratorioDAO {
     void asociarEquipoConLaboratorio(int maxLabId, int idEquipo);
 
     List<Laboratorio> consultarLaboratorios();
+
+    List<Equipo> consultarEquiposDeLaboratorio(int idLab);
 }

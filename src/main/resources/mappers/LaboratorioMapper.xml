@@ -38,4 +38,24 @@
         FROM Laboratorios
     </select>
 
+    <select id="consultarEquiposDeLaboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult">
+        select idequipo,labs,torreid,torremarca, torredesc,pantallaid,pantallamarca, pantalladesc,tecladoid,tecladomarca, tecladodesc,mouseid ,mousemarca, mousedesc, de_baja
+        from (select idequipo,idelemento as torreid, marca as torremarca, descripcion as torredesc, equipos.de_baja as de_baja,labs
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TORRE') as ttorre
+            join
+            (select idequipo,idelemento as pantallaid, marca as pantallamarca, descripcion as pantalladesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='PANTALLA') as ppantalla using (idequipo)
+            join
+            (select idequipo, idelemento as tecladoid,marca as tecladomarca, descripcion as tecladodesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TECLADO') as tteclado using (idequipo)
+            join
+            (select idequipo,idelemento as mouseid ,marca as mousemarca, descripcion as mousedesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='MOUSE') as mmouse using (idequipo)
+                where labs = #{idLab}
+    </select>
+
 </mapper>
