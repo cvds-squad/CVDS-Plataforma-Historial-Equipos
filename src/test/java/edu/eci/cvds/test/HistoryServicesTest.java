@@ -185,4 +185,22 @@ public class HistoryServicesTest {
         });
     }
 
+    @Test
+    public void shouldAffiliateEquipmentToLaboratoryAndConsultAffiliation(){
+        qt().forAll(Generadores.genLaboratorios(),Generadores.genEquipos()).check(((laboratorio, equipo) -> {
+            try{
+                historyService.registarEquipo(equipo);
+                historyService.registrarLaboratorio(laboratorio);
+                Integer labDeEquipo1 = historyService.consultarLabAsociadoAEquipo(idEquipoCont);
+                historyService.asociarEquipoConLaboratorio(idLaboratory,idEquipoCont);
+                Integer labDeEquipo2 = historyService.consultarLabAsociadoAEquipo(idEquipoCont);
+                idLaboratory++;idEquipoCont++;
+                return labDeEquipo1 == null && labDeEquipo2 == idLaboratory-1;
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        }));
+    }
+
 }
