@@ -166,10 +166,11 @@ public class EquipoBean implements Serializable {
                 return;
             }
         }
-
+        Date utilDate = new Date();
         for (Elemento elemento : elementos){
             try{
                 historyService.asociarElementoConEquipo(equipo.getIdEquipo(),elemento.getIdElemento());
+                historyService.registrarNovedad(new Novedad(elemento.getIdElemento(),equipo.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Asociacion de elemento",ShiroSecurityBean.getUser(),"Se asocio al equipo con id "+ equipo.getIdEquipo() + " el elemento " + elemento ));
             }catch (HistoryServiceException e){
                 FacesContext.getCurrentInstance().addMessage("msgsElemento",new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al asociar elemento","Error al asociar elemento"));
                 return;
