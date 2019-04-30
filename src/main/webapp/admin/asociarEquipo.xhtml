@@ -14,7 +14,7 @@
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
           crossorigin="anonymous" />
 
-    <title>Registro Laboratorio</title>
+    <title>Asociar Equipos</title>
 
 </h:head>
 <h:body>
@@ -34,24 +34,47 @@
 
         <div class="container">
             <h:form id="regLab">
-                <p:panel header="Registro de Laboratorio" style="text-align: center">
-                    <p:messages id="msgsLab" closable="true"/>
-                    <center>
-                        <p:panelGrid columns="2">
-                            <p:outputLabel value="Nombre: "/>
-                            <p:inputText value="#{laboratorioBean.labNombre}" required="true"/>
+                <br/>
+                <p:panel header="ASOCIAR EQUIPOS" style="text-align: center">
+                    <p:messages id="msgsAso" closable="true"/>
+                    <h:outputText value="Seleccione un laboratorio para asociar equipos"/>
+                    <p:fieldset legend="Laboratorios">
+                        <p:dataTable id="labs" value="#{laboratorioBean.consultarLaboratorios()}" var="lab"
+                                     selectionMode="single"
+                                     rowKey="#{lab.idLab}" selection="#{laboratorioBean.labAsociar}"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{lab.idLab}"/>
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{lab.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{lab.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                <h:outputText value="#{lab.usuario}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <f:facet name="footer">
+                        <center>
+                            <p:commandButton icon="fas fa-check" value="Seleccionar" update="@form" oncomplete="PF('equipChooser').show()"/>
+                        </center>
+                    </f:facet>
+                </p:panel>
 
-                            <p:outputLabel value="Descripcion: "/>
-                            <p:inputTextarea rows="4" value="#{laboratorioBean.labDescripcion}" required="true"/>
-                        </p:panelGrid>
-                    </center>
-                    <br/>
+                <p:dialog widgetVar="equipChooser" showEffect="fade" hideEffect="fade" header="Equipos del laboratorio" modal="true" width="1000">
                     <p:fieldset legend="Asociar equipos" id="equipos">
                         <p:dataTable id="elements" value="#{equipoBean.consultarEquiposNoDeBaja()}" var="equi"
-                                     selection="#{laboratorioBean.labEquipos}"
+                                     selection="#{laboratorioBean.labAsociarEquipos}"
                                      rowKey="#{equi.idEquipo}"
                                      rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10,15">
+                            <f:facet name="header">
+                                Equipos disponibles
+                            </f:facet>
                             <p:column selectionMode="multiple" style="width:50px;text-align:center"/>
                             <p:column headerText="Id" style="text-align: center">
                                 <h:outputText value="#{equi.idEquipo}" />
@@ -71,42 +94,25 @@
                             <p:column headerText="Mouse">
                                 <h:outputText value="#{equi.mouse}"/>
                             </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="AsociarBtn"
+                                                 value="Asociar"
+                                                 icon="fas fa-link"
+                                                 update="@form"
+                                                 action="#{laboratorioBean.asociarEquipos()}"
+                                                 oncomplete="setTimeout(function(){$('[id$=msgsAso]').hide(1000)},3000);">
+                                    <p:confirm header="Confirmación" message="¿Asociar estos equipos?" icon="fas fa-exclamation-triangle"/>
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <center>
+                                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" onclick="PF('equipChooser').hide();"/>
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+                                    </center>
+                                </p:confirmDialog>
+                            </f:facet>
                         </p:dataTable>
                     </p:fieldset>
-                    <f:facet name="footer">
-                        <center>
-                            <p:commandButton icon="fa fa-database"
-                                             update="@form"
-                                             value="Crear laboratorio"
-                                             actionListener="#{laboratorioBean.crearLaboratorio()}"
-                                             oncomplete="setTimeout(function(){$('[id$=msgsLab]').hide(1000)},3000);"
-                            />
-                        </center>
-                    </f:facet>
-                </p:panel>
-                <br/>
-                <p:panel header="Laboratorios Registrados" style="text-align: center">
-                    <p:fieldset legend="Laboratorios">
-                        <p:dataTable id="labs" value="#{laboratorioBean.consultarLaboratorios()}" var="lab"
-                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="5,10,15">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{lab.idLab}"/>
-                            </p:column>
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{lab.nombre}"/>
-                            </p:column>
-                            <p:column headerText="Descripcion">
-                                <h:outputText value="#{lab.descripcion}"/>
-                            </p:column>
-                            <p:column headerText="Usuario">
-                                <h:outputText value="#{lab.usuario}"/>
-                            </p:column>
-                        </p:dataTable>
-
-                    </p:fieldset>
-                </p:panel>
-
+                </p:dialog>
             </h:form>
         </div>
 
@@ -158,13 +164,7 @@
         </div>
     </footer>
 
-    <!-- jQuery library -->
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'/>
-    <!-- Latest compiled JavaScript -->
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
+
 
 </h:body>
 </html>

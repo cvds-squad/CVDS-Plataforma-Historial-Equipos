@@ -27,8 +27,16 @@ public class LaboratorioBean implements Serializable {
     private String labDescripcion;
     private List<Equipo> labEquipos;
 
+    private Laboratorio labDesasociar;
+    private Laboratorio labAsociar;
+    private List<Equipo> labAsociarEquipos;
+    private List<Equipo> labDesasociarEquipos;
+
     public LaboratorioBean(){
+
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
+        labAsociarEquipos = new ArrayList<>();
+        labDesasociarEquipos = new ArrayList<>();
     }
 
     public void crearLaboratorio(){
@@ -56,11 +64,57 @@ public class LaboratorioBean implements Serializable {
     public List<Laboratorio> consultarLaboratorios(){
         List<Laboratorio> laboratorios = null;
         try{
-           laboratorios = historyService.consultarLaboratorios();
+            laboratorios = historyService.consultarLaboratorios();
         }catch (HistoryServiceException ex){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo consultar laboratorios","No se pudo consultar laboratorios"));
         }
         return laboratorios;
+    }
+
+    /**
+     * Asocia los equipos seleccionados al laboratorio seleccionado
+     **/
+    public void asociarEquipos(){
+        Date utilDate = new Date();
+        try{
+            if (labAsociar != null) {
+                if (labAsociarEquipos.size() != 0) {
+                    for (Equipo equipo : labAsociarEquipos) {
+                        Integer labAnterior = historyService.consultarLabAsociadoAEquipo(equipo.getIdEquipo());
+                        historyService.registrarNovedad(new Novedad(null, equipo.getIdEquipo(), new java.sql.Date(utilDate.getTime()), "Asociación a laboratorio", ShiroSecurityBean.getUser(), "Se asoció al laboratorio " + labAsociar.getNombre() + " el equipo con id: " + equipo.getIdEquipo()));
+                        if (labAnterior != null) {
+                            historyService.registrarNovedad(new Novedad(null, equipo.getIdEquipo(), new java.sql.Date(utilDate.getTime()), "Desasoción de laboratorio", ShiroSecurityBean.getUser(), "Se desasoció del laboratorio " + historyService.consultarLaboratorio(labAnterior).getNombre() + " el equipo con id: " + equipo.getIdEquipo()));
+                        }
+                        historyService.asociarEquipoConLaboratorio(labAsociar.getIdLab(), equipo.getIdEquipo());
+                    }
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipos asociados correctamente", "Equipos asociados correctamente"));
+                }
+                else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione por lo menos un equipo","Seleccione por lo menos un equipo"));
+                }
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione un laboratorio","Seleccione un laboratorio"));
+            }
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+    }
+
+    /**
+     * Desasocia los equipos seleccionados del laboratorio seleccionado
+     **/
+    public void desasociarEquipos(){
+        Date utilDate = new Date();
+        if (labDesasociar != null) {
+            for (Equipo equipo : labDesasociarEquipos) {
+                //servicio de desasociar pendiente
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"construccion","construccion"));
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione por lo menos un equipo","Seleccione por lo menos un equipo"));
+        }
     }
 
     private void clean() {
@@ -99,5 +153,37 @@ public class LaboratorioBean implements Serializable {
 
     public void setLabEquipos(List<Equipo> labEquipos) {
         this.labEquipos = labEquipos;
+    }
+
+    public Laboratorio getLabDesasociar() {
+        return labDesasociar;
+    }
+
+    public void setLabDesasociar(Laboratorio labDesasociar) {
+        this.labDesasociar = labDesasociar;
+    }
+
+    public Laboratorio getLabAsociar() {
+        return labAsociar;
+    }
+
+    public void setLabAsociar(Laboratorio labAsociar) {
+        this.labAsociar = labAsociar;
+    }
+
+    public List<Equipo> getLabAsociarEquipos() {
+        return labAsociarEquipos;
+    }
+
+    public void setLabAsociarEquipos(List<Equipo> labAsociarEquipos) {
+        this.labAsociarEquipos = labAsociarEquipos;
+    }
+
+    public List<Equipo> getLabDesasociarEquipos() {
+        return labDesasociarEquipos;
+    }
+
+    public void setLabDesasociarEquipos(List<Equipo> labDesasociarEquipos) {
+        this.labDesasociarEquipos = labDesasociarEquipos;
     }
 }
