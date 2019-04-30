@@ -8,17 +8,21 @@ package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 import edu.eci.cvds.samples.entities.Novedad;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  *
  * @author jcortes
  */
 public interface NovedadMapper {
     
-    public void registrarNovedad(@Param("novedad") Novedad novedad);
+    void registrarNovedad(@Param("novedad") Novedad novedad);
     
-    public Novedad consultarNovedadId (@Param("idNovedad") int idNovedad);
+    Novedad consultarNovedadId (@Param("idNovedad") int idNovedad);
     
-    public Novedad consultarNovedadEquipo (@Param("idEquipo") int idEquipo);
+    Novedad consultarNovedadEquipo (@Param("idEquipo") int idEquipo);
     
-    public Novedad consultarNovedadElementoEquipo (@Param("idElemento") int idElemento, @Param("idEquipo") int idEquipo );
+    Novedad consultarNovedadElementoEquipo (@Param("idElemento") int idElemento, @Param("idEquipo") int idEquipo );
+
+    List<Novedad> consultarNovedades();
 }

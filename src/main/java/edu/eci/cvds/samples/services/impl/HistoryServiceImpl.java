@@ -345,4 +345,13 @@ public class HistoryServiceImpl implements HistoryService {
             throw  new HistoryServiceException("No se pudo consultar los equipos");
         }
     }
+
+    @Override
+    public List<Novedad> consultarNovedades() throws HistoryServiceException {
+        try{
+            return novedadDAO.consultarNovedades();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las novedades",ex);
+        }
+    }
 }

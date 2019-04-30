@@ -22,7 +22,30 @@
         <br/><br/>
         <div class="container">
             <p:fieldset id="novedadesTabla" legend="Novedades">
-                <!-- dataTable con el bean de Novedades -->
+                <p:messages for="novedadesTabla"/>
+                <p:dataTable id="novs" var="nov"
+                             value="#{novedadBean.consultarNovedades()}"
+                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="ID Elemento">
+                        <h:outputText value="#{nov.elementoAsociado}"/>
+                    </p:column>
+                    <p:column headerText="ID Equipo">
+                        <h:outputText value="#{nov.equipoAsociado}"/>
+                    </p:column>
+                    <p:column headerText="Fecha">
+                        <h:outputText value="#{nov.fecha}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{nov.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{nov.detalle}"/>
+                    </p:column>
+                    <p:column headerText="Responsable">
+                        <h:outputText value="#{nov.responsable}"/>
+                    </p:column>
+                </p:dataTable>
             </p:fieldset>
         </div>
 

@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper;
 import edu.eci.cvds.samples.entities.Novedad;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -54,6 +55,15 @@ public class MyBatisNovedadDAO implements NovedadDAO {
             return novedadMapper.consultarNovedadElementoEquipo(idElemento, idEquipo);
         }catch (PersistenceException ex){
             throw new PersistenceException("Error al consultar novedad",ex);
+        }
+    }
+
+    @Override
+    public List<Novedad> consultarNovedades() throws PersistenceException {
+        try{
+            return novedadMapper.consultarNovedades();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar novedades",ex);
         }
     }
 }

@@ -221,4 +221,9 @@ public class HistoryServiceStub implements HistoryService
         return null;
     }
 
+    @Override
+    public List<Novedad> consultarNovedades() throws HistoryServiceException {
+        return null;
+    }
+
 }

@@ -21,7 +21,7 @@
     </insert>
     
     <select id="consultarNovedadId" resultType="Novedad">
-        SELECT equipoAsociado, elementoAsociado, fecha, titulo, responsable, detalle    
+        SELECT elementoAsociado, equipoAsociado, fecha, titulo, responsable, detalle
         FROM Novedad
         WHERE  idNovedad = #{idNovedad}
     </select>
@@ -36,6 +36,11 @@
         SELECT  idNovedad, fecha, titulo, responsable, detalle    
         FROM Novedad
         WHERE  elementoAsociado = #{idElemento}  AND equipoAsociado = #{idEquipo}
+    </select>
+
+    <select id="consultarNovedades" resultType="Novedad">
+        SELECT elementoAsociado, equipoAsociado, fecha, titulo, responsable, detalle
+        FROM Novedad
     </select>
 
 </mapper>

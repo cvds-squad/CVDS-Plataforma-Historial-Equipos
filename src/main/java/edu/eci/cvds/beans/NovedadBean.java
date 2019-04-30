@@ -11,10 +11,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import java.awt.*;
+import javax.faces.context.FacesContext;;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
@@ -88,6 +88,20 @@ public class NovedadBean implements Serializable {
         }catch (HistoryServiceException e) {
             FacesContext.getCurrentInstance().addMessage("equipo", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al registrar la novedad", "Error al registrar la novedad"));
         }
+    }
+
+    /**
+     * Consulta todas las novedades
+     * @return lista de todas las novedades
+     */
+    public List<Novedad> consultarNovedades(){
+        List<Novedad> novedades = null;
+        try{
+            novedades = historyService.consultarNovedades();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage("novedadesTabla", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar las novedades","Error al consultar las novedades"));
+        }
+        return novedades;
     }
 
     private void cleanEquipo() {
