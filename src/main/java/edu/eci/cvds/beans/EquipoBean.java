@@ -272,27 +272,39 @@ public class EquipoBean implements Serializable {
                 try {
                     historyService.darBajaEquipo(equipoDarBaja.getIdEquipo());
                     historyService.registrarNovedad(new Novedad(null, equipoDarBaja.getIdEquipo(), new java.sql.Date(utilDate.getTime()), "Dar de baja equipo", ShiroSecurityBean.getUser(), "Se dio de baja al equipo con id " + equipoDarBaja.getIdEquipo()));
+                    Elemento torre = equipoDarBaja.getTorre();
+                    Elemento pantalla = equipoDarBaja.getPantalla();
+                    Elemento teclado = equipoDarBaja.getTeclado();
+                    Elemento mouse = equipoDarBaja.getMouse();
                     if (darBajaTorre && !quitarAsociacionTorre) {
-                        historyService.darBajaElemento(equipoDarBaja.getTorre().getIdElemento());
+                        historyService.darBajaElemento(torre.getIdElemento());
+                        historyService.registrarNovedad(new Novedad(torre.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Dar de baja elemento",ShiroSecurityBean.getUser(),"Se dio de baja al elemento " + torre));
                     } else {
+                        historyService.registrarNovedad(new Novedad(torre.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Desasociar elemento",ShiroSecurityBean.getUser(),"Se desasocio el elemento " + torre + " del equipo con id " + equipoDarBaja.getIdEquipo()));
                         historyService.quitarAsociacionConEquipo(equipoDarBaja.getTorre().getIdElemento());
                     }
 
                     if (darBajaPantalla && !quitarAsociacionPantalla) {
                         historyService.darBajaElemento(equipoDarBaja.getPantalla().getIdElemento());
+                        historyService.registrarNovedad(new Novedad(pantalla.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Dar de baja elemento",ShiroSecurityBean.getUser(),"Se dio de baja al elemento " + pantalla));
                     } else {
+                        historyService.registrarNovedad(new Novedad(pantalla.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Desasociar elemento",ShiroSecurityBean.getUser(),"Se desasocio el elemento " + pantalla + " del equipo con id " + equipoDarBaja.getIdEquipo()));
                         historyService.quitarAsociacionConEquipo(equipoDarBaja.getPantalla().getIdElemento());
                     }
 
                     if (darBajaTeclado && !quitarAsociacionTeclado) {
+                        historyService.registrarNovedad(new Novedad(teclado.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Dar de baja elemento",ShiroSecurityBean.getUser(),"Se dio de baja al elemento " + teclado));
                         historyService.darBajaElemento(equipoDarBaja.getTeclado().getIdElemento());
                     } else {
+                        historyService.registrarNovedad(new Novedad(teclado.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Desasociar elemento",ShiroSecurityBean.getUser(),"Se desasocio el elemento " + teclado + " del equipo con id " + equipoDarBaja.getIdEquipo()));
                         historyService.quitarAsociacionConEquipo(equipoDarBaja.getTeclado().getIdElemento());
                     }
 
                     if (darBajaMouse && !quitarAsociacionMouse) {
+                        historyService.registrarNovedad(new Novedad(mouse.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Dar de baja elemento",ShiroSecurityBean.getUser(),"Se dio de baja al elemento " + mouse));
                         historyService.darBajaElemento(equipoDarBaja.getMouse().getIdElemento());
                     } else {
+                        historyService.registrarNovedad(new Novedad(mouse.getIdElemento(),equipoDarBaja.getIdEquipo(),new java.sql.Date(utilDate.getTime()),"Desasociar elemento",ShiroSecurityBean.getUser(),"Se desasocio el elemento " + mouse + " del equipo con id " + equipoDarBaja.getIdEquipo()));
                         historyService.quitarAsociacionConEquipo(equipoDarBaja.getMouse().getIdElemento());
                     }
                     FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipo dado de baja correctamente", "Equipo dado de baja correctamente"));
