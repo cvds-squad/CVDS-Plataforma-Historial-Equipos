@@ -40,4 +40,6 @@ public interface ElementoDAO {
     List<Elemento> consultarElementosNoAsociados();
 
     List<Elemento> consultarElementosDadosDeBaja();
+
+    void quitarAsociacionConEquipo(int idElemento);
 }

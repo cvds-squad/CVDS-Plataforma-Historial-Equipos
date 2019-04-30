@@ -2,18 +2,24 @@ package edu.eci.cvds.beans;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
 
 @ManagedBean(name="equipoBean")
 @SessionScoped
@@ -82,6 +88,20 @@ public class EquipoBean implements Serializable {
             equipos = historyService.consultarEquipos();
         } catch (HistoryServiceException e) {
             e.printStackTrace();
+        }
+        return equipos;
+    }
+
+    /**
+     * Consulta los equipos que no estan de baja
+     * @return lista de equipos no dados de baja
+     */
+    public List<Equipo> consultarEquiposNoDeBaja(){
+        List<Equipo> equipos = null;
+        try{
+            equipos = historyService.consultarEquiposNoDeBaja();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage("registroEquipo", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar equipos","Error al consultar equipos"));
         }
         return equipos;
     }
@@ -242,17 +262,46 @@ public class EquipoBean implements Serializable {
         }
     }
 
-    public void darBajaEquipo(){
-        if (equipoDarBaja != null){
+    public void darBajaEquipo() {
+        Date utilDate = new Date();
+        if (equipoDarBaja != null) {
             if (!darBajaMouse && !darBajaTeclado && !darBajaPantalla && !darBajaTorre &&
-                    !quitarAsociacionMouse && !quitarAsociacionTeclado && !quitarAsociacionTorre && !quitarAsociacionPantalla){
-                FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_WARN,"Debe seleccionar los estados de los elementos","Debe seleccionar los estados de los elementos"));
-            }else{
-                FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_INFO,"Servicio en construccion","Servicio en construccion"));
-                resetBooleans();
+                    !quitarAsociacionMouse && !quitarAsociacionTeclado && !quitarAsociacionTorre && !quitarAsociacionPantalla) {
+                FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_WARN, "Debe seleccionar los estados de los elementos", "Debe seleccionar los estados de los elementos"));
+            } else {
+                try {
+                    historyService.darBajaEquipo(equipoDarBaja.getIdEquipo());
+                    historyService.registrarNovedad(new Novedad(null, equipoDarBaja.getIdEquipo(), new java.sql.Date(utilDate.getTime()), "Dar de baja equipo", ShiroSecurityBean.getUser(), "Se dio de baja al equipo con id " + equipoDarBaja.getIdEquipo()));
+                    if (darBajaTorre && !quitarAsociacionTorre) {
+                        historyService.darBajaElemento(equipoDarBaja.getTorre().getIdElemento());
+                    } else {
+                        historyService.quitarAsociacionConEquipo(equipoDarBaja.getTorre().getIdElemento());
+                    }
+
+                    if (darBajaPantalla && !quitarAsociacionPantalla) {
+                        historyService.darBajaElemento(equipoDarBaja.getPantalla().getIdElemento());
+                    } else {
+                        historyService.quitarAsociacionConEquipo(equipoDarBaja.getPantalla().getIdElemento());
+                    }
+
+                    if (darBajaTeclado && !quitarAsociacionTeclado) {
+                        historyService.darBajaElemento(equipoDarBaja.getTeclado().getIdElemento());
+                    } else {
+                        historyService.quitarAsociacionConEquipo(equipoDarBaja.getTeclado().getIdElemento());
+                    }
+
+                    if (darBajaMouse && !quitarAsociacionMouse) {
+                        historyService.darBajaElemento(equipoDarBaja.getMouse().getIdElemento());
+                    } else {
+                        historyService.quitarAsociacionConEquipo(equipoDarBaja.getMouse().getIdElemento());
+                    }
+                    FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipo dado de baja correctamente", "Equipo dado de baja correctamente"));
+                    resetBooleans();
+                } catch (HistoryServiceException e) {
+                    FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+                }
             }
-        }
-        else {
+        }else{
             FacesContext.getCurrentInstance().addMessage("equipoDarBaja", new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un equipo", "Seleccione un equipo"));
         }
     }

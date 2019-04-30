@@ -134,4 +134,13 @@ public class MyBatisElementoDAO  implements ElementoDAO{
             throw new PersistenceException("No se pudo consultar elementos dados de baja");
         }
     }
+
+    @Override
+    public void quitarAsociacionConEquipo(int idElemento) {
+        try{
+            elementoMapper.quitarAsociacionConEquipo(idElemento);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo desasociar el elemento del equipo");
+        }
+    }
 }

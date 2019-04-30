@@ -22,38 +22,62 @@
     </update>
 
     <select id="consultarEquipos" resultMap="EquipoResult">
-        select idequipo,torremarca, torredesc,pantallamarca, pantalladesc,tecladomarca, tecladodesc, mousemarca, mousedesc, de_baja
-        from (select idequipo, marca as torremarca, descripcion as torredesc, equipos.de_baja as de_baja
+        select idequipo,torreid,torremarca, torredesc,pantallaid,pantallamarca, pantalladesc,tecladoid,tecladomarca, tecladodesc,mouseid ,mousemarca, mousedesc, de_baja
+        from (select idequipo,idelemento as torreid, marca as torremarca, descripcion as torredesc, equipos.de_baja as de_baja
                 from elementos join equipos on idequipo=eqps
                 where tipelement='TORRE') as ttorre
             join
-            (select idequipo, marca as pantallamarca, descripcion as pantalladesc
+            (select idequipo,idelemento as pantallaid, marca as pantallamarca, descripcion as pantalladesc
                 from elementos join equipos on idequipo=eqps
                 where tipelement='PANTALLA') as ppantalla using (idequipo)
             join
-            (select idequipo, marca as tecladomarca, descripcion as tecladodesc
+            (select idequipo, idelemento as tecladoid,marca as tecladomarca, descripcion as tecladodesc
                 from elementos join equipos on idequipo=eqps
                 where tipelement='TECLADO') as tteclado using (idequipo)
             join
-            (select idequipo, marca as mousemarca, descripcion as mousedesc
+            (select idequipo,idelemento as mouseid ,marca as mousemarca, descripcion as mousedesc
                 from elementos join equipos on idequipo=eqps
                 where tipelement='MOUSE') as mmouse using (idequipo)
 
+    </select>
+
+    <select id="consultarEquiposNoDeBaja" resultMap="EquipoResult">
+        select idequipo,torreid,torremarca, torredesc,pantallaid,pantallamarca, pantalladesc,tecladoid,tecladomarca, tecladodesc,mouseid ,mousemarca, mousedesc, de_baja
+        from (select idequipo,idelemento as torreid, marca as torremarca, descripcion as torredesc, equipos.de_baja as de_baja
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TORRE') as ttorre
+            join
+            (select idequipo,idelemento as pantallaid, marca as pantallamarca, descripcion as pantalladesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='PANTALLA') as ppantalla using (idequipo)
+            join
+            (select idequipo, idelemento as tecladoid,marca as tecladomarca, descripcion as tecladodesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='TECLADO') as tteclado using (idequipo)
+            join
+            (select idequipo,idelemento as mouseid ,marca as mousemarca, descripcion as mousedesc
+                from elementos join equipos on idequipo=eqps
+                where tipelement='MOUSE') as mmouse using (idequipo)
+              where de_baja = false;
     </select>
 
     <resultMap id="EquipoResult" type="Equipo">
         <id property="idEquipo" column="idequipo"/>
         <result property="torre.descripcion" column="torredesc"/>
         <result property="torre.marca" column="torremarca"/>
+        <result property="torre.idElemento" column="torreid"/>
 
         <result property="pantalla.marca" column="pantallamarca"/>
         <result property="pantalla.descripcion" column="pantalladesc"/>
+        <result property="pantalla.idElemento" column="pantallaid"/>
 
         <result property="teclado.marca" column="tecladomarca"/>
         <result property="teclado.descripcion" column="tecladodesc"/>
+        <result property="teclado.idElemento" column="tecladoid"/>
 
         <result property="mouse.marca" column="mousemarca"/>
         <result property="mouse.descripcion" column="mousedesc"/>
+        <result property="mouse.idElemento" column="mouseid"/>
 
         <result property="de_baja" column="de_baja"/>
     </resultMap>

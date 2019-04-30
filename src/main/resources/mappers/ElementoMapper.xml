@@ -55,7 +55,7 @@
     <update id = "setDarDeBaja">
         UPDATE Elementos set 
             de_baja = true
-        where eqps is null and idElemento = #{eid}  
+            where (eqps is null or (select de_baja from equipos where idequipo = eqps)) and idElemento = #{eid}
     </update>
 
     <select id="consultarElementosNoAsociados" resultMap="ElementoResult">
@@ -67,6 +67,12 @@
         SELECT idElemento,eqps,tipelement,marca,Descripcion,disponible,de_baja FROM Elementos
             WHERE de_baja
     </select>
+
+    <update id="quitarAsociacionConEquipo">
+        UPDATE elementos
+            SET eqps = null
+            WHERE idElemento = #{eid}
+    </update>
 
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>

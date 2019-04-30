@@ -10,6 +10,8 @@ import edu.eci.cvds.samples.services.HistoryServicesFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.quicktheories.QuickTheory.qt;
@@ -145,4 +147,22 @@ public class HistoryServicesTest {
         });
     }
 
+    @Test
+    public void shouldEraseAffiliationoOfElementToEquipment(){
+        qt().forAll(Generadores.genEquipos(),Generadores.genElementos()).check((equipo,elem) -> {
+            try{
+                historyService.registarEquipo(equipo);
+                historyService.registrarElemento(elem);
+                historyService.asociarElementoConEquipo(idEquipoCont,idElemCont);
+                Integer eqps1 = historyService.consultarElemento(idElemCont).getEquipoAsociado();
+                historyService.quitarAsociacionConEquipo(idElemCont);
+                Integer eqps2 = historyService.consultarElemento(idElemCont).getEquipoAsociado();
+                idEquipoCont++;idElemCont++;
+                return eqps1 > 0 && eqps2 == null;
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
 }

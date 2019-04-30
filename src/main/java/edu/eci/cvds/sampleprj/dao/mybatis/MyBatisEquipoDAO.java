@@ -83,4 +83,13 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
             throw new PersistenceException("Error al dar de baja al equipo");
         }
     }
+
+    @Override
+    public List<Equipo> consultarEquiposNoDeBaja() {
+        try{
+            return equipoMapper.consultarEquiposNoDeBaja();
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al consultar los equipos");
+        }
+    }
 }

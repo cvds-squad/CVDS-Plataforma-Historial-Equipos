@@ -28,7 +28,7 @@
                     <p:messages id="msgsDarBajaEquipo" closable="true" for="equipoDarBaja"/>
                     <p:fieldset id="equiposBajar" legend="Equipos para dar de baja">
                         <p:dataTable id="equipos" var="equi"
-                                     value="#{equipoBean.consultarEquipos()}" selectionMode="single"
+                                     value="#{equipoBean.consultarEquiposNoDeBaja()}" selectionMode="single"
                                      rowKey="#{equi.idEquipo}" selection="#{equipoBean.equipoDarBaja}"
                                      rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10,15">

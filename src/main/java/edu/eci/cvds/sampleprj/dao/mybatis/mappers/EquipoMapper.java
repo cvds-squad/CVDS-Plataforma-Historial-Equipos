@@ -30,4 +30,6 @@ public interface EquipoMapper {
     Integer consultarLabAsociado(@Param("idEquipo") int idEquipo);
     
     void setDarDeBaja(@Param("idEquipo") int idEquipo);
+
+    List<Equipo> consultarEquiposNoDeBaja();
 }

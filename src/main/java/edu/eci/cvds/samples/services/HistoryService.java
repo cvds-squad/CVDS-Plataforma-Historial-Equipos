@@ -65,4 +65,8 @@ public interface HistoryService {
     List<Elemento> consultarElementosNoAsociados() throws HistoryServiceException;
 
     List<Elemento> consultarElementosDadosDeBaja() throws HistoryServiceException;
+
+    void quitarAsociacionConEquipo(int idElemento) throws HistoryServiceException;
+
+    List<Equipo> consultarEquiposNoDeBaja() throws HistoryServiceException;
 }

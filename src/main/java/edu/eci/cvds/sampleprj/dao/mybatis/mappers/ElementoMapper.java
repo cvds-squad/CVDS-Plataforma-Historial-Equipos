@@ -40,4 +40,6 @@ public interface ElementoMapper {
     List<Elemento> consultarElementosNoAsociados();
 
     List<Elemento> consultarElementosDadosDeBaja();
+
+    void quitarAsociacionConEquipo(@Param("eid")int idElemento);
 }

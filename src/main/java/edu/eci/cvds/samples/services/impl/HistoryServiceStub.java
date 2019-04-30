@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HistoryServiceStub implements HistoryService {
+public class HistoryServiceStub implements HistoryService
+{
     
 
     private final Map<Integer,Elemento> elementosRegistrados;
@@ -207,6 +208,16 @@ public class HistoryServiceStub implements HistoryService {
 
     @Override
     public List<Elemento> consultarElementosDadosDeBaja() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public void quitarAsociacionConEquipo(int idElemento) throws HistoryServiceException {
+
+    }
+
+    @Override
+    public List<Equipo> consultarEquiposNoDeBaja() throws HistoryServiceException {
         return null;
     }
 
