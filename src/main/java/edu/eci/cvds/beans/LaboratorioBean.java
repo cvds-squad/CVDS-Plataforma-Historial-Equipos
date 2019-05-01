@@ -106,19 +106,21 @@ public class LaboratorioBean implements Serializable {
      **/
     public void desasociarEquipos(){
         Date utilDate = new Date();
-        if (labDesasociar != null) {
-            if (labDesasociarEquipos.size() != 0) {
-                for (Equipo equipo : labDesasociarEquipos) {
-                    //servicio de desasociar pendiente
+        try {
+            if (labDesasociar != null) {
+                if (labDesasociarEquipos.size() != 0) {
+                    for (Equipo equipo : labDesasociarEquipos) {
+                        historyService.desasociarEquipoDelLab(equipo.getIdEquipo());
+                    }
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipos desasociados correctamente", "Equipos desasociados correctamente"));
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione por lo menos un equipo", "Seleccione por lo menos un equipo"));
                 }
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "construccion", "construccion"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione un laboratorio", "Seleccione un laboratorio"));
             }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione por lo menos un equipo","Seleccione por lo menos un equipo"));
-            }
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione un laboratorio","Seleccione un laboratorio"));
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
         }
     }
 

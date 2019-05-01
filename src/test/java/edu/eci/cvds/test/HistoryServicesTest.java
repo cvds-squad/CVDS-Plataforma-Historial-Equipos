@@ -203,4 +203,23 @@ public class HistoryServicesTest {
         }));
     }
 
+    @Test
+    public void shouldUnsuscribeEquimentOfLaboratory(){
+        qt().forAll(Generadores.genLaboratorios(),Generadores.genEquipos()).check(((laboratorio, equipo) -> {
+            try{
+                historyService.registarEquipo(equipo);
+                historyService.registrarLaboratorio(laboratorio);
+                historyService.asociarEquipoConLaboratorio(idLaboratory,idEquipoCont);
+                boolean toReturn = historyService.consultarLabAsociadoAEquipo(idEquipoCont) == idLaboratory;
+                historyService.desasociarEquipoDelLab(idEquipoCont);
+                Integer labId = historyService.consultarLabAsociadoAEquipo(idEquipoCont);
+                idLaboratory++;idEquipoCont++;
+                return toReturn && labId == null;
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        }));
+    }
+
 }

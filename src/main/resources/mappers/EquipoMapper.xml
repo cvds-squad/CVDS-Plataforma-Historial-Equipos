@@ -102,7 +102,7 @@
         where idEquipo = #{idEquipo}  
     </update>
     
-    <update id="eliminarAsociacionEquipoLabs" parameterType="map">
+    <update id="desasociarEquipoDelLab" parameterType="map">
         UPDATE Equipos
           SET labs = NULL
         WHERE idEquipo=#{idEquipo} 
