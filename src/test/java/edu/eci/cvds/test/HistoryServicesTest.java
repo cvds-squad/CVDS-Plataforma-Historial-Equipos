@@ -1,16 +1,14 @@
 package edu.eci.cvds.test;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.samples.entities.Elemento;
-import edu.eci.cvds.samples.entities.Equipo;
-import edu.eci.cvds.samples.entities.Laboratorio;
-import edu.eci.cvds.samples.entities.TipoElemento;
+import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -27,6 +25,7 @@ public class HistoryServicesTest {
     public static int idElemCont = 1;
     public static int idEquipoCont = 1;
     public static int idLaboratory = 1;
+    public static int idNovedadCont = 1;
 
     public HistoryServicesTest(){
         historyService = HistoryServicesFactory.getInstance().getHistoryServiceForTesting();
@@ -220,6 +219,22 @@ public class HistoryServicesTest {
                 return false;
             }
         }));
+    }
+
+    @Test
+    public void shouldInsertAndConsultNews(){
+        qt().forAll(Generadores.genNovedadesNoFk()).check(novedad -> {
+            try {
+                historyService.registrarNovedad(novedad);
+                Novedad conNovedad = historyService.consultarNovedadDadoId(idNovedadCont);
+                idNovedadCont++;
+                return novedad.getDetalle().equals(conNovedad.getDetalle()) &&
+                        novedad.getTitulo().equals(conNovedad.getTitulo());
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
     }
 
 }

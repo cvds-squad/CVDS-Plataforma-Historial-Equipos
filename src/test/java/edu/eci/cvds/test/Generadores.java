@@ -117,6 +117,18 @@ public class Generadores {
             return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
         };   
     }
+
+    public static Gen<Novedad> genNovedadesNoFk(){
+        return source->{
+            Integer equipo = null;
+            Integer elemento = null;
+            Date fecha = genDate().generate(source);
+            String titulo = genMarcas().generate(source);
+            String responsable = "predeterminado";
+            String detalle = genDescripcion().generate(source);
+            return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
+        };
+    }
     
         public static Gen<Laboratorio> genLaboratorios(){
         return source->{
