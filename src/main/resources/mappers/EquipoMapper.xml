@@ -101,5 +101,11 @@
             de_baja = true
         where idEquipo = #{idEquipo}  
     </update>
+    
+    <update id="eliminarAsociacionEquipoLabs" parameterType="map">
+        UPDATE Equipos
+          SET labs = NULL
+        WHERE idEquipo=#{idEquipo} 
+    </update>
 
 </mapper>

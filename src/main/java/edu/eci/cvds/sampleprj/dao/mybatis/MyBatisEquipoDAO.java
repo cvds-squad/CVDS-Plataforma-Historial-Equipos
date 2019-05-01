@@ -92,4 +92,13 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
             throw new PersistenceException("Error al consultar los equipos");
         }
     }
+
+    @Override
+    public void desasociarEquipoLabs(int idEquipo) throws PersistenceException {
+        try{
+            equipoMapper.desasociarEquipoDelLab(idEquipo);
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al desasociar el equipo del laboratorio");
+        }
+    }
 }

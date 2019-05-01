@@ -74,4 +74,6 @@ public interface HistoryService {
     List<Novedad> consultarNovedades() throws HistoryServiceException;
 
     List<Equipo> consultarEquiposDeLaboratorio(int idLab) throws HistoryServiceException;
+    
+    void desasociarEquipoDelLab(int idEquipo) throws HistoryServiceException;
 }

@@ -363,4 +363,15 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar los equipos del laboratorio",ex);
         }
     }
+
+    @Override
+    public void desasociarEquipoDelLab(int idEquipo) throws HistoryServiceException {
+        try{
+            equipoDAO.desasociarEquipoLabs(idEquipo);
+        }catch(PersistenceException ex){
+            throw new HistoryServiceException("No se pudo desasociar el equipo con el respectivo laboratorio",ex);
+        }
+    }
+    
+    
 }

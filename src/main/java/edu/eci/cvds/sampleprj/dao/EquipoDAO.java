@@ -31,4 +31,6 @@ public interface EquipoDAO {
     void darDeBajaEqp(int idEquipo) throws PersistenceException;
 
     List<Equipo> consultarEquiposNoDeBaja();
+    
+    void desasociarEquipoLabs(int idEquipo) throws PersistenceException;
 }
