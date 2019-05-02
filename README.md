@@ -31,10 +31,10 @@ Las credenciales para ingresar son las siguientes:
 ## Arquitectura y Diseño
 
 #### Modelo E-R
-![](resources/Diagrama%20ER.png)
+![](resources/modelos/Diagrama%20ER.png)
 
 #### Diagrama de Clases (Simplificado)
-![](resources/Diagrama%20Clases.png)
+![](resources/modelos/Diagrama%20Clases.png)
 
 #### Enlaces
 + [Despliegue en Heroku](https://cvds-equipment-history.herokuapp.com/)
@@ -58,14 +58,4 @@ Las credenciales para ingresar son las siguientes:
 
 
 ## Sprints
-
-### Sprint 1
-**Sprint-backlog**
-
-![Sprint-backlog](resources/sprint1backlog.PNG)
-
-**Sprint-burndown chart**
-![Sprint-burndown chart](resources/sprint1burndown.PNG)
- 
-
- 
+Ver la documentación de los [sprints](resources/markdowns/sprints/sprints.md)

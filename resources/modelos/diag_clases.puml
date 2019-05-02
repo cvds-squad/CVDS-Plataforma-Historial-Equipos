@@ -20,10 +20,22 @@ class Elemento{
 class Equipo{
 }
 
+class Novedad{
+}
+
+class Laboratorio{
+}
+
 class MyBatisEquipoDAO{
 }
 
 class MyBatisElementoDAO{
+}
+
+class MyBatisNovedadDAO{
+}
+
+class MyBatisLaboratorioDAO{
 }
 
 interface HistoryService{
@@ -35,10 +47,22 @@ interface ElementoDAO{
 interface EquipoDAO{
 }
 
+interface NovedadDAO{
+}
+
+interface LaboratorioDAO{
+}
+
 interface ElementoMapper{
 }
 
 interface EquipoMapper{
+}
+
+interface NovedadMapper{
+}
+
+interface LaboratorioMapper{
 }
 
 
@@ -52,13 +76,20 @@ MOUSE
 
 HistoryService <|.. HistoryServiceImpl
 
-HistoryServiceImpl --> ElementoDAO : <<injected>>
-HistoryServiceImpl --> EquipoDAO : <<injected>>
+HistoryServiceImpl -left-> ElementoDAO : <<injected>>
+HistoryServiceImpl -down-> EquipoDAO : <<injected>>
+HistoryServiceImpl -down-> LaboratorioDAO : <<injected>>
+HistoryServiceImpl -right-> NovedadDAO: <<injected>>
+
 
 ElementoDAO <|.. MyBatisElementoDAO
 EquipoDAO <|.. MyBatisEquipoDAO
+NovedadDAO <|.. MyBatisNovedadDAO
+LaboratorioDAO <|.. MyBatisLaboratorioDAO
 
 MyBatisElementoDAO --> ElementoMapper : <<injected>>
 MyBatisEquipoDAO --> EquipoMapper : <<injected>>
+MyBatisLaboratorioDAO --> LaboratorioMapper : <<injected>>
+MyBatisNovedadDAO --> NovedadMapper : <<injected>>
 
 @enduml
