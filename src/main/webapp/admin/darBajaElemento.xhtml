@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
-    <title>Dar Baja Elemento</title>
+    <title>Dar Baja Elementos</title>
 
 </h:head>
 <h:body>
@@ -24,14 +24,17 @@
 
         <div class="container">
             <h:form id="elementoDarBajaForm">
-                <p:panel header="DAR DE BAJA ELEMENTO" style="text-align: center">
+                <p:panel header="DAR DE BAJA ELEMENTOS" style="text-align: center">
                     <p:messages id="msgsDarBaja" closable="true"/>
                     <p:fieldset id="elementosBajar" legend="Elementos no asociados a un equipo">
                         <p:dataTable id="elems" var="elem"
-                                     value="#{elementoBean.consultarElementosNoAsociados()}" selectionMode="single"
-                                     rowKey="#{elem.idElemento}" selection="#{elementoBean.elementoDarBajar}"
+                                     value="#{elementoBean.consultarElementosNoAsociados()}"
+                                     rowKey="#{elem.idElemento}" selection="#{elementoBean.elementosDarBajar}"
                                      rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10,15">
+                            <p:column selectionMode="multiple"
+                            style="width: 40px; text-align: center" />
+
                             <p:column headerText="Id">
                                 <h:outputText value="#{elem.idElemento}"/>
                             </p:column>
@@ -52,7 +55,7 @@
                                                  update="@form"
                                                  actionListener="#{elementoBean.darBajaElemento()}"
                                                  oncomplete="setTimeout(function(){$('[id$=msgsDarBaja]').hide(1000)},3000);">
-                                    <p:confirm header="Confirmación" message="¿Dar de baja este elemento?" icon="fas fa-exclamation-triangle"/>
+                                    <p:confirm header="Confirmación" message="¿Dar de baja estos elementos?" icon="fas fa-exclamation-triangle"/>
                                 </p:commandButton>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                     <center>
