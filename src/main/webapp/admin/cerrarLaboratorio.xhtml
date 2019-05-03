@@ -1,0 +1,153 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+            rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+          crossorigin="anonymous" />
+
+    <title>Cerrar Laboratorio</title>
+
+</h:head>
+<h:body>
+    <div class="wrapper">
+        <!--Header-->
+
+        <div class="header">
+            <a href="index.xhtml" class="logo"><img src="/images/labLogo.png" />Historial
+                de Equipos</a>
+            <div class="header-right">
+                <a class="active" href="index.xhtml"><i
+                        class="icono izquierda fas fa-home" />Inicio</a><a class="active"
+                                                                           href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
+        <br /> <br />
+
+        <div class="container">
+            <h:form id="regLab">
+                <p:panel header="Cerrar Laboratorio" style="text-align: center">
+                    <p:messages id="msgsLab" closable="true"/>
+                    <h:outputText value="Seleccione un laboratorio para cerrarlo"/>
+                    <p:fieldset legend="Laboratorios">
+                        <p:dataTable id="labsOpen" value="#{laboratorioBean.consultarLaboratorios()}" var="lab"
+                                     selectionMode="single"
+                                     rowKey="#{lab.idLab}" selection="#{laboratorioBean.labCerrar}"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{lab.idLab}"/>
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{lab.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{lab.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                <h:outputText value="#{lab.usuario}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <f:facet name="footer">
+                        <center>
+                            <p:commandButton icon="fas fa-minus-circle"
+                                             value="Cerrar"
+                                             update="@form"
+                                             oncomplete="setTimeout(function(){$('[id$=msgsLab]').hide(1000)},3000);"
+                                             actionListener="#{laboratorioBean.cerrarLaboratorio()}">
+                                <p:confirm header="Confirmación" message="¿Cerrar este laboratorio?" icon="fas fa-exclamation-triangle"/>
+                            </p:commandButton>
+                        </center>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <center>
+                                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fas fa-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-times" />
+                            </center>
+                        </p:confirmDialog>
+                    </f:facet>
+                </p:panel>
+                <br/>
+                <p:panel header="Laboratorios Cerrados" style="text-align: center">
+                    <p:fieldset legend="Laboratorios">
+                        <p:dataTable id="labs" value="#{laboratorioBean.consultarLaboratoriosCerrados()}" var="lab"
+                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{lab.idLab}"/>
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{lab.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{lab.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                <h:outputText value="#{lab.usuario}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:fieldset>
+                </p:panel>
+
+            </h:form>
+        </div>
+
+
+
+        <div class="push" />
+    </div>
+
+    <!--Footer -->
+    <footer class="ct-footer">
+        <div class="container">
+            <div class="ct-footer-meta text-center-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2">
+                        <img alt="logo" src="/images/labLogo.png" />
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <address>
+                            <span>Escuela Colombiana de Ingeniería Julio Garavito<br /></span>Laboratorio
+                            de Informática<br /> AK.45 No.205-59 (Autopista Norte)-Bogotá<br />
+                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+                        </address>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <ul class="ct-socials list-unstyled list-inline">
+                            <li><a href="https://www.facebook.com/EscuelaIng/?ref=br_rs"
+                                   target="_blank"><img alt="facebook"
+                                                        src="https://www.solodev.com/assets/footer/facebook-white.png" /></a>
+                            </li>
+                            <li><a href="https://twitter.com/Escuelaing" target="_blank"><img
+                                    alt="twitter"
+                                    src="https://www.solodev.com/assets/footer/twitter-white.png" /></a>
+                            </li>
+                            <li><a
+                                    href="https://www.youtube.com/user/escuelacolingenieria/featured"
+                                    target="_blank"><img alt="youtube"
+                                                         src="https://www.solodev.com/assets/footer/youtube-white.png" /></a>
+                            </li>
+                            <li><a href="https://www.instagram.com/escuelaing/?hl=es-la"
+                                   target="_blank"><img alt="instagram"
+                                                        src="https://www.solodev.com/assets/footer/instagram-white.png" /></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</h:body>
+</html>

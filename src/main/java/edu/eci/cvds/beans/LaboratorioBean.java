@@ -32,6 +32,8 @@ public class LaboratorioBean implements Serializable {
     private List<Equipo> labAsociarEquipos;
     private List<Equipo> labDesasociarEquipos;
 
+    private Laboratorio labCerrar;
+
     public LaboratorioBean(){
 
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
@@ -137,6 +139,22 @@ public class LaboratorioBean implements Serializable {
         return equipos;
     }
 
+    public void cerrarLaboratorio(){
+        if (labCerrar != null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Lab seleccionado " + labCerrar.getNombre(),"Construccion"));
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione un laboratorio","Seleccione un laboratorio"));
+        }
+    }
+
+    public List<Laboratorio> consultarLaboratoriosAbiertos(){
+        return null;
+    }
+
+    public List<Laboratorio> consultarLaboratoriosCerrados(){
+        return null;
+    }
+
     private void clean() {
         labNombre = "";
         labDescripcion = "";
@@ -205,5 +223,13 @@ public class LaboratorioBean implements Serializable {
 
     public void setLabDesasociarEquipos(List<Equipo> labDesasociarEquipos) {
         this.labDesasociarEquipos = labDesasociarEquipos;
+    }
+
+    public Laboratorio getLabCerrar() {
+        return labCerrar;
+    }
+
+    public void setLabCerrar(Laboratorio labCerrar) {
+        this.labCerrar = labCerrar;
     }
 }
