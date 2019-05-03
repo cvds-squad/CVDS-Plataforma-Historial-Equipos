@@ -50,6 +50,9 @@ public class ShiroSecurityBean implements Serializable {
 		rememberMe = rme;
 	}
 
+	/**
+	 * Metodo que realiza el login del usuario y verifica sus credenciales
+	 */
 	public void loginUser() {
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
@@ -69,6 +72,9 @@ public class ShiroSecurityBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Metodo que verifica si el usuario está en sesión
+	 */
 	public void isLogged(){
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.getSession().getAttribute("Correo") != null){
@@ -80,6 +86,10 @@ public class ShiroSecurityBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Obtiene el nombre del usuario en la sesión actual
+	 * @return correo del usuario
+	 */
 	public static String getUser(){
 		return (String) SecurityUtils.getSubject().getSession().getAttribute("Correo");
 	}

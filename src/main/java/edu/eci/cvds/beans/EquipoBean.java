@@ -179,6 +179,9 @@ public class EquipoBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage("msgsElemento",new FacesMessage(FacesMessage.SEVERITY_INFO,"Elementos asociados correctamente","Elementos asociados correctamente"));
     }
 
+    /**
+     * Crea un torre sin ingresarla a la base de datos
+     **/
     public void crearTorre(){
         if (asociarElementos.containsKey("torre")) asociarElementos.remove("torre");
         if (crearElementos.containsKey("torre")) crearElementos.remove("torre");
@@ -189,6 +192,9 @@ public class EquipoBean implements Serializable {
         crearElementos.put("torre",elems);
     }
 
+    /**
+     * Asocia una torre sin realizar el cambio en al base de datos
+     **/
     public void asociarTorre(){
         if (torreSeleccionada == null){
             FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció torre","No asoció torre"));
@@ -200,6 +206,9 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    /**
+     * Crea un pantalla sin ingresarla a la base de datos
+     **/
     public void crearPantalla(){
         if (asociarElementos.containsKey("pantalla")) asociarElementos.remove("pantalla");
         if (crearElementos.containsKey("pantalla")) crearElementos.remove("pantalla");
@@ -210,6 +219,9 @@ public class EquipoBean implements Serializable {
         crearElementos.put("pantalla",elems);
     }
 
+    /**
+     * Asocia una pantalla sin realizar el cambio en al base de datos
+     **/
     public void asociarPantalla(){
         if (pantallaSeleccionada == null){
             FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció pantalla","No asoció pantalla"));
@@ -221,6 +233,9 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    /**
+     * Crea un teclado sin ingresarla a la base de datos
+     **/
     public void crearTeclado(){
         if (asociarElementos.containsKey("teclado")) asociarElementos.remove("teclado");
         if (crearElementos.containsKey("teclado")) crearElementos.remove("teclado");
@@ -231,6 +246,9 @@ public class EquipoBean implements Serializable {
         crearElementos.put("teclado",elems);
     }
 
+    /**
+     * Asocia una torre sin realizar el cambio en al base de datos
+     **/
     public void asociarTeclado(){
         if (tecladoSeleccionado == null){
             FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció teclado","No asoció teclado"));
@@ -242,6 +260,9 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    /**
+     * Crea un mouse sin ingresarla a la base de datos
+     **/
     public void crearMouse(){
         if (asociarElementos.containsKey("mouse")) asociarElementos.remove("mouse");
         if (crearElementos.containsKey("mouse")) crearElementos.remove("mouse");
@@ -252,6 +273,9 @@ public class EquipoBean implements Serializable {
         crearElementos.put("mouse",elems);
     }
 
+    /**
+     * Asocia una torre sin realizar el cambio en al base de datos
+     **/
     public void asociarMouse(){
         if (mouseSeleccionado == null){
             FacesContext.getCurrentInstance().addMessage("msgsElemento", new FacesMessage(FacesMessage.SEVERITY_ERROR,"No asoció mouse","No asoció mouse"));
@@ -263,6 +287,10 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    /**
+     * Da de baja a un equipo seleccionado de una tabla
+     * Registra novedades
+     **/
     public void darBajaEquipo() {
         Date utilDate = new Date();
         if (equipoDarBaja != null) {
@@ -319,6 +347,7 @@ public class EquipoBean implements Serializable {
         }
     }
 
+    //Metodo privado para resetear los checkbox
     private void resetBooleans() {
         darBajaTorre = false;
         quitarAsociacionTorre = false;
@@ -333,34 +362,58 @@ public class EquipoBean implements Serializable {
         quitarAsociacionMouse = false;
     }
 
+    /**
+     * Reinicia el checkbox de baja torre
+     **/
     public void resetBajaTorre(){
         darBajaTorre = false;
     }
 
+    /**
+     * Reinicia el checkbox de baja pantalla
+     **/
     public void resetBajaPantalla(){
         darBajaPantalla = false;
     }
 
+    /**
+     * Reinicia el checkbox de baja teclado
+     **/
     public void resetBajaTeclado(){
         darBajaTeclado = false;
     }
 
+    /**
+     * Reinicia el checkbox de baja mouse
+     **/
     public void resetBajaMouse(){
         darBajaMouse = false;
     }
 
+    /**
+     * Reinicia el checkbox de asociar torre
+     **/
     public void resetAsociacionTorre(){
         quitarAsociacionTorre = false;
     }
 
+    /**
+     * Reinicia el checkbox de asociar pantalla
+     **/
     public void resetAsociacionPantalla(){
         quitarAsociacionPantalla = false;
     }
 
+    /**
+     * Reinicia el checkbox de asociar Teclado
+     **/
     public void resetAsociacionTeclado(){
         quitarAsociacionTeclado = false;
     }
 
+    /**
+     * Reinicia el checkbox de asociar mouse
+     **/
     public void resetAsociacionMouse(){
         quitarAsociacionMouse = false;
     }

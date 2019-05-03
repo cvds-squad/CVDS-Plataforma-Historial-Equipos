@@ -104,11 +104,13 @@ public class NovedadBean implements Serializable {
         return novedades;
     }
 
+    //Limpia atributos
     private void cleanEquipo() {
         equipoNovedadDescripcion = "";
         equipoNovedadTitulo = "";
     }
 
+    //Limpia atributos
     private void cleanElemento() {
         elementoNovedadTitulo = "";
         elementoNovedadDescripcion = "";

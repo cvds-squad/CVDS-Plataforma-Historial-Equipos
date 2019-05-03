@@ -41,6 +41,11 @@ public class LaboratorioBean implements Serializable {
         labDesasociarEquipos = new ArrayList<>();
     }
 
+    /**
+     * Crea un laboratorio dado un nombre y una descripcion
+     * Asocia equipos de la lista de labAsociarEquipos
+     * Registra novedades
+     **/
     public void crearLaboratorio(){
         Laboratorio laboratorio = new Laboratorio(labNombre,ShiroSecurityBean.getUser(),labDescripcion,(ArrayList<Equipo>)labEquipos);
         Date utilDate = new Date();
@@ -63,6 +68,10 @@ public class LaboratorioBean implements Serializable {
         }
     }
 
+    /**
+     * Consulta todos los laboratorios
+     * @return lista de laboratorios registrados
+     **/
     public List<Laboratorio> consultarLaboratorios(){
         List<Laboratorio> laboratorios = null;
         try{
@@ -126,6 +135,10 @@ public class LaboratorioBean implements Serializable {
         }
     }
 
+    /**
+     * Consulta los equipos de el laboratorio al que se le desea desasociar los equipos
+     * @return Lista de equipos asociados a dicho laboratorio
+     **/
     public List<Equipo> consultarEquiposDeLaboratorioDesasociar(){
         List<Equipo> equipos = null;
         try{
@@ -139,6 +152,10 @@ public class LaboratorioBean implements Serializable {
         return equipos;
     }
 
+    /**
+     * Cierra un laboratorio
+     * Desasocia todos sus equipos
+     **/
     public void cerrarLaboratorio(){
         if (labCerrar != null){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Lab seleccionado " + labCerrar.getNombre(),"Construccion"));
@@ -147,10 +164,18 @@ public class LaboratorioBean implements Serializable {
         }
     }
 
+    /**
+     * Consulta los laboratorios abiertos
+     * @return Lista de laboratorios abiertos
+     **/
     public List<Laboratorio> consultarLaboratoriosAbiertos(){
         return null;
     }
 
+    /**
+     * Consulta los laboratorios cerrados
+     * @return Lista de laboratorios cerrados
+     **/
     public List<Laboratorio> consultarLaboratoriosCerrados(){
         return null;
     }

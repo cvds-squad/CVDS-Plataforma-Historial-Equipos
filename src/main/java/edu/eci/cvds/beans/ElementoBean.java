@@ -112,6 +112,10 @@ public class ElementoBean implements Serializable {
         return elems;
     }
 
+    /**
+     * Consulta las torres disponibles
+     * @return lista de torres disponibles
+     */
     public List<Elemento> consultarTorresDisponibles(){
         List<Elemento> torresDisponibles = null;
         try{
@@ -122,6 +126,10 @@ public class ElementoBean implements Serializable {
         return torresDisponibles;
     }
 
+    /**
+     * Consulta las pantallas disponibles
+     * @return lista de pantallas disponibles
+     **/
     public List<Elemento> consultarPantallasDisponibles(){
         List<Elemento> pantallasDisponibles = null;
         try{
@@ -132,6 +140,10 @@ public class ElementoBean implements Serializable {
         return pantallasDisponibles;
     }
 
+    /**
+     * Consulta las teclados disponibles
+     * @return lista de teclados disponibles
+     **/
     public List<Elemento> consultarTecladosDisponibles(){
         List<Elemento> tecladosDisponibles = null;
         try{
@@ -142,6 +154,10 @@ public class ElementoBean implements Serializable {
         return tecladosDisponibles;
     }
 
+    /**
+     * Consulta las mouses disponibles
+     * @return lista de mouses disponibles
+     **/
     public List<Elemento> consultarMousesDisponibles(){
         List<Elemento> mousesDisponibles = null;
         try{
