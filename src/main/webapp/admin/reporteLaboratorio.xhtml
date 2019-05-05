@@ -35,7 +35,35 @@
 
                     <p:panel id="labs" header="Laboratorios" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="labs" style="margin-bottom:20px;text-align: left">
                         <center>
-                            test2 labs
+                            <p:fieldset legend="Laboratorios">
+                                <p:dataTable id="labsTable" var="lab" value="#{laboratorioBean.todosLaboratorios}"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                             paginator="true" rows="10"
+                                             sortMode="multiple">
+                                    <f:facet name="{Exporters}">
+                                        <div style="float:right;">
+                                            <h:commandLink>
+                                                <p:graphicImage url="/images/excel.png"/>
+                                                <p:dataExporter type="xls" target="labsTable" fileName="reporte_laboratorios"/>
+                                            </h:commandLink>
+                                        </div>
+                                    </f:facet>
+
+                                    <p:column headerText="Id" sortBy="#{lab.idLab}">
+                                        <h:outputText value="#{lab.idLab}"/>
+                                    </p:column>
+                                    <p:column headerText="Nombre" sortBy="#{lab.nombre}">
+                                        <h:outputText value="#{lab.nombre}"/>
+                                    </p:column>
+                                    <p:column headerText="Descripcion">
+                                        <h:outputText value="#{lab.descripcion}"/>
+                                    </p:column>
+                                    <p:column headerText="Usuario">
+                                        <h:outputText value="#{lab.usuario}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:fieldset>
                         </center>
                     </p:panel>
                 </h:form>
@@ -85,12 +113,8 @@
 
     </footer>
 
-    <!-- jQuery library -->
 
-    <!-- Latest compiled JavaScript -->
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"/>
-    <script src="/js/reporteLab.js"/>
+
 
 </h:body>
 </html>

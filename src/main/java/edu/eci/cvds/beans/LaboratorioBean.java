@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @ManagedBean(name="laboratorioBean")
-@SessionScoped
+@ViewScoped
 public class LaboratorioBean implements Serializable {
 
     private HistoryService historyService;
@@ -39,6 +40,8 @@ public class LaboratorioBean implements Serializable {
 
     private PieChartModel pieModel;
 
+    private List<Laboratorio> todosLaboratorios;
+
     public LaboratorioBean(){
 
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
@@ -48,7 +51,7 @@ public class LaboratorioBean implements Serializable {
 
     @PostConstruct
     public void init(){
-        crearPieModel();
+        crearPieModelOC();
     }
 
     /**
@@ -190,13 +193,26 @@ public class LaboratorioBean implements Serializable {
         return null;
     }
 
-
-    private void crearPieModel(){
+    //Crea un pie chart para laboratorios cerrados y abiertos
+    private void crearPieModelOC() {
         pieModel = new PieChartModel();
+        try {
+            List<Laboratorio> laboratorios = historyService.consultarLaboratorios();
+            int open = 0, closed = 0;
+            for (Laboratorio laboratorio : laboratorios) {
+                //if laboratorio.isDeBaja() closed++ else open++
+            }
+            pieModel.setTitle("Estados de Laboratorios");
+            pieModel.set("Abierto",12); //cambiar a open
+            pieModel.set("Cerrado",14); //cambiar a closed
+            pieModel.setShowDataLabels(true);
+            pieModel.setLegendPosition("e");
 
-        pieModel.set("ad",2);
-        pieModel.setTitle("Test");
+        } catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error mientras se creaba la grafica", "Error al consultar laboratorios"));
+        }
     }
+
 
     private void clean() {
         labNombre = "";
@@ -282,5 +298,16 @@ public class LaboratorioBean implements Serializable {
 
     public void setPieModel(PieChartModel pieModel) {
         this.pieModel = pieModel;
+    }
+
+    public List<Laboratorio> getTodosLaboratorios() {
+        if (todosLaboratorios == null){
+            todosLaboratorios = consultarLaboratorios();
+        }
+        return todosLaboratorios;
+    }
+
+    public void setTodosLaboratorios(List<Laboratorio> todosLaboratorios) {
+        this.todosLaboratorios = todosLaboratorios;
     }
 }
