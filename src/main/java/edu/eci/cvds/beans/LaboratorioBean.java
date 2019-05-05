@@ -6,7 +6,10 @@ import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import edu.eci.cvds.samples.services.HistoryServicesFactory;
+import org.primefaces.model.chart.PieChartModel;
 
+
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,11 +37,18 @@ public class LaboratorioBean implements Serializable {
 
     private Laboratorio labCerrar;
 
+    private PieChartModel pieModel;
+
     public LaboratorioBean(){
 
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
         labAsociarEquipos = new ArrayList<>();
         labDesasociarEquipos = new ArrayList<>();
+    }
+
+    @PostConstruct
+    public void init(){
+        crearPieModel();
     }
 
     /**
@@ -180,6 +190,14 @@ public class LaboratorioBean implements Serializable {
         return null;
     }
 
+
+    private void crearPieModel(){
+        pieModel = new PieChartModel();
+
+        pieModel.set("ad",2);
+        pieModel.setTitle("Test");
+    }
+
     private void clean() {
         labNombre = "";
         labDescripcion = "";
@@ -256,5 +274,13 @@ public class LaboratorioBean implements Serializable {
 
     public void setLabCerrar(Laboratorio labCerrar) {
         this.labCerrar = labCerrar;
+    }
+
+    public PieChartModel getPieModel() {
+        return pieModel;
+    }
+
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
     }
 }
