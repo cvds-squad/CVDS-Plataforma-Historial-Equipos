@@ -24,8 +24,8 @@
           WHERE disponible = true
     </select>
 
-    <select id="consultarElementos" resultType="Elemento">
-        SELECT idElemento,eqps,tipelement,marca,descripcion FROM elementos
+    <select id="consultarElementos" resultMap="ElementoResult">
+        SELECT idElemento,eqps,tipelement,marca,descripcion,de_baja FROM elementos
     </select>
 
     <select id="consultarTorresDisponibles" resultType="Elemento">

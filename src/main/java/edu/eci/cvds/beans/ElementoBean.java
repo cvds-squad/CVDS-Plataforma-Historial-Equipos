@@ -34,6 +34,10 @@ public class ElementoBean implements Serializable {
 
     private List<Elemento> elementosDarBajar;
 
+    private List<Elemento> todosElementos;
+
+    private Elemento elemNovSeleccionado;
+
     public ElementoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
     }
@@ -216,6 +220,15 @@ public class ElementoBean implements Serializable {
         }
     }
 
+    /**
+     * Consulta las novedades del elemento seleccionado en el reporte
+     * @return Lista con las novedades
+     */
+    public List<Novedad> consultarNovedadesDeSeleccionado(){
+        //TODO consultar novedades de elemento
+        return null;
+    }
+
     public List<Elemento> getElementosDisponibles() {
         return elementosDisponibles;
     }
@@ -230,5 +243,24 @@ public class ElementoBean implements Serializable {
 
     public void setElementosDarBajar(List<Elemento> elementosDarBajar) {
         this.elementosDarBajar = elementosDarBajar;
+    }
+
+    public List<Elemento> getTodosElementos() {
+        if (todosElementos == null){
+            todosElementos = consultarElementos();
+        }
+        return todosElementos;
+    }
+
+    public void setTodosElementos(List<Elemento> todosElementos) {
+        this.todosElementos = todosElementos;
+    }
+
+    public Elemento getElemNovSeleccionado() {
+        return elemNovSeleccionado;
+    }
+
+    public void setElemNovSeleccionado(Elemento elemNovSeleccionado) {
+        this.elemNovSeleccionado = elemNovSeleccionado;
     }
 }

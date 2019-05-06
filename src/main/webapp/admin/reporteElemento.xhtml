@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
+    <title>Reporte Elementos</title>
+
+
+</h:head>
+<h:body>
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="header-right"><a class="active" href="/logout"><i class="fas fa-sign-out-alt"></i>#{msg.labelSalir}</a></div>
+            <div class="header-right"><a class="active" href="index.xhtml"><i class="icono izquierda fas fa-home"/>#{msg.labelInicio}</a></div>
+            <a href="" class="logo"><img src="/images/labLogo.png"/>#{msg.labelHistorialEquipos}</a>
+        </div>
+
+        <div class="container">
+            <center>
+                <h2>Reporte de Elementos</h2>
+                <br/>
+                <h:form id="form">
+                    <p:panel>
+                        <p:fieldset legend="Elementos">
+                            <p:dataTable id="elementsTable" value="#{elementoBean.todosElementos}" var="elem" widgetVar="elemTable"
+                                         rows="10" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                         sortMode="multiple">
+
+                                <f:facet name="{Exporters}">
+                                    <div style="float:right;">
+                                        <h:commandLink>
+                                            <p:graphicImage url="/images/excel.png"/>
+                                            <p:dataExporter type="xls" target="elementsTable" fileName="reporte_laboratorios"/>
+                                        </h:commandLink>
+                                    </div>
+                                </f:facet>
+
+                                <p:column headerText="Id" sortBy="#{elem.idElemento}" filterBy="#{elem.idElemento}" filterMatchMode="exact">
+                                    <h:outputText value="#{elem.idElemento}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" sortBy="#{elem.tipelement}" filterMatchMode="exact" filterBy="#{elem.tipelement}">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('elemTable').filter()" styleClass="custom-filter">
+                                            <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{elementoBean.tipos()}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <h:outputText value="#{elem.tipelement}"/>
+                                </p:column>
+                                <p:column headerText="Marca" sortBy="#{elem.marca}">
+                                    <h:outputText value="#{elem.marca}"/>
+                                </p:column>
+                                <p:column headerText="Descripcion" sortBy="#{elem.descripcion}">
+                                    <h:outputText value="#{elem.descripcion}"/>
+                                </p:column>
+                                <p:column headerText="Vinculado a equipo" sortBy="#{elem.equipoAsociado}">
+                                    <h:outputText value="#{elem.equipoAsociado}"/>
+                                </p:column>
+                                <p:column headerText="De baja" sortBy="#{elem.de_baja}">
+                                    <h:outputText value="#{elem.de_baja}"/>
+                                </p:column>
+
+                                <p:column style="width:100px;text-align: center" headerText="Novedades" exportable="false">
+                                    <p:commandButton update=":form:elemNovs"  oncomplete="PF('elemsDialog').show()" icon="fas fa-search" title="Ver novedades">
+                                        <f:setPropertyActionListener value="#{elem}" target="#{elementoBean.elemNovSeleccionado}" />
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:fieldset>
+                    </p:panel>
+
+                    <p:dialog header="Novedades" modal="true" showEffect="fade" hideEffect="fade" widgetVar="elemsDialog" resizable="false" draggable="false" width="1150">
+                        <p:outputPanel id="elemNovs">
+                            <p:fieldset legend="Novedades del elemento">
+                                <p:dataTable id="novs" var="nov"
+                                             value="#{elementoBean.consultarNovedadesDeSeleccionado()}"
+                                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15">
+                                    <!-- BORRAR DESPUES -->
+                                    <p:column headerText="ID Elemento">
+                                        <h:outputText value="#{nov.elementoAsociado}"/>
+                                    </p:column>
+                                    <p:column headerText="ID Equipo">
+                                        <h:outputText value="#{nov.equipoAsociado}"/>
+                                    </p:column>
+                                    <p:column headerText="Fecha">
+                                        <h:outputText value="#{nov.fecha}"/>
+                                    </p:column>
+                                    <p:column headerText="Titulo">
+                                        <h:outputText value="#{nov.titulo}"/>
+                                    </p:column>
+                                    <p:column headerText="Descripcion">
+                                        <h:outputText value="#{nov.detalle}"/>
+                                    </p:column>
+                                    <p:column headerText="Responsable">
+                                        <h:outputText value="#{nov.responsable}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:fieldset>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </center>
+        </div>
+
+        <div class="push"/>
+    </div>
+
+
+
+    <footer class="ct-footer">
+        <div class="container">
+            <div class="ct-footer-meta text-center-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2">
+                        <img alt="logo" src="/images/labLogo.png"/>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <address>
+                            <span>Escuela Colombiana de Ingenieria Julio Garavito<br/></span>Laboratorio de Informatica<br/>
+                            AK.45 No.205-59 (Autopista Norte)-Bogota<br/>
+                            <span>Telefono: <a href="tel:+57 6683600">+57 6683600</a></span>
+                        </address>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <ul class="ct-socials list-unstyled list-inline">
+                            <li>
+                                <a href="https://www.facebook.com/EscuelaIng/?ref=br_rs" target="_blank"><img alt="facebook" src="https://www.solodev.com/assets/footer/facebook-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Escuelaing" target="_blank"><img alt="twitter" src="https://www.solodev.com/assets/footer/twitter-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/user/escuelacolingenieria/featured" target="_blank"><img alt="youtube" src="https://www.solodev.com/assets/footer/youtube-white.png"/></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/escuelaing/?hl=es-la" target="_blank"><img alt="instagram" src="https://www.solodev.com/assets/footer/instagram-white.png"/></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+</h:body>
+</html>

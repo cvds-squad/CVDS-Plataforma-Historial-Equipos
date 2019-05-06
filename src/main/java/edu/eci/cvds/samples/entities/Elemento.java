@@ -31,7 +31,6 @@ public class Elemento implements Serializable {
     }
 
     public Elemento(int id,TipoElemento tipElement, String marca, String descripcion){
-        this.equipoAsociado = equipoAsociado;
         this.idElemento = id;
         this.tipelement = tipElement;
         this.marca = marca;
