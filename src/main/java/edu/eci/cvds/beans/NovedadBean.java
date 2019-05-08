@@ -9,15 +9,14 @@ import edu.eci.cvds.samples.services.HistoryServicesFactory;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class NovedadBean implements Serializable {
 
     private HistoryService historyService;
@@ -33,6 +32,8 @@ public class NovedadBean implements Serializable {
     private String equipoNovedadTitulo;
 
     private String equipoNovedadDescripcion;
+
+    private List<Novedad> todosNovedades;
 
     public NovedadBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
@@ -154,5 +155,16 @@ public class NovedadBean implements Serializable {
 
     public void setEquipoNovedadDescripcion(String equipoNovedadDescripcion) {
         this.equipoNovedadDescripcion = equipoNovedadDescripcion;
+    }
+
+    public List<Novedad> getTodosNovedades() {
+        if (todosNovedades == null){
+            todosNovedades = consultarNovedades();
+        }
+        return todosNovedades;
+    }
+
+    public void setTodosNovedades(List<Novedad> todosNovedades) {
+        this.todosNovedades = todosNovedades;
     }
 }
