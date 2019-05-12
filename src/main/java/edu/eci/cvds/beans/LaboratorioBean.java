@@ -222,11 +222,14 @@ public class LaboratorioBean implements Serializable {
             List<Laboratorio> laboratorios = historyService.consultarLaboratorios();
             int open = 0, closed = 0;
             for (Laboratorio laboratorio : laboratorios) {
-                //if laboratorio.isDeBaja() closed++ else open++
+                if (laboratorio.isDeBaja())
+                    closed++;
+                else
+                    open++;
             }
             pieModel.setTitle("Estados de Laboratorios");
-            pieModel.set("Abierto",12); //cambiar a open
-            pieModel.set("Cerrado",14); //cambiar a closed
+            pieModel.set("Abierto",open);
+            pieModel.set("Cerrado",closed);
             pieModel.setShowDataLabels(true);
             pieModel.setLegendPosition("e");
 

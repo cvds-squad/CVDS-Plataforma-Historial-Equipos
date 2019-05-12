@@ -64,7 +64,7 @@
                                              update="@form"
                                              oncomplete="setTimeout(function(){$('[id$=msgsLab]').hide(1000)},3000);"
                                              actionListener="#{laboratorioBean.cerrarLaboratorio()}">
-                                <p:confirm header="Confirmación" message="¿Cerrar este laboratorio?" icon="fas fa-exclamation-triangle"/>
+                                <p:confirm header="Confirmación" message="¿Cerrar este laboratorio, sus equipos serán desasociados?" icon="fas fa-exclamation-triangle"/>
                             </p:commandButton>
                         </center>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

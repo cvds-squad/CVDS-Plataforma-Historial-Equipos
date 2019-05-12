@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
     <title>Reporte Laboratorios</title>
 
+    <script type="text/javascript">
+
+        function exportChart() {
+            //export image
+            $('#output').empty().append(PF('pieChart').exportAsImage());
+
+            //show the dialog
+            PF('dlg').show();
+        }
+
+    </script>
 
 </h:head>
 <h:body>
@@ -23,15 +34,21 @@
 
         <div class="container">
             <center>
+                <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="PieChart como Imagen" resizable="false">
+                    <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
+                </p:dialog>
                 <h2>Reporte de Laboratorios</h2>
                 <br/>
 
                 <h:form>
                     <p:panel id="graphs" header="Gráficas" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="graphs" style="margin-bottom:20px;text-align: left">
                         <center>
-                            <p:chart id="chart" class="jqplot-target" type="pie" model="#{laboratorioBean.pieModel}" style="width:400px;height:300px" />
+                            <p:chart widgetVar="pieChart" id="chart" class="jqplot-target" type="pie" model="#{laboratorioBean.pieModel}" style="width:400px;height:300px" />
+                            <p:commandButton value="Exportar" type="button" icon="fas fa-file-export" onclick="exportChart()"/>
                         </center>
                     </p:panel>
+
+
 
                     <p:panel id="labs" header="Laboratorios" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="labs" style="margin-bottom:20px;text-align: left">
                         <center>
@@ -60,6 +77,9 @@
                                     </p:column>
                                     <p:column headerText="Usuario">
                                         <h:outputText value="#{lab.usuario}"/>
+                                    </p:column>
+                                    <p:column headerText="De baja" sortBy="#{lab.deBaja}">
+                                        <h:outputText value="#{lab.deBaja}"/>
                                     </p:column>
 
                                 </p:dataTable>
