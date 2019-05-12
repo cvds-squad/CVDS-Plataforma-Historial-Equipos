@@ -5,6 +5,7 @@
  */
 package edu.eci.cvds.samples.entities;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -12,13 +13,16 @@ import java.util.ArrayList;
  * @author jcortes
  */
 public class Laboratorio {
-    
+
+
     private int idLab;
     private String nombre;
     private String  usuario;
     private String descripcion;
     private ArrayList<Equipo> equipos;
     private boolean deBaja;
+    private Date fechaCreacion;
+    private Date fechaCierre;
 
     public Laboratorio(int idLab, String nombre, String usuario, String descripcion) {
         this.idLab = idLab;
@@ -36,11 +40,21 @@ public class Laboratorio {
         this.equipos = new ArrayList<Equipo>();
     }
 
-    public Laboratorio(String nombre, String usuario, String descripcion, ArrayList<Equipo> equipos){
+    public Laboratorio(String nombre, String usuario, String descripcion, ArrayList<Equipo> equipos,Date fechaCreacion){
         this.nombre = nombre;
         this.usuario = usuario;
         this.descripcion = descripcion;
-        this.equipos = new ArrayList<Equipo>();
+        this.equipos = equipos;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Laboratorio(String nombre, String usuario, String descripcion, ArrayList<Equipo> equipos,Date fechaCreacion,Date fechaCierre){
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.descripcion = descripcion;
+        this.equipos = equipos;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaCierre = fechaCierre;
     }
 
     public Laboratorio(int idLab, String nombre, String usuario, String descripcion, ArrayList<Equipo> equipos) {
@@ -58,6 +72,17 @@ public class Laboratorio {
         this.descripcion = descripcion;
         this.deBaja = deBaja;
     }
+
+    public Laboratorio(int idLab, String nombre, String usuario, String descripcion, boolean deBaja,Date fechaCreacion, Date fechaCierre) {
+        this.idLab = idLab;
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.descripcion = descripcion;
+        this.deBaja = deBaja;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaCierre = fechaCierre;
+    }
+
 
     public int getIdLab() {
         return idLab;
@@ -106,5 +131,21 @@ public class Laboratorio {
 
     public void setDeBaja(boolean deBaja) {
         this.deBaja = deBaja;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Date getFechaCierre() {
+        return fechaCierre;
+    }
+
+    public void setFechaCierre(Date fechaCierre) {
+        this.fechaCierre = fechaCierre;
     }
 }

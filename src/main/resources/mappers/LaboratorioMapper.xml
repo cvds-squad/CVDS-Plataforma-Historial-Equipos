@@ -11,15 +11,17 @@
        <result property="usuario" column="usuario"/>
        <result property="descripcion" column="descripcion"/>
        <result property="deBaja" column="de_baja"/>
+       <result property="fechaCreacion" column="fecha_creacion"/>
+       <result property="fechaCierre" column="fecha_cierre"/>
    </resultMap>
    
     <insert parameterType="map" id="registrarLaboratorio" > 
-        INSERT INTO Laboratorios ( nombre, usuario, descripcion,de_baja)
-            VALUES ( #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion},#{laboratorio.deBaja})
+        INSERT INTO Laboratorios ( nombre, usuario, descripcion,de_baja,fecha_creacion)
+            VALUES ( #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion},#{laboratorio.deBaja},#{laboratorio.fechaCreacion})
     </insert>
     
     <select id="consultarLaboratorio" resultType="Laboratorio">
-        SELECT idLab, nombre, usuario, descripcion, de_baja
+        SELECT idLab, nombre, usuario, descripcion, de_baja, fecha_creacion, fecha_cierre
         FROM Laboratorios
         WHERE  idLab = #{idLab}
     </select>
@@ -35,18 +37,18 @@
     </update>
 
     <select id="consultarLaboratorios" resultType="Laboratorio">
-        SELECT idLab, nombre, usuario, descripcion
+        SELECT idLab, nombre, usuario, descripcion, de_baja, fecha_creacion, fecha_cierre
         FROM Laboratorios
     </select>
     
     <select id="consultarLaboratoriosAbiertos" resultType="Laboratorio">
-        SELECT idLab, nombre, usuario, descripcion, de_baja
+        SELECT idLab, nombre, usuario, descripcion, de_baja , fecha_creacion, fecha_cierre
         FROM Laboratorios
         WHERE de_baja = false
     </select>
     
     <select id="consultarLaboratoriosCerrados" resultType="Laboratorio">
-        SELECT idLab, nombre, usuario, descripcion, de_baja
+        SELECT idLab, nombre, usuario, descripcion, de_baja, fecha_creacion, fecha_cierre
         FROM Laboratorios
         WHERE de_baja = true
     </select>
@@ -73,7 +75,7 @@
 
     <update id="darBajaLaboratorio">
         UPDATE laboratorios
-          SET de_baja = true
+          SET de_baja = true , fecha_cierre = #{fcierre}
           WHERE idlab = #{idLab}
     </update>
 

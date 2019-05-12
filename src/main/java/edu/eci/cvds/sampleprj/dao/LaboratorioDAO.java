@@ -7,6 +7,8 @@ package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
+
+import java.sql.Date;
 import java.util.List;
 /**
  *
@@ -30,5 +32,5 @@ public interface LaboratorioDAO {
     
     List<Laboratorio> consultarLaboratoriosCerrados();
 
-    void darBajaLaboratorio(int idLab);
+    void darBajaLaboratorio(int idLab, Date fcierre);
 }

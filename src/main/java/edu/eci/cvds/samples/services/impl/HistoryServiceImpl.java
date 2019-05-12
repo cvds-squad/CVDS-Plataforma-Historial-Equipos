@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
 import javax.persistence.PersistenceException;
+import java.sql.Date;
 import java.util.List;
 
 public class HistoryServiceImpl implements HistoryService {
@@ -392,9 +393,9 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public void darBajaLaboratorio(int idLab) throws HistoryServiceException {
+    public void darBajaLaboratorio(int idLab, Date fcierre) throws HistoryServiceException {
         try{
-            laboratorioDAO.darBajaLaboratorio(idLab);
+            laboratorioDAO.darBajaLaboratorio(idLab, fcierre);
         }catch (PersistenceException ex){
             throw new HistoryServiceException("No se pudo dar baja al laboratorio");
         }

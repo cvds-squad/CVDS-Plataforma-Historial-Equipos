@@ -9,6 +9,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -33,5 +34,5 @@ public interface LaboratorioMapper {
     
     List<Laboratorio> consultarLaboratoriosCerrados();
 
-    void darBajaLaboratorio(@Param("idLab") int idLab);
+    void darBajaLaboratorio(@Param("idLab") int idLab, @Param("fcierre") Date fcierre);
 }

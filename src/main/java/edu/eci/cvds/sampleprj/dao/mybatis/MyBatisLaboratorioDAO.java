@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import javax.persistence.PersistenceException;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
            laboratorioMapper.registrarLaboratorio(laboratorio);
        }
        catch(org.apache.ibatis.exceptions.PersistenceException e){
+            e.printStackTrace();
              throw new PersistenceException("El laboratorio ya se encuetra registrado",e);   
        }
     }
@@ -98,9 +100,9 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
     }
 
     @Override
-    public void darBajaLaboratorio(int idLab) {
+    public void darBajaLaboratorio(int idLab, Date fcierre) {
         try{
-            laboratorioMapper.darBajaLaboratorio(idLab);
+            laboratorioMapper.darBajaLaboratorio(idLab, fcierre);
         }catch (PersistenceException ex){
             throw new PersistenceException("Error al dar baja el laboratorio");
         }

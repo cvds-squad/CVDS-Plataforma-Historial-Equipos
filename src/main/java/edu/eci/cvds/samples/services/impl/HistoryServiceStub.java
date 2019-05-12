@@ -5,6 +5,8 @@ import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.services.HistoryService;
 import edu.eci.cvds.samples.services.HistoryServiceException;
+
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -248,7 +250,8 @@ public class HistoryServiceStub implements HistoryService
     }
 
     @Override
-    public void darBajaLaboratorio(int idLab) throws HistoryServiceException {
+    public void darBajaLaboratorio(int idLab, Date f) throws HistoryServiceException {
+
 
     }
 

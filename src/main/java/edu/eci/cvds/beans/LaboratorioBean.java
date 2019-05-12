@@ -61,8 +61,8 @@ public class LaboratorioBean implements Serializable {
      * Registra novedades
      **/
     public void crearLaboratorio(){
-        Laboratorio laboratorio = new Laboratorio(labNombre,ShiroSecurityBean.getUser(),labDescripcion,(ArrayList<Equipo>)labEquipos);
         Date utilDate = new Date();
+        Laboratorio laboratorio = new Laboratorio(labNombre,ShiroSecurityBean.getUser(),labDescripcion,(ArrayList<Equipo>)labEquipos,new java.sql.Date(utilDate.getTime()));
         try {
             historyService.registrarLaboratorio(laboratorio);
             int maxLabId = historyService.getIdMaxLaboratorio();
@@ -177,7 +177,8 @@ public class LaboratorioBean implements Serializable {
                 for (Equipo equipo: equiposDelLab){
                     historyService.desasociarEquipoDelLab(equipo.getIdEquipo());
                 }
-                historyService.darBajaLaboratorio(labCerrar.getIdLab());
+                Date utilDate = new Date();
+                historyService.darBajaLaboratorio(labCerrar.getIdLab(), new java.sql.Date(utilDate.getTime()));
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Laboratorio cerrado correctamente","Laboratorio cerrado correctamente"));
             }catch (HistoryServiceException e){
                 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));

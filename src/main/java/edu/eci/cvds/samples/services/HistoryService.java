@@ -3,6 +3,7 @@ package edu.eci.cvds.samples.services;
 
 import edu.eci.cvds.samples.entities.*;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.PersistenceException;
 
@@ -81,5 +82,5 @@ public interface HistoryService {
     
     List<Laboratorio> consultarLaboratoriosCerrados() throws HistoryServiceException;
 
-    void darBajaLaboratorio(int idLab) throws  HistoryServiceException;
+    void darBajaLaboratorio(int idLab, Date fcierre) throws  HistoryServiceException;
 }

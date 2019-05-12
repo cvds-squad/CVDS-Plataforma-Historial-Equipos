@@ -273,7 +273,7 @@ public class HistoryServicesTest {
         qt().forAll(Generadores.genOpenLaboratorios()).check(laboratorio -> {
             try{
                 historyService.registrarLaboratorio(laboratorio);
-                historyService.darBajaLaboratorio(idLaboratory);
+                historyService.darBajaLaboratorio(idLaboratory,null);
                 Laboratorio laboratorio1 = historyService.consultarLaboratorio(idLaboratory);
                 idLaboratory++;
                 return laboratorio1.isDeBaja();

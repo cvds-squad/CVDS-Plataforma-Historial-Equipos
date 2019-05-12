@@ -21,7 +21,9 @@ idLab serial primary key,
 nombre varchar(30) not null,
 usuario varchar(100) references Usuarios(correo),
 descripcion varchar(500),
-de_baja bool not null);
+de_baja bool not null,
+fecha_creacion Date,
+fecha_cierre Date);
 
 create table Equipos(
 idEquipo serial primary key,
