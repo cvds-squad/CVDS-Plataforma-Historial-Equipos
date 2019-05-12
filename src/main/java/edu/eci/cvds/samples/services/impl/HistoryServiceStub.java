@@ -237,4 +237,14 @@ public class HistoryServiceStub implements HistoryService
        
     }
 
+    @Override
+    public List<Laboratorio> consultarLaboratoriosAbiertos() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratoriosCerrados() throws HistoryServiceException {
+        return null;
+    }
+
 }

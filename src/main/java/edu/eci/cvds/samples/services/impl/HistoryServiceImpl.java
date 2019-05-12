@@ -372,6 +372,24 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo desasociar el equipo con el respectivo laboratorio",ex);
         }
     }
+
+    @Override
+    public List<Laboratorio> consultarLaboratoriosAbiertos() throws HistoryServiceException {
+        try{
+            return laboratorioDAO.consultarLaboratoriosAbiertos();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los laboratorios disponibles");
+        }
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratoriosCerrados() throws HistoryServiceException {
+        try{
+            return laboratorioDAO.consultarLaboratoriosCerrados();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los laboratorios no disponibles");
+        }
+    }
     
     
 }
