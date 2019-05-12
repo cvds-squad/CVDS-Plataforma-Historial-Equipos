@@ -20,7 +20,8 @@ create table Laboratorios(
 idLab serial primary key,
 nombre varchar(30) not null,
 usuario varchar(100) references Usuarios(correo),
-descripcion varchar(500));
+descripcion varchar(500),
+de_baja bool);
 
 create table Equipos(
 idEquipo serial primary key,
