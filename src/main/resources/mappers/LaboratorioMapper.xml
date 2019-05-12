@@ -13,8 +13,8 @@
    </resultMap>
    
     <insert parameterType="map" id="registrarLaboratorio" > 
-        INSERT INTO Laboratorios ( nombre, usuario, descripcion)
-            VALUES ( #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion})
+        INSERT INTO Laboratorios ( nombre, usuario, descripcion,de_baja)
+            VALUES ( #{laboratorio.nombre}, #{laboratorio.usuario}, #{laboratorio.descripcion},#{laboratorio.deBaja})
     </insert>
     
     <select id="consultarLaboratorio" resultType="Laboratorio">

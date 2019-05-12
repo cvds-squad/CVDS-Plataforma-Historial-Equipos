@@ -11,10 +11,15 @@ import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import java.sql.Date;
+import java.util.List;
+
 import org.quicktheories.core.Gen;
+import org.quicktheories.core.RandomnessSource;
 import org.quicktheories.generators.Generate;
-import static org.quicktheories.generators.SourceDSL.integers;
-import static org.quicktheories.generators.SourceDSL.strings;
+import org.quicktheories.impl.ConcreteDetachedSource;
+
+import static org.quicktheories.generators.SourceDSL.*;
+
 /**
  *
  * @author 2131381
@@ -32,19 +37,19 @@ public class Generadores {
     private static Gen<String> genMarcas(){
         return strings().betweenCodePoints(97,122).ofLengthBetween(5, 10);
     }
-    
+
     private static Gen<String> genDescripcion(){
         return strings().betweenCodePoints(97,122).ofLengthBetween(20, 100);
     }
-    
+
     private static Gen<Boolean> genDisponible(){
         return Generate.booleans();
     }
-    
+
     private static Gen<Date> genDate(){
-	return Generate.longRange(0,100).map(l -> new Date(l));
+        return Generate.longRange(0,100).map(l -> new Date(l));
     }
-    
+
     public static Gen<Elemento> genElementos(){
         return source->{
             int ids = ids().generate(source);
@@ -53,9 +58,9 @@ public class Generadores {
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
             return new Elemento(HistoryServicesTest.idElemCont,tipElement,marca,descripcion);
-        };   
+        };
     }
-    
+
     private static Gen<Elemento> genElementosMouse(){
         return source->{
             int ids = ids().generate(source);
@@ -63,8 +68,8 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(ids,mouse,marca,descripcion,disponible);            
-        };   
+            return new Elemento(ids,mouse,marca,descripcion,disponible);
+        };
     }
     private static Gen<Elemento> genElementosTorre(){
         return source->{
@@ -73,8 +78,8 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(ids,torre,marca,descripcion,disponible);            
-        };   
+            return new Elemento(ids,torre,marca,descripcion,disponible);
+        };
     }
     private static Gen<Elemento> genElementosPantalla(){
         return source->{
@@ -83,8 +88,8 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(ids,pantalla,marca,descripcion,disponible);            
-        };   
+            return new Elemento(ids,pantalla,marca,descripcion,disponible);
+        };
     }
     private static Gen<Elemento> genElementosTeclado(){
         return source->{
@@ -93,10 +98,10 @@ public class Generadores {
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
             boolean disponible = genDisponible().generate(source);
-            return new Elemento(ids,teclado,marca,descripcion,disponible);            
-        };   
+            return new Elemento(ids,teclado,marca,descripcion,disponible);
+        };
     }
-    
+
     public static Gen<Equipo> genEquipos(){
         return source->{
             Elemento torre = genElementosTorre().generate(source);
@@ -104,7 +109,7 @@ public class Generadores {
             Elemento pantalla = genElementosPantalla().generate(source);
             Elemento teclado = genElementosTeclado().generate(source);
             return new Equipo(HistoryServicesTest.idEquipoCont,torre, pantalla, mouse, teclado);
-        };   
+        };
     }
     public static Gen<Novedad> genNovedades(){
         return source->{
@@ -115,7 +120,7 @@ public class Generadores {
             String responsable = genDescripcion().generate(source);
             String detalle = genDescripcion().generate(source);
             return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
-        };   
+        };
     }
 
     public static Gen<Novedad> genNovedadesNoFk(){
@@ -129,14 +134,22 @@ public class Generadores {
             return new Novedad(equipo, elemento, fecha, titulo, responsable, detalle);
         };
     }
-    
-        public static Gen<Laboratorio> genLaboratorios(){
+
+    public static Gen<Laboratorio> genLaboratorios(){
         return source->{
             int idLab = ids().generate(source);
             String nombre = genMarcas().generate(source);
             String usuario = "predeterminado";
             String descripcion = genDescripcion().generate(source);
+            boolean openclosed = genDisponible().generate(source);
             return new Laboratorio(HistoryServicesTest.idLaboratory, nombre, usuario, descripcion);
-        };   
+        };
+    }
+
+    public static Gen<List<Laboratorio>> genLabArray(){
+        return source -> {
+            int size = integers().between(10,15).generate(source);
+            return lists().of(genLaboratorios()).ofSize(size).generate(source);
+        };
     }
 }

@@ -237,4 +237,51 @@ public class HistoryServicesTest {
         });
     }
 
+
+
+    @Test
+    public void shouldConsultClosedLaboratories(){
+        qt().forAll(Generadores.genLabArray()).check(laboratorios -> {
+            try {
+                int closedLabs = 0;
+                for (Laboratorio laboratorio : laboratorios) {
+                    historyService.registrarLaboratorio(laboratorio);
+                    idLaboratory++;
+                    if (laboratorio.isDeBaja())
+                        closedLabs++;
+                }
+
+                List<Laboratorio> labsClosed = historyService.consultarLaboratoriosCerrados();
+                return closedLabs == labsClosed.size();
+
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
+
+    @Test
+    public void shouldConsultOpenLaboratories(){
+        qt().forAll(Generadores.genLabArray()).check(laboratorios -> {
+            try {
+                int openLabs = 0;
+                for (Laboratorio laboratorio : laboratorios) {
+                    historyService.registrarLaboratorio(laboratorio);
+                    idLaboratory++;
+                    if (laboratorio.isDeBaja())
+                        openLabs++;
+                }
+
+                List<Laboratorio> labsClosed = historyService.consultarLaboratoriosCerrados();
+                return openLabs == labsClosed.size();
+
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
 }

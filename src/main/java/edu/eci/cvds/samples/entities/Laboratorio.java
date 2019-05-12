@@ -18,6 +18,7 @@ public class Laboratorio {
     private String  usuario;
     private String descripcion;
     private ArrayList<Equipo> equipos;
+    private boolean deBaja;
 
     public Laboratorio(int idLab, String nombre, String usuario, String descripcion) {
         this.idLab = idLab;
@@ -48,6 +49,14 @@ public class Laboratorio {
         this.usuario = usuario;
         this.descripcion = descripcion;
         this.equipos = equipos;
+    }
+
+    public Laboratorio(int idLab, String nombre, String usuario, String descripcion, boolean deBaja) {
+        this.idLab = idLab;
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.descripcion = descripcion;
+        this.deBaja = deBaja;
     }
 
     public int getIdLab() {
@@ -89,9 +98,13 @@ public class Laboratorio {
     public void setEquipos(ArrayList<Equipo> equipos) {
         this.equipos = equipos;
     }
-    
-    
-    
-    
-    
+
+
+    public boolean isDeBaja() {
+        return deBaja;
+    }
+
+    public void setDeBaja(boolean deBaja) {
+        this.deBaja = deBaja;
+    }
 }
