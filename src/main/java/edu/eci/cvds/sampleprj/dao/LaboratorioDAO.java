@@ -29,4 +29,6 @@ public interface LaboratorioDAO {
     List<Laboratorio> consultarLaboratoriosAbiertos();
     
     List<Laboratorio> consultarLaboratoriosCerrados();
+
+    void darBajaLaboratorio(int idLab);
 }

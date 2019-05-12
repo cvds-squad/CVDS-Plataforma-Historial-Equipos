@@ -38,7 +38,7 @@
                     <p:messages id="msgsLab" closable="true"/>
                     <h:outputText value="Seleccione un laboratorio para cerrarlo"/>
                     <p:fieldset legend="Laboratorios">
-                        <p:dataTable id="labsOpen" value="#{laboratorioBean.consultarLaboratorios()}" var="lab"
+                        <p:dataTable id="labsOpen" value="#{laboratorioBean.consultarLaboratoriosAbiertos()}" var="lab"
                                      selectionMode="single"
                                      rowKey="#{lab.idLab}" selection="#{laboratorioBean.labCerrar}"
                                      rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

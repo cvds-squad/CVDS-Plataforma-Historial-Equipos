@@ -142,13 +142,22 @@ public class Generadores {
             String usuario = "predeterminado";
             String descripcion = genDescripcion().generate(source);
             boolean openclosed = genDisponible().generate(source);
-            return new Laboratorio(HistoryServicesTest.idLaboratory, nombre, usuario, descripcion);
+            return new Laboratorio(HistoryServicesTest.idLaboratory, nombre, usuario, descripcion,openclosed);
+        };
+    }
+
+    public static Gen<Laboratorio> genOpenLaboratorios(){
+        return source->{
+            String nombre = genMarcas().generate(source);
+            String usuario = "predeterminado";
+            String descripcion = genDescripcion().generate(source);
+            return new Laboratorio(HistoryServicesTest.idLaboratory, nombre, usuario, descripcion,true);
         };
     }
 
     public static Gen<List<Laboratorio>> genLabArray(){
         return source -> {
-            int size = integers().between(10,15).generate(source);
+            int size = integers().between(1,5).generate(source);
             return lists().of(genLaboratorios()).ofSize(size).generate(source);
         };
     }

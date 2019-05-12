@@ -1,5 +1,6 @@
 package edu.eci.cvds.beans;
 
+import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
@@ -171,7 +172,16 @@ public class LaboratorioBean implements Serializable {
      **/
     public void cerrarLaboratorio(){
         if (labCerrar != null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Lab seleccionado " + labCerrar.getNombre(),"Construccion"));
+            try{
+                List<Equipo> equiposDelLab = historyService.consultarEquiposDeLaboratorio(labCerrar.getIdLab());
+                for (Equipo equipo: equiposDelLab){
+                    historyService.desasociarEquipoDelLab(equipo.getIdEquipo());
+                }
+                historyService.darBajaLaboratorio(labCerrar.getIdLab());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Laboratorio cerrado correctamente","Laboratorio cerrado correctamente"));
+            }catch (HistoryServiceException e){
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+            }
         }else{
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Seleccione un laboratorio","Seleccione un laboratorio"));
         }
@@ -182,7 +192,13 @@ public class LaboratorioBean implements Serializable {
      * @return Lista de laboratorios abiertos
      **/
     public List<Laboratorio> consultarLaboratoriosAbiertos(){
-        return null;
+        List<Laboratorio> openLabs = null;
+        try{
+            openLabs = historyService.consultarLaboratoriosAbiertos();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+        return openLabs;
     }
 
     /**
@@ -190,7 +206,13 @@ public class LaboratorioBean implements Serializable {
      * @return Lista de laboratorios cerrados
      **/
     public List<Laboratorio> consultarLaboratoriosCerrados(){
-        return null;
+        List<Laboratorio> closedLabs = null;
+        try{
+            closedLabs = historyService.consultarLaboratoriosCerrados();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+        return closedLabs;
     }
 
     //Crea un pie chart para laboratorios cerrados y abiertos

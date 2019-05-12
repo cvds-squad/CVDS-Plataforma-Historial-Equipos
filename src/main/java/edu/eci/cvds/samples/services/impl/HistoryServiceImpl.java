@@ -390,6 +390,15 @@ public class HistoryServiceImpl implements HistoryService {
             throw new HistoryServiceException("No se pudo consultar los laboratorios no disponibles");
         }
     }
-    
-    
+
+    @Override
+    public void darBajaLaboratorio(int idLab) throws HistoryServiceException {
+        try{
+            laboratorioDAO.darBajaLaboratorio(idLab);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo dar baja al laboratorio");
+        }
+    }
+
+
 }

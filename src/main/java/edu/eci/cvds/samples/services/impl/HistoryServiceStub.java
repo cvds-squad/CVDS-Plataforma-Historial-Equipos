@@ -247,4 +247,9 @@ public class HistoryServiceStub implements HistoryService
         return null;
     }
 
+    @Override
+    public void darBajaLaboratorio(int idLab) throws HistoryServiceException {
+
+    }
+
 }

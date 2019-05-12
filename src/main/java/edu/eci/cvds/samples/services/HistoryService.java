@@ -80,4 +80,6 @@ public interface HistoryService {
     List<Laboratorio> consultarLaboratoriosAbiertos() throws HistoryServiceException;
     
     List<Laboratorio> consultarLaboratoriosCerrados() throws HistoryServiceException;
+
+    void darBajaLaboratorio(int idLab) throws  HistoryServiceException;
 }

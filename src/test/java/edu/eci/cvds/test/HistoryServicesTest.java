@@ -238,50 +238,52 @@ public class HistoryServicesTest {
     }
 
 
-
     @Test
     public void shouldConsultClosedLaboratories(){
-        qt().forAll(Generadores.genLabArray()).check(laboratorios -> {
-            try {
-                int closedLabs = 0;
-                for (Laboratorio laboratorio : laboratorios) {
-                    historyService.registrarLaboratorio(laboratorio);
-                    idLaboratory++;
-                    if (laboratorio.isDeBaja())
-                        closedLabs++;
-                }
-
-                List<Laboratorio> labsClosed = historyService.consultarLaboratoriosCerrados();
-                return closedLabs == labsClosed.size();
-
-            }catch (HistoryServiceException e){
-                e.printStackTrace();
-                return false;
+        try{
+            List<Laboratorio> laboratoriosCerrados = historyService.consultarLaboratoriosCerrados();
+            boolean toAssert = false;
+            for (Laboratorio laboratorio: laboratoriosCerrados){
+                toAssert = toAssert || laboratorio.isDeBaja();
             }
-        });
+            assertTrue(toAssert);
+        }catch (HistoryServiceException e){
+            e.printStackTrace();
+            fail();
+        }
     }
-
 
     @Test
     public void shouldConsultOpenLaboratories(){
-        qt().forAll(Generadores.genLabArray()).check(laboratorios -> {
-            try {
-                int openLabs = 0;
-                for (Laboratorio laboratorio : laboratorios) {
-                    historyService.registrarLaboratorio(laboratorio);
-                    idLaboratory++;
-                    if (laboratorio.isDeBaja())
-                        openLabs++;
-                }
+        try{
+            List<Laboratorio> laboratoriosAbiertos = historyService.consultarLaboratoriosAbiertos();
+            boolean toAssert = true;
+            for (Laboratorio laboratorio: laboratoriosAbiertos){
+                toAssert = toAssert && !laboratorio.isDeBaja();
+            }
+            assertTrue(toAssert);
+        }catch (HistoryServiceException e){
+            e.printStackTrace();
+            fail();
+        }
+    }
 
-                List<Laboratorio> labsClosed = historyService.consultarLaboratoriosCerrados();
-                return openLabs == labsClosed.size();
-
+    @Test
+    public void shouldCloseLaboratories(){
+        qt().forAll(Generadores.genOpenLaboratorios()).check(laboratorio -> {
+            try{
+                historyService.registrarLaboratorio(laboratorio);
+                historyService.darBajaLaboratorio(idLaboratory);
+                Laboratorio laboratorio1 = historyService.consultarLaboratorio(idLaboratory);
+                idLaboratory++;
+                return laboratorio1.isDeBaja();
             }catch (HistoryServiceException e){
                 e.printStackTrace();
                 return false;
             }
         });
     }
+
+
 
 }

@@ -97,4 +97,13 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
         }
     }
 
+    @Override
+    public void darBajaLaboratorio(int idLab) {
+        try{
+            laboratorioMapper.darBajaLaboratorio(idLab);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("Error al dar baja el laboratorio");
+        }
+    }
+
 }

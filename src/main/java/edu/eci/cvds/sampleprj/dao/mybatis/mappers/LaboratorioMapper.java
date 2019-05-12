@@ -32,4 +32,6 @@ public interface LaboratorioMapper {
     List<Laboratorio> consultarLaboratoriosAbiertos();
     
     List<Laboratorio> consultarLaboratoriosCerrados();
+
+    void darBajaLaboratorio(@Param("idLab") int idLab);
 }
