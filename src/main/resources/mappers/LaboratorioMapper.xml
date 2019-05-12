@@ -37,6 +37,18 @@
         SELECT idLab, nombre, usuario, descripcion
         FROM Laboratorios
     </select>
+    
+    <select id="consultarLaboratoriosAbiertos" resultType="Laboratorio">
+        SELECT idLab, nombre, usuario, descripcion
+        FROM Laboratorios
+        WHERE de_baja = false
+    </select>
+    
+    <select id="consultarLaboratoriosCerrados" resultType="Laboratorio">
+        SELECT idLab, nombre, usuario, descripcion
+        FROM Laboratorios
+        WHERE de_baja = true
+    </select>
 
     <select id="consultarEquiposDeLaboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult">
         select idequipo,labs,torreid,torremarca, torredesc,pantallaid,pantallamarca, pantalladesc,tecladoid,tecladomarca, tecladodesc,mouseid ,mousemarca, mousedesc, de_baja
