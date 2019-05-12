@@ -79,4 +79,22 @@ public class MyBatisLaboratorioDAO implements LaboratorioDAO{
         }
     }
 
+    @Override
+    public List<Laboratorio> consultarLaboratoriosAbiertos() {
+        try{
+            return laboratorioMapper.consultarLaboratoriosAbiertos();
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al consultar los laboratorios abiertos",ex); 
+        }
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratoriosCerrados() {
+        try{
+            return laboratorioMapper.consultarLaboratoriosCerrados();
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al consultar los laboratorios abiertos",ex); 
+        }
+    }
+
 }

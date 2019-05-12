@@ -28,4 +28,8 @@ public interface LaboratorioMapper {
     List<Laboratorio> consultarLaboratorios();
 
     List<Equipo> consultarEquiposDeLaboratorio(@Param("idLab") int idLab);
+    
+    List<Laboratorio> consultarLaboratoriosAbiertos();
+    
+    List<Laboratorio> consultarLaboratoriosCerrados();
 }

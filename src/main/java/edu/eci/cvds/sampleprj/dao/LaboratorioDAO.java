@@ -25,4 +25,8 @@ public interface LaboratorioDAO {
     List<Laboratorio> consultarLaboratorios();
 
     List<Equipo> consultarEquiposDeLaboratorio(int idLab);
+    
+    List<Laboratorio> consultarLaboratoriosAbiertos();
+    
+    List<Laboratorio> consultarLaboratoriosCerrados();
 }
