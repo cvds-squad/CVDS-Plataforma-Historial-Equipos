@@ -283,5 +283,25 @@ public class HistoryServicesTest {
     }
 
 
+    @Test
+    public void shouldConsultNewsOfElement(){
+        qt().forAll(Generadores.genNovedadesNoFk(),Generadores.genElementos()).check((novedad,elemento) -> {
+            try {
+                historyService.registrarElemento(elemento);
+                novedad.setElementoAsociado(idElemCont);
+                historyService.registrarNovedad(novedad);
+                List<Novedad> novedades = historyService.consultarNovedadesDeElemento(idElemCont);
+                idNovedadCont++;
+                idElemCont++;
+                return novedad.getDetalle().equals(novedades.get(0).getDetalle()) &&
+                        novedad.getTitulo().equals(novedades.get(0).getTitulo());
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
+
 
 }

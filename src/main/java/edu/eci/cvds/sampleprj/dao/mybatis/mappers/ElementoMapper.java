@@ -6,6 +6,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Novedad;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -42,4 +43,6 @@ public interface ElementoMapper {
     List<Elemento> consultarElementosDadosDeBaja();
 
     void quitarAsociacionConEquipo(@Param("eid")int idElemento);
+
+    List<Novedad> consultarNovedadesDeElemento(@Param("idElemento") int idElemento);
 }

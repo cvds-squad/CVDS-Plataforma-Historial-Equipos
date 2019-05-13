@@ -9,6 +9,8 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Novedad;
+
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -141,6 +143,15 @@ public class MyBatisElementoDAO  implements ElementoDAO{
             elementoMapper.quitarAsociacionConEquipo(idElemento);
         }catch (PersistenceException ex){
             throw new PersistenceException("No se pudo desasociar el elemento del equipo");
+        }
+    }
+
+    @Override
+    public List<Novedad> consultarNovedades(int idElemento) {
+        try{
+            return elementoMapper.consultarNovedadesDeElemento(idElemento);
+        }catch (PersistenceException ex){
+            throw new PersistenceException("No se pudo consultar las novedades del elemento");
         }
     }
 }

@@ -30,7 +30,7 @@ public class Novedad {
         return elementoAsociado;
     }
 
-    public void setElementoAsociado(int elementoAsociado) {
+    public void setElementoAsociado(Integer elementoAsociado) {
         this.elementoAsociado = elementoAsociado;
     }
 
@@ -38,7 +38,7 @@ public class Novedad {
         return equipoAsociado;
     }
 
-    public void setEquipoAsociado(int equipoAsociado) {
+    public void setEquipoAsociado(Integer equipoAsociado) {
         this.equipoAsociado = equipoAsociado;
     }
 

@@ -402,4 +402,19 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
 
+    @Override
+    /**
+     * Consulta todas las novedades de un elemento
+     * @param idElemento La identificacion del elemento
+     * @return Lista de novedades del elemento
+     */
+    public List<Novedad> consultarNovedadesDeElemento(int idElemento) throws HistoryServiceException {
+        try{
+            return elementoDAO.consultarNovedades(idElemento);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las novedades del elemento");
+        }
+    }
+
+
 }

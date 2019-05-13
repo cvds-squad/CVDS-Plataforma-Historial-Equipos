@@ -6,6 +6,8 @@
 package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Novedad;
+
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -42,4 +44,6 @@ public interface ElementoDAO {
     List<Elemento> consultarElementosDadosDeBaja();
 
     void quitarAsociacionConEquipo(int idElemento);
+
+    List<Novedad> consultarNovedades(int idElemento);
 }

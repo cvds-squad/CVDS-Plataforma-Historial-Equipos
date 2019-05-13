@@ -223,8 +223,13 @@ public class ElementoBean implements Serializable {
      * @return Lista con las novedades
      */
     public List<Novedad> consultarNovedadesDeSeleccionado(){
-        //TODO consultar novedades de elemento
-        return null;
+        List<Novedad> novedades = null;
+        try{
+            novedades = historyService.consultarNovedadesDeElemento(elemNovSeleccionado.getIdElemento());
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+        return novedades;
     }
 
     public List<Elemento> getElementosDisponibles() {

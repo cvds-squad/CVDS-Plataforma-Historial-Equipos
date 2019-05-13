@@ -255,4 +255,9 @@ public class HistoryServiceStub implements HistoryService
 
     }
 
+    @Override
+    public List<Novedad> consultarNovedadesDeElemento(int idElemento) throws HistoryServiceException {
+        return null;
+    }
+
 }

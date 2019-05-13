@@ -74,6 +74,13 @@
             WHERE idElemento = #{eid}
     </update>
 
+
+    <select id="consultarNovedadesDeElemento" resultType="Novedad">
+        select elementoAsociado, equipoAsociado, fecha, titulo, responsable, detalle
+        from novedad
+        where elementoasociado = #{idElemento};
+    </select>
+
    <resultMap id="ElementoResult" type="Elemento">
        <id property="idElemento" column="idElemento"/>
        <result property="equipoAsociado" column="eqps"/>
