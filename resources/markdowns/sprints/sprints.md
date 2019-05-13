@@ -27,7 +27,14 @@ Tras cada Sprint se suele mejorar algunos detalles de los anteriores.
 
 
 ### Sprint 3
+**Sprint-backlog**\
+![Sprint3-backlog](sprint3backlog.png)
 
+**Sprint-burndown chart**\
+![Sprint3-burndown](sprint3burndow.png)
 
-
-#### Resumen del sprint
+##### Resumen del sprint
+Para este sprint, comenzamos a tiempo, en los días siguientes
+se fueron realizando las distintas historias manteniendo un ritmo casi constante.
+Unos días no se realizó ningun avance debido a entrega de proyectos
+de otras materias, sin embargo se logró terminar el sprint a tiempo.
