@@ -7,6 +7,8 @@ package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
+
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -33,4 +35,8 @@ public interface EquipoDAO {
     List<Equipo> consultarEquiposNoDeBaja();
     
     void desasociarEquipoLabs(int idEquipo) throws PersistenceException;
+
+    List<Equipo> consultarEquiposTodos();
+
+    List<Novedad> consultarNovedadEquipo(int idEquipo);
 }

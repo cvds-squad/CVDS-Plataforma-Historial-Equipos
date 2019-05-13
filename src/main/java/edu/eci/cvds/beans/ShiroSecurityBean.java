@@ -97,6 +97,18 @@ public class ShiroSecurityBean implements Serializable {
 	}
 
 	/**
+	 * Redirecciona al usuario al reporte de equipos
+	 */
+	public void backToReporteEquipos(){
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("reporteEquipo.xhtml");
+		} catch (IOException e) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Error al redireccionar", e.getMessage()));
+		}
+	}
+
+	/**
 	 * Obtiene el nombre del usuario en la sesión actual
 	 * @return correo del usuario
 	 */

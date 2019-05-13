@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
-    <title>Reporte Elementos</title>
+    <title>Reporte Equipos</title>
 
 
 </h:head>
@@ -23,12 +23,12 @@
 
         <div class="container">
             <center>
-                <h2>Reporte de Elementos</h2>
+                <h2>Reporte de Equipos</h2>
                 <br/>
                 <h:form id="form">
                     <p:panel>
-                        <p:fieldset legend="Elementos">
-                            <p:dataTable id="elementsTable" value="#{elementoBean.todosElementos}" var="elem" widgetVar="elemTable"
+                        <p:fieldset legend="Equipos">
+                            <p:dataTable id="equisTable" var="equi" widgetVar="equiTable" value="#{equipoBean.todosEquipos}"
                                          rows="10" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                          sortMode="multiple">
 
@@ -36,45 +36,29 @@
                                     <div style="float:right;">
                                         <h:commandLink>
                                             <p:graphicImage url="/images/excel.png"/>
-                                            <p:dataExporter type="xls" target="elementsTable" fileName="reporte_elementos"/>
+                                            <p:dataExporter type="xls" target="equisTable" fileName="reporte_equipos"/>
                                         </h:commandLink>
                                     </div>
                                 </f:facet>
 
-                                <p:column headerText="Id" sortBy="#{elem.idElemento}" filterBy="#{elem.idElemento}" filterMatchMode="exact">
-                                    <h:outputText value="#{elem.idElemento}"/>
-                                </p:column>
-                                <p:column headerText="Tipo" sortBy="#{elem.tipelement}" filterMatchMode="exact" filterBy="#{elem.tipelement}">
-                                    <f:facet name="filter">
-                                        <p:selectOneMenu onchange="PF('elemTable').filter()" styleClass="custom-filter">
-                                            <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems value="#{elementoBean.tipos()}"/>
-                                        </p:selectOneMenu>
-                                    </f:facet>
-                                    <h:outputText value="#{elem.tipelement}"/>
-                                </p:column>
-                                <p:column headerText="Marca" sortBy="#{elem.marca}">
-                                    <h:outputText value="#{elem.marca}"/>
-                                </p:column>
-                                <p:column headerText="Descripcion" sortBy="#{elem.descripcion}">
-                                    <h:outputText value="#{elem.descripcion}"/>
-                                </p:column>
-                                <p:column headerText="Vinculado a equipo" sortBy="#{elem.equipoAsociado}">
-                                    <h:outputText value="#{elem.equipoAsociado}"/>
-                                </p:column>
-                                <p:column headerText="De baja" sortBy="#{elem.de_baja}">
-                                    <h:outputText value="#{elem.de_baja}"/>
+                                <p:column headerText="ID" sortBy="#{equi.idEquipo}">
+                                    <h:outputText value="#{equi.idEquipo}"/>
                                 </p:column>
 
+                                <p:column headerText="Vinculado a Laboratorio" sortBy="#{equi.idLab}">
+                                    <h:outputText value="#{equi.idLab}"/>
+                                </p:column>
+
+
                                 <p:column style="width:100px;text-align: center" headerText="Novedades" exportable="false">
-                                    <p:commandButton update=":form:elemNovs"  oncomplete="PF('elemsDialog').show()" icon="fas fa-search" title="Ver novedades">
-                                        <f:setPropertyActionListener value="#{elem}" target="#{elementoBean.elemNovSeleccionado}" />
+                                    <p:commandButton update=":form:equiNovs"  oncomplete="PF('equisDialog').show()" icon="fas fa-search" title="Ver novedades">
+                                        <f:setPropertyActionListener value="#{equi}" target="#{equipoBean.equiNovSeleccionado}" />
                                     </p:commandButton>
                                 </p:column>
 
                                 <p:column headerText="Administrar" style="width:200px;text-align: center" exportable="false">
-                                    <p:button outcome="adminElemento" value="Administrar" icon="fas fa-cog">
-                                        <f:param name="elemento" value="#{elem.idElemento}"/>
+                                    <p:button outcome="adminEquipo" value="Administrar" icon="fas fa-cog">
+                                        <f:param name="equipo" value="#{equi.idEquipo}"/>
                                     </p:button>
                                 </p:column>
 
@@ -82,24 +66,22 @@
                         </p:fieldset>
                     </p:panel>
 
-                    <p:dialog header="Novedades" modal="true" showEffect="fade" hideEffect="fade" widgetVar="elemsDialog" resizable="false" draggable="false" width="1150">
-                        <p:outputPanel id="elemNovs" >
-                            <p:fieldset legend="Novedades del elemento">
+                    <p:dialog header="Novedades" modal="true" showEffect="fade" hideEffect="fade" widgetVar="equisDialog" resizable="false" draggable="false" width="1000">
+                        <p:outputPanel id="equiNovs" >
+                            <p:fieldset legend="Novedades del equipo">
                                 <p:dataTable id="novs" var="nov"
-                                             value="#{elementoBean.consultarNovedadesDeSeleccionado()}"
-                                             rows="10" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                             rowsPerPageTemplate="5,10,15" rendered="#{not empty elementoBean.elemNovSeleccionado}">
+                                             value="#{equipoBean.consultarNovedadesDeSeleccionado()}"
+                                             rows="5" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                             rowsPerPageTemplate="5,10,15" rendered="#{not empty equipoBean.equiNovSeleccionado}">
+
                                     <f:facet name="{Exporters}">
                                         <div style="float:right;">
                                             <h:commandLink>
                                                 <p:graphicImage url="/images/excel.png"/>
-                                                <p:dataExporter type="xls" target="novs" fileName="novedad_elemento_#{elementoBean.elemNovSeleccionado.idElemento}"/>
+                                                <p:dataExporter type="xls" target="novs" fileName="novedad_equipo_#{equipoBean.equiNovSeleccionado.idEquipo}"/>
                                             </h:commandLink>
                                         </div>
                                     </f:facet>
-                                    <p:column headerText="ID Equipo">
-                                        <h:outputText value="#{nov.equipoAsociado}"/>
-                                    </p:column>
                                     <p:column headerText="Fecha">
                                         <h:outputText value="#{nov.fecha}"/>
                                     </p:column>

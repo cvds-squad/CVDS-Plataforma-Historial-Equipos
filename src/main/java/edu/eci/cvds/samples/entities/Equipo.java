@@ -20,6 +20,7 @@ public class Equipo implements Serializable{
     private Elemento teclado;
     private boolean disponible;
     private boolean de_baja;
+    private Integer idLab;
 
     public Equipo(){
         disponible = true;
@@ -32,6 +33,13 @@ public class Equipo implements Serializable{
     public Equipo(int idEquipo,String novedad,boolean disponible){
         this.idEquipo = idEquipo;
         this.disponible = disponible;
+    }
+
+    public Equipo(int idEquipo,Integer idLab,String novedad,boolean disponible, boolean de_baja){
+        this.idEquipo = idEquipo;
+        this.disponible = disponible;
+        this.idLab=idLab;
+        this.de_baja = de_baja;
     }
 
     public Equipo(int idEquipo,String novedad,boolean disponible,boolean de_baja){
@@ -114,6 +122,13 @@ public class Equipo implements Serializable{
     public void setDe_baja(boolean de_baja) {
         this.de_baja = de_baja;
     }
-   
-    
+
+
+    public Integer getIdLab() {
+        return idLab;
+    }
+
+    public void setIdLab(Integer idLab) {
+        this.idLab = idLab;
+    }
 }

@@ -83,8 +83,13 @@
     </resultMap>
 
     <select id="consultarEquipo" resultType="Equipo">
-        SELECT idEquipo,Novedades,Disponible,de_baja FROM equipos
+        SELECT idEquipo,labs,Novedades,Disponible,de_baja FROM equipos
           WHERE  idEquipo = #{idEqui}
+    </select>
+
+    <select id="consultarEquiposTodo" resultType="Equipo">
+        SELECT idEquipo,labs,Novedades,Disponible,de_baja FROM equipos
+        where de_baja = false
     </select>
 
     <select id="getMaxId" resultType="int">
@@ -94,6 +99,12 @@
     <select id="consultarLabAsociado" resultType="Integer">
         SELECT labs FROM equipos
             WHERE idEquipo = #{idEquipo}
+    </select>
+
+    <select id="consultarNovedadEquipo" resultType="Novedad">
+        select elementoAsociado, equipoAsociado, fecha, titulo, responsable, detalle
+        from novedad
+        where equipoasociado = #{idEquipo};
     </select>
     
     <update id = "setDarDeBaja">

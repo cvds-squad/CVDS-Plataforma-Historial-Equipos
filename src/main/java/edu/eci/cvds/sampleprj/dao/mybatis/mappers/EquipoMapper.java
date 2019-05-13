@@ -6,6 +6,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,4 +35,8 @@ public interface EquipoMapper {
     List<Equipo> consultarEquiposNoDeBaja();
     
     void desasociarEquipoDelLab(@Param("idEquipo") int idEquipo);
+
+    List<Equipo> consultarEquiposTodo();
+
+    List<Novedad> consultarNovedadEquipo(@Param("idEquipo") int idEquipo);
 }

@@ -416,5 +416,26 @@ public class HistoryServiceImpl implements HistoryService {
         }
     }
 
+    @Override
+    public List<Equipo> consultarEquiposTodos() throws HistoryServiceException {
+        try{
+            return equipoDAO.consultarEquiposTodos();
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar los equipos");
+        }
+}
+
+    /**
+     * Consulta las novedades de un equipo
+     * @return lista de novedades
+     */
+    @Override
+    public List<Novedad> consultarNovedadesDeEquipo(int idEquipo) throws HistoryServiceException {
+        try{
+            return equipoDAO.consultarNovedadEquipo(idEquipo);
+        }catch (PersistenceException ex){
+            throw new HistoryServiceException("No se pudo consultar las novedades del equipo");
+        }
+    }
 
 }

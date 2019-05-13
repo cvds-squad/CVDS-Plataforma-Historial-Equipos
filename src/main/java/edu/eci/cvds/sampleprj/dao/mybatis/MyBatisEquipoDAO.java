@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Novedad;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -98,6 +99,24 @@ public class MyBatisEquipoDAO  implements EquipoDAO{
             equipoMapper.desasociarEquipoDelLab(idEquipo);
         }catch(PersistenceException ex){
             throw new PersistenceException("Error al desasociar el equipo del laboratorio");
+        }
+    }
+
+    @Override
+    public List<Equipo> consultarEquiposTodos() {
+        try{
+            return equipoMapper.consultarEquiposTodo();
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al consultar equipos");
+        }
+    }
+
+    @Override
+    public List<Novedad> consultarNovedadEquipo(int idEquipo) {
+        try{
+            return equipoMapper.consultarNovedadEquipo(idEquipo);
+        }catch(PersistenceException ex){
+            throw new PersistenceException("Error al consultar las novedades del equipo");
         }
     }
 }

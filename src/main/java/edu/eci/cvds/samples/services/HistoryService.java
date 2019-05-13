@@ -85,4 +85,8 @@ public interface HistoryService {
     void darBajaLaboratorio(int idLab, Date fcierre) throws  HistoryServiceException;
 
     List<Novedad> consultarNovedadesDeElemento(int idElemento) throws HistoryServiceException;
+
+    List<Equipo> consultarEquiposTodos() throws  HistoryServiceException;
+
+    List<Novedad> consultarNovedadesDeEquipo(int idEquipo) throws HistoryServiceException;
 }

@@ -68,6 +68,12 @@ public class EquipoBean implements Serializable {
     private boolean darBajaMouse;
     private boolean quitarAsociacionMouse;
 
+    private List<Equipo> todosEquipos;
+
+    private Equipo equiNovSeleccionado;
+
+    private Integer adminEquipoID;
+
     public EquipoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
         crearElementos =  new HashMap<>();
@@ -418,6 +424,35 @@ public class EquipoBean implements Serializable {
         quitarAsociacionMouse = false;
     }
 
+    /**
+     * Obtiene el equipo seleccionado
+     * @return Se obtiene una lista con el equipo seleccionado
+     */
+    public List<Equipo> obtenerAdminEquipo(){
+        List<Equipo> list = new ArrayList<>();
+        try {
+            Equipo equipo = historyService.consultaEquipo(adminEquipoID);
+            list.add(equipo);
+        } catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al consultar","Error"));
+        }
+        return list;
+    }
+
+    /**
+     * Consultar novedades del elementos seleccinado en el reporte
+     * @return Novedades seleccionadas
+     */
+    public List<Novedad> consultarNovedadesDeSeleccionado(){
+        List<Novedad> list = null;
+        try{
+            list = historyService.consultarNovedadesDeEquipo(equiNovSeleccionado.getIdEquipo());
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+        return list;
+    }
+
     public Equipo getEquipo() {
         return equipo;
     }
@@ -624,5 +659,42 @@ public class EquipoBean implements Serializable {
 
     public void setQuitarAsociacionMouse(boolean quitarAsociacionMouse) {
         this.quitarAsociacionMouse = quitarAsociacionMouse;
+    }
+
+    public List<Equipo> getTodosEquipos() {
+        if (todosEquipos == null){
+            todosEquipos = consultarEquiposTodos();
+        }
+        return todosEquipos;
+    }
+
+    private List<Equipo> consultarEquiposTodos(){
+        List<Equipo> list = null;
+        try{
+           list = historyService.consultarEquiposTodos();
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo consultar","No se pudo consultar"));
+        }
+        return list;
+    }
+
+    public void setTodosEquipos(List<Equipo> todosEquipos) {
+        this.todosEquipos = todosEquipos;
+    }
+
+    public Equipo getEquiNovSeleccionado() {
+        return equiNovSeleccionado;
+    }
+
+    public void setEquiNovSeleccionado(Equipo equiNovSeleccionado) {
+        this.equiNovSeleccionado = equiNovSeleccionado;
+    }
+
+    public Integer getAdminEquipoID() {
+        return adminEquipoID;
+    }
+
+    public void setAdminEquipoID(Integer adminEquipoID) {
+        this.adminEquipoID = adminEquipoID;
     }
 }

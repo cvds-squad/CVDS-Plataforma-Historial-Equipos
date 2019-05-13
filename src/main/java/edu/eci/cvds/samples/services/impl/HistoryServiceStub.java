@@ -260,4 +260,14 @@ public class HistoryServiceStub implements HistoryService
         return null;
     }
 
+    @Override
+    public List<Equipo> consultarEquiposTodos() throws HistoryServiceException {
+        return null;
+    }
+
+    @Override
+    public List<Novedad> consultarNovedadesDeEquipo(int idEquipo) throws HistoryServiceException {
+        return null;
+    }
+
 }
