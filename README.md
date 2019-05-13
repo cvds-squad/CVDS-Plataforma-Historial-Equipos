@@ -16,6 +16,11 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1d786a743cf54409b03ec51ed51060ac)](https://app.codacy.com/app/JulianBenitez99/CVDS-Plataforma-Historial-Equipos?utm_source=github.com&utm_medium=referral&utm_content=cvds-squad/CVDS-Plataforma-Historial-Equipos&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/cvds-squad/CVDS-Plataforma-Historial-Equipos.svg?style=svg)](https://circleci.com/gh/cvds-squad/CVDS-Plataforma-Historial-Equipos)
 
+**Cobertura de Pruebas**
+
+![](resources/tests/jacocoT1.png)
+
+![](resources/tests/listTest.png)
 
 ## Descripción del Producto
 
@@ -88,7 +93,13 @@ el equipo se reune y planea lo que se realizará en el
 [Taiga backlog](https://tree.taiga.io/project/julianbenitez99-historial-de-equipos-labinfo/backlog)
 
 #### Release-burndown chart
+La gráfica muestra que todos los sprints se terminaron.
 
+![](resources/modelos/releaseBurnDown.png)
+
+Puntos de Historia faltantes:
++ Dar baja multiples equipos.
++ Al ver un equipo debo ver el historial de todas las novedades asociadas a este y todas las novedades de los elementos  mientras estuvieron asociados a este equipo.
 
 ## Sprints
 Ver la documentación de los [sprints](resources/markdowns/sprints/sprints.md)
