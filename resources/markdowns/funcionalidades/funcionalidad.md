@@ -169,6 +169,21 @@ Al administrar el elemento podemos dar de baja a este.
 
 ![](adminElem.png)
 
+### Reporte de Equipos
+El reporte de equipos muestra todos los que están activos, brinda la opcion de filtrar
+por id.
+
+![](repEquipo.png)
+
+Al oprimir el boton de novedades de un equipo, se nos abrira un modal el cual contiene
+todas las novedades de éste. El cual también permite ser exportado a
+formato .xlsx
+
+![](novEquipo.png)
+
+Al darle al boton de administrar nos lleverá a una nueva pestaña con el mismo.
+
+![](adminEquipo.png)
 
 ### Reporte de Laboratorios
 
