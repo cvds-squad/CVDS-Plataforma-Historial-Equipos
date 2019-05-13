@@ -157,13 +157,17 @@ Se abrirá un modal con los equipos del laboratorio.
 
 Se muestra una tabla con todos los elementos que se han registrado en el aplicativo. 
 Los elementos de la tabla se pueden filtrar por la mayoría de sus columnas, además la información
-puede ser exportada a formato .xlsx.
+puede ser exportada a formato .xlsx. 
 
 ![](repElementos.png)
 
 Al presionar el boton de novedades del elemento se muestran todas las novedadas asociadas a este.
 
-IMAGEN
+![](novsDeElemento.png)
+
+Al administrar el elemento podemos dar de baja a este.
+
+![](adminElem.png)
 
 
 ### Reporte de Laboratorios
