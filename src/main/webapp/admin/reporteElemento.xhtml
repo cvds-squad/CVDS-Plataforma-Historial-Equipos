@@ -77,12 +77,12 @@
                     </p:panel>
 
                     <p:dialog header="Novedades" modal="true" showEffect="fade" hideEffect="fade" widgetVar="elemsDialog" resizable="false" draggable="false" width="1150">
-                        <p:outputPanel id="elemNovs">
+                        <p:outputPanel id="elemNovs" >
                             <p:fieldset legend="Novedades del elemento">
                                 <p:dataTable id="novs" var="nov"
                                              value="#{elementoBean.consultarNovedadesDeSeleccionado()}"
                                              rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                             rowsPerPageTemplate="5,10,15">
+                                             rowsPerPageTemplate="5,10,15" rendered="#{not empty elementoBean.elemNovSeleccionado}">
                                     <!-- BORRAR DESPUES -->
                                     <p:column headerText="ID Elemento">
                                         <h:outputText value="#{nov.elementoAsociado}"/>
