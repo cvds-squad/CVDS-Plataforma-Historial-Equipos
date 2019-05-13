@@ -304,4 +304,25 @@ public class HistoryServicesTest {
 
 
 
+    @Test
+    public void shouldConsultNewsOfEquipment(){
+        qt().forAll(Generadores.genNovedadesNoFk(),Generadores.genEquipos()).check((novedad,equipo) -> {
+            try {
+                historyService.registarEquipo(equipo);
+                novedad.setEquipoAsociado(idEquipoCont);
+                historyService.registrarNovedad(novedad);
+                List<Novedad> novedades = historyService.consultarNovedadesDeEquipo(idEquipoCont);
+                idNovedadCont++;
+                idEquipoCont++;
+                return novedad.getDetalle().equals(novedades.get(0).getDetalle()) &&
+                        novedad.getTitulo().equals(novedades.get(0).getTitulo());
+            }catch (HistoryServiceException e){
+                e.printStackTrace();
+                return false;
+            }
+        });
+    }
+
+
+
 }
