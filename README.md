@@ -25,7 +25,7 @@ Las credenciales para ingresar son las siguientes:
 + **Usuario:** *claudia.santiago@escuelaing.edu.co*
 + **Contraseña:** *admin*
 
-#### Funcionalidades Importantes
+Ver [funcionalidades importantes.](resources/markdowns/funcionalidades/funcionalidad.md)
 
 
 ## Arquitectura y Diseño
