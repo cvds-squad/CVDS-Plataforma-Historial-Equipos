@@ -72,6 +72,12 @@
                                     </p:commandButton>
                                 </p:column>
 
+                                <p:column headerText="Administrar" style="width:200px;text-align: center" exportable="false">
+                                    <p:button outcome="adminElemento" value="Administrar" icon="fas fa-cog">
+                                        <f:param name="elemento" value="#{elem.idElemento}"/>
+                                    </p:button>
+                                </p:column>
+
                             </p:dataTable>
                         </p:fieldset>
                     </p:panel>
@@ -83,10 +89,7 @@
                                              value="#{elementoBean.consultarNovedadesDeSeleccionado()}"
                                              rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="5,10,15" rendered="#{not empty elementoBean.elemNovSeleccionado}">
-                                    <!-- BORRAR DESPUES -->
-                                    <p:column headerText="ID Elemento">
-                                        <h:outputText value="#{nov.elementoAsociado}"/>
-                                    </p:column>
+
                                     <p:column headerText="ID Equipo">
                                         <h:outputText value="#{nov.equipoAsociado}"/>
                                     </p:column>

@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class ElementoBean implements Serializable {
     private List<Elemento> todosElementos;
 
     private Elemento elemNovSeleccionado;
+
+    private Integer adminElemID;
 
     public ElementoBean(){
         historyService = HistoryServicesFactory.getInstance().getHistoryService();
@@ -232,6 +235,42 @@ public class ElementoBean implements Serializable {
         return novedades;
     }
 
+    /**
+     * Obtiene la el elemento escogido en el reporte
+     * @return lista del con el elemento escogido en el reporte
+     */
+    public List<Elemento> obtenerAdminId(){
+        Elemento elemento = null;
+        try {
+            elemento = historyService.consultarElemento(adminElemID);
+        } catch (HistoryServiceException e) {
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+        List<Elemento> elementos = new ArrayList<>();
+        elementos.add(elemento);
+        return elementos;
+    }
+
+    /**
+     * Da baja al elemento seleccionado en el reporte
+     */
+    public void adminElemDarBaja(){
+        Date utilDate = new Date();
+        try{
+            Elemento elemento = historyService.consultarElemento(adminElemID);
+            if (elemento.isDe_baja()){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Ya esta de baja el elemento","Ya esta de baja el elemento"));
+            }
+            else {
+                historyService.darBajaElemento(adminElemID);
+                historyService.registrarNovedad(new Novedad(elemento.getIdElemento(), null, new java.sql.Date(utilDate.getTime()), "Dar baja elemento", ShiroSecurityBean.getUser(), "Se dio de baja al elemento " + elemento));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Elemento dado de baja correctamente","Elemento dado de baja correctamente"));
+            }
+        }catch (HistoryServiceException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(),e.getMessage()));
+        }
+    }
+
     public List<Elemento> getElementosDisponibles() {
         return elementosDisponibles;
     }
@@ -265,5 +304,13 @@ public class ElementoBean implements Serializable {
 
     public void setElemNovSeleccionado(Elemento elemNovSeleccionado) {
         this.elemNovSeleccionado = elemNovSeleccionado;
+    }
+
+    public Integer getAdminElemID() {
+        return adminElemID;
+    }
+
+    public void setAdminElemID(Integer adminElemID) {
+        this.adminElemID = adminElemID;
     }
 }
