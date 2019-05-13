@@ -8,7 +8,6 @@ import edu.eci.cvds.samples.services.HistoryServicesFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -17,8 +16,6 @@ import static org.quicktheories.QuickTheory.qt;
 
 public class HistoryServicesTest {
 
-    @Inject
-    private SqlSession sqlSession;
 
     private HistoryService historyService;
 
@@ -134,7 +131,8 @@ public class HistoryServicesTest {
     public void shouldUnsuscribeEquipment(){
         qt().forAll(Generadores.genEquipos()).check(equi ->{
             try{
-                boolean deBajaUno,deBajaDos;
+                boolean deBajaUno;
+                boolean deBajaDos;
                 historyService.registarEquipo(equi);
                 deBajaUno = equi.isDe_baja();
                 historyService.darBajaEquipo(idEquipoCont);

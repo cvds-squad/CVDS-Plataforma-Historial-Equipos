@@ -14,9 +14,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.quicktheories.core.Gen;
-import org.quicktheories.core.RandomnessSource;
 import org.quicktheories.generators.Generate;
-import org.quicktheories.impl.ConcreteDetachedSource;
 
 import static org.quicktheories.generators.SourceDSL.*;
 
@@ -52,11 +50,9 @@ public class Generadores {
 
     public static Gen<Elemento> genElementos(){
         return source->{
-            int ids = ids().generate(source);
             TipoElemento tipElement = genTipoElementos().generate(source);
             String marca = genMarcas().generate(source);
             String descripcion = genDescripcion().generate(source);
-            boolean disponible = genDisponible().generate(source);
             return new Elemento(HistoryServicesTest.idElemCont,tipElement,marca,descripcion);
         };
     }
@@ -137,7 +133,6 @@ public class Generadores {
 
     public static Gen<Laboratorio> genLaboratorios(){
         return source->{
-            int idLab = ids().generate(source);
             String nombre = genMarcas().generate(source);
             String usuario = "predeterminado";
             String descripcion = genDescripcion().generate(source);

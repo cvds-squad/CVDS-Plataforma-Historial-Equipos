@@ -9,7 +9,6 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Equipo;
-import edu.eci.cvds.samples.services.HistoryService;
 
 import javax.persistence.PersistenceException;
 import java.util.List;

@@ -1,6 +1,5 @@
 package edu.eci.cvds.beans;
 
-import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
@@ -13,7 +12,6 @@ import org.primefaces.model.chart.PieChartModel;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
@@ -130,7 +128,6 @@ public class LaboratorioBean implements Serializable {
      * Desasocia los equipos seleccionados del laboratorio seleccionado
      **/
     public void desasociarEquipos(){
-        Date utilDate = new Date();
         try {
             if (labDesasociar != null) {
                 if (labDesasociarEquipos.size() != 0) {
@@ -221,7 +218,8 @@ public class LaboratorioBean implements Serializable {
         pieModel = new PieChartModel();
         try {
             List<Laboratorio> laboratorios = historyService.consultarLaboratorios();
-            int open = 0, closed = 0;
+            int open = 0;
+            int closed = 0;
             for (Laboratorio laboratorio : laboratorios) {
                 if (laboratorio.isDeBaja())
                     closed++;
