@@ -62,7 +62,7 @@ con la capa de Persistencia, la cual tiene acceso a la base de datos.
 Stack de Tecnologías:
    * [PrimeFaces (Framework)](https://www.primefaces.org/)
    * [QuickTheories (Property Based Testing)](https://github.com/quicktheories/QuickTheories)
-   * [Guice (Injección de Dependencias)](https://github.com/google/guice)
+   * [Guice (Inyección de Dependencias)](https://github.com/google/guice)
    * [Bootstrap (Web Toolkit)](https://getbootstrap.com/)
    * PostgreSQL (DataBase Management)
    
